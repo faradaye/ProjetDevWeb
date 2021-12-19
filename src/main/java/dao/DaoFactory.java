@@ -50,4 +50,6 @@ public class DaoFactory {
         return new UtilisateurDao(this);
     }
 
+    public NotificationDao getNotificationDao() { return new NotificationDao(this); }
+
 }

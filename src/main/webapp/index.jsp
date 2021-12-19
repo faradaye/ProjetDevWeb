@@ -15,6 +15,7 @@
 
     <p>Bonjour ${sessionScope.utilisateur.login}</p><br>
     <a href="utilisateurs">Utilisateurs</a>
+    <a href="notifications">Notifications</a>
 </c:if>
 
 </body>
