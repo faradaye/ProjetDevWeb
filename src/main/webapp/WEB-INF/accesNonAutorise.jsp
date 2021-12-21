@@ -6,7 +6,7 @@
 </head>
 <body>
     <h1>Acces Non Autorisé</h1><br>
-    <a href="index">Accueil</a>
+    <a href="<c:url value="/" />">Accueil</a>
 
 
 </body>

@@ -5,6 +5,7 @@ import dao.DaoFactory;
 import dao.LieuDao;
 import dao.UtilisateurDao;
 import utils.VerifDate;
+import utils.VerifDouble;
 import utils.VerifInt;
 
 import javax.servlet.ServletException;
@@ -36,6 +37,7 @@ public class ModifierLieu extends HttpServlet {
                 response.sendRedirect(request.getHeader("Referer"));
                 return;
             }
+            request.setAttribute("idLieu", request.getParameter("id"));
             request.setAttribute("lieu", lieu);
             this.getServletContext().getRequestDispatcher("/WEB-INF/modifierLieu.jsp").forward(request, response);
         }
@@ -54,13 +56,13 @@ public class ModifierLieu extends HttpServlet {
         String longitude = request.getParameter("longitude");
 
         //verification remplissage formulaire
-        if (id != null && !id.equals("") && nom != null && !nom.equals("") && adresse != null && !adresse.equals("") && latitude != null && !latitude.equals("") && longitude != null && !longitude.equals("")) {
+        if (id != null && !id.equals("") && nom != null && !nom.equals("") && adresse != null && !adresse.equals("") && latitude != null && !latitude.equals("") && longitude != null && !longitude.equals("") && VerifDouble.isDouble(latitude) && VerifDouble.isDouble(longitude)) {
             lieuDao.modifier(new beans.Lieu(Integer.parseInt(id), nom, adresse, Double.parseDouble(latitude), Double.parseDouble(longitude)));
             request.setAttribute("id", Integer.parseInt(id));
             response.sendRedirect(request.getContextPath() + "/lieu?id=" + id);
         }
         else {
-            beans.Lieu lieu = new beans.Lieu(0, nom, adresse, Double.parseDouble(latitude), Double.parseDouble(longitude));
+            beans.Lieu lieu = new beans.Lieu(0, nom, adresse, VerifDouble.isDouble(latitude) ? Double.parseDouble(latitude) : 0.0, VerifDouble.isDouble(latitude) ? Double.parseDouble(longitude) : 0.0);
             String erreur = "Informations rentrées incorrectes";
             request.setAttribute("erreur", erreur);
             request.setAttribute("lieu", lieu);

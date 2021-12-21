@@ -33,8 +33,9 @@ public class SupprimerUtilisateur extends HttpServlet {
             if(!utilisateur.isAdministrateur() && ((Utilisateur) request.getSession().getAttribute("utilisateur")).isAdministrateur())
                 utilisateurDao.supprimer(utilisateur);
         }
-
-        response.sendRedirect(request.getHeader("referer"));
+        if(request.getHeader("referer")==null || request.getHeader("referer").contains("/profile?id="))
+            response.sendRedirect(request.getContextPath() + "/utilisateurs");
+        else response.sendRedirect(request.getHeader("referer"));
     }
 
     @Override

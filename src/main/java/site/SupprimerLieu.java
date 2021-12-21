@@ -33,7 +33,9 @@ public class SupprimerLieu extends HttpServlet {
                 lieuDao.supprimer(lieu);
         }
 
-        response.sendRedirect(request.getHeader("referer"));
+        if(request.getHeader("referer")==null || request.getHeader("referer").contains("/lieu?id="))
+            response.sendRedirect(request.getContextPath() + "/lieux");
+        else response.sendRedirect(request.getHeader("referer"));
     }
 
     @Override

@@ -33,7 +33,7 @@ public class SecuriteFiltre implements Filter {
         }
 
         //Si la page est une page qui necessite de se connecter
-        if(path.equals("/profile") || path.equals("/utilisateurs") || path.equals("/notifications") || path.equals("/modifierUtilisateur")){
+        if(path.equals("/profile") || path.equals("/utilisateurs") || path.equals("/notifications") || path.equals("/modifierUtilisateur") || path.equals("/supprimerUtilisateur") || path.equals("/modifierLieu") || path.equals("/supprimerLieu")){
             Utilisateur utilisateur = (Utilisateur) req.getSession().getAttribute("utilisateur");
             if(utilisateur==null){
                 String requestUri = req.getRequestURI();
@@ -52,12 +52,10 @@ public class SecuriteFiltre implements Filter {
                 return;
             }
             //Verification si la page est une page admin et si l'utilisateur est un admin
-            /*
-            if(!utilisateur.isAdministrateur() && ){
+            if(!utilisateur.isAdministrateur() && (path.equals("/supprimerUtilisateur") || path.equals("/modifierLieu") || path.equals("/supprimerLieu"))){
                 req.getRequestDispatcher("/WEB-INF/accesNonAutorise.jsp").forward(req, resp);
                 return;
             }
-             */
         }
 
         chain.doFilter(req,resp);

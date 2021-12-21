@@ -4,6 +4,8 @@ import beans.Lieu;
 import beans.Utilisateur;
 import dao.DaoFactory;
 import dao.LieuDao;
+import utils.VerifDate;
+import utils.VerifDouble;
 import utils.VerifInt;
 
 import javax.servlet.ServletException;
@@ -13,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Date;
+import java.time.LocalDate;
 
 @WebServlet(name = "creerLieu", value = "/creerLieu")
 public class CreerLieu extends HttpServlet {
@@ -38,7 +41,7 @@ public class CreerLieu extends HttpServlet {
         String longitude = request.getParameter("longitude");
 
         //verification remplissage formulaire
-        if (nom != null && !nom.equals("") && adresse != null && !adresse.equals("") && latitude != null && !latitude.equals("") && longitude != null && !longitude.equals("")) {
+        if (nom != null && !nom.equals("") && adresse != null && !adresse.equals("") && latitude != null && !latitude.equals("") && longitude != null && !longitude.equals("") && VerifDouble.isDouble(latitude) && VerifDouble.isDouble(longitude)) {
             if(!lieuDao.nomLieuExiste(nom)){
                 Lieu lieu = new beans.Lieu(0, nom, adresse, Double.parseDouble(latitude), Double.parseDouble(longitude));
                 lieuDao.ajouter(lieu);
@@ -54,7 +57,7 @@ public class CreerLieu extends HttpServlet {
             }
         }
         else {
-            beans.Lieu lieu = new beans.Lieu(0, nom, adresse, Double.parseDouble(latitude), Double.parseDouble(longitude));
+            beans.Lieu lieu = new beans.Lieu(0, nom, adresse, VerifDouble.isDouble(latitude) ? Double.parseDouble(latitude) : 0.0, VerifDouble.isDouble(latitude) ? Double.parseDouble(longitude) : 0.0);
             String erreur = "Informations rentrées incorrectes";
             request.setAttribute("erreur", erreur);
             request.setAttribute("lieu", lieu);

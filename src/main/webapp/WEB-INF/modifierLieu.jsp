@@ -10,6 +10,7 @@
     <p style="color: red;">${erreur}</p>
 
     <form method="post" action="${pageContext.request.contextPath}/modifierLieu">
+        <input type="hidden" name="idLieu" value="${idLieu}" />
         <p>Nom:</p>
             <input type="text" name="nom" value= "${lieu.nom}"/><br>
         <p>Adresse:</p>
