@@ -20,6 +20,7 @@
                 <th>Nom</th>
                 <th>Prenom</th>
                 <th>Date de naissance</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -28,6 +29,7 @@
                     <td>${ utilisateur.nom }</td>
                     <td>${ utilisateur.prenom }</td>
                     <td>${ utilisateur.date_naissance }</td>
+                    <td><a href="profile?id=${utilisateur.id}">Profile utilisateur</a> <c:if test="${ sessionScope.utilisateur.administrateur}"><a href="modifierUtilisateur?id=${utilisateur.id}">Modifier utilisateur</a> <a href="supprimerUtilisateur?id=${utilisateur.id}">Supprimer utilisateur</a></c:if></td>
                 </tr>
             </c:forEach>
         </tbody>

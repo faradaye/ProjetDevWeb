@@ -10,6 +10,7 @@
     <p style="color: red;">${erreur}</p>
 
     <form method="post" action="${pageContext.request.contextPath}/authentification">
+        <input type="hidden" name="redirectId" value="${param.redirectId}" />
         <p>Login:</p>
             <input type="text" name="login" value= "${utilisateur.login}"/><br>
         <p>Password:</p>

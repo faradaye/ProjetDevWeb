@@ -25,7 +25,7 @@ public class UtilisateurDao {
             preparedStatement.setString(3, utilisateur.getNom());
             preparedStatement.setString(4, utilisateur.getPrenom());
             preparedStatement.setString(5, utilisateur.getDate_naissance().toString());
-            preparedStatement.setString(6, String.valueOf(utilisateur.isAdministrateur() ? 1 : 0));
+            preparedStatement.setBoolean(6, utilisateur.isAdministrateur());
 
             int affectedRows = preparedStatement.executeUpdate();
 
@@ -45,6 +45,33 @@ public class UtilisateurDao {
             e.printStackTrace();
         }
 
+    }
+
+    public void modifier(Utilisateur utilisateur) {
+        Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            connexion = daoFactory.getConnection();
+            preparedStatement = connexion.prepareStatement("UPDATE Utilisateur " +
+                    " SET login = ?, `password` = ?, nom = ?, prenom = ?, date_naissance = ?, administrateur = ? " +
+                    " WHERE id = ?;", Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setString(1, utilisateur.getLogin());
+            preparedStatement.setString(2, utilisateur.getPassword()); //A hasher plus tard
+            preparedStatement.setString(3, utilisateur.getNom());
+            preparedStatement.setString(4, utilisateur.getPrenom());
+            preparedStatement.setString(5, utilisateur.getDate_naissance().toString());
+            preparedStatement.setBoolean(6, utilisateur.isAdministrateur());
+            preparedStatement.setInt(7, utilisateur.getId());
+
+            int affectedRows = preparedStatement.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("Echec modification d'utilisateur, pas de ligne modifié");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void supprimer(Utilisateur utilisateur) {
@@ -147,5 +174,35 @@ public class UtilisateurDao {
             e.printStackTrace();
         }
         return true;
+    }
+
+    public Utilisateur getUtilisateur(int idUtilisateur) {
+        Utilisateur utilisateur = null;
+        Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            connexion = daoFactory.getConnection();
+            preparedStatement = connexion.prepareStatement("SELECT * FROM Utilisateur WHERE id=?;");
+            preparedStatement.setInt(1, idUtilisateur);
+
+            ResultSet resultat = preparedStatement.executeQuery();
+
+            if(resultat.next()){
+                int id = resultat.getInt("id");
+                String login = resultat.getString("login");
+                String password = resultat.getString("password");
+                String nom = resultat.getString("nom");
+                String prenom = resultat.getString("prenom");
+                Date date_naissance = resultat.getDate("date_naissance");
+                boolean administrateur = resultat.getBoolean("administrateur");
+
+                utilisateur = new Utilisateur(id, login, password, nom, prenom, date_naissance, administrateur);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return utilisateur;
     }
 }

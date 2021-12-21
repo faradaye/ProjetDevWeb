@@ -11,6 +11,7 @@
     <a href="inscription">Inscription</a>
 </c:if>
 <c:if test="${not empty sessionScope.utilisateur}">
+    <a href="profile">Mon compte</a><br>
     <a href="deconnexion">Deconnexion</a><br><br>
 
     <p>Bonjour ${sessionScope.utilisateur.login}</p><br>
