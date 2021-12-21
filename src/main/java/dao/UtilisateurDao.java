@@ -81,7 +81,7 @@ public class UtilisateurDao {
 
         try {
             connexion = daoFactory.getConnection();
-            preparedStatement = connexion.prepareStatement("DELETE FROM UTILISATEUR WHERE id=?;");
+            preparedStatement = connexion.prepareStatement("DELETE FROM Utilisateur WHERE id=?;");
             preparedStatement.setString(1, String.valueOf(utilisateur.getId()));
 
             preparedStatement.executeUpdate();

@@ -15,8 +15,9 @@
     <a href="deconnexion">Deconnexion</a><br><br>
 
     <p>Bonjour ${sessionScope.utilisateur.login}</p><br>
-    <a href="utilisateurs">Utilisateurs</a>
-    <a href="notifications">Notifications</a>
+    <a href="utilisateurs">Utilisateurs</a><br>
+    <a href="notifications">Notifications</a><br>
+    <a href="lieux">Lieux</a><br>
 </c:if>
 
 </body>

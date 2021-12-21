@@ -52,4 +52,8 @@ public class DaoFactory {
 
     public NotificationDao getNotificationDao() { return new NotificationDao(this); }
 
+    public LieuDao getLieuDao() {
+        return new LieuDao(this);
+    }
+
 }

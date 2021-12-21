@@ -48,7 +48,7 @@ public class Profile extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("On est dans post");
+
     }
 
 }
