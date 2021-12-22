@@ -21,6 +21,16 @@ public class Utilisateur {
         this.administrateur = administrateur;
     }
 
+    public Utilisateur(int id, String login, String nom, String prenom, Date date_naissance, boolean administrateur) {
+        this.id = id;
+        this.login = login;
+        this.password = "";
+        this.nom = nom;
+        this.prenom = prenom;
+        this.date_naissance = date_naissance;
+        this.administrateur = administrateur;
+    }
+
     public int getId() {
         return id;
     }

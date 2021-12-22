@@ -16,8 +16,16 @@
             if($("#displayErreurModificationUtilisateur").html()!='')
                 $("#displayErreurModificationUtilisateur").show();
 
+
+            $("#btn-MdpReset").click(function (){
+                $("#password").show();
+                $("#labelInputMdpReset").show()
+            });
+
         });
+
     </script>
+
 </head>
 <body>
     <%@ include file="menu.jsp"%>
@@ -49,10 +57,15 @@
                     <input type="text" class="form-control" id="login" name="login" placeholder="Ex: L.DuPont" value="${utilisateur.login}" required>
                 </div>
             </div>
-            <div class="col-12">
-                <label for="password" class="form-label">Mot de passe</label>
-                <input type="password" class="form-control" id="password" name="password" placeholder="Ex: ChevalRizBatterie" value="${utilisateur.password}" required>
+
+            <div class="col-4">
+                <button type="button" id="btn-MdpReset" class="btn btn-primary">Reset mot de passe</button>
             </div>
+            <div class="col-4">
+                <label id="labelInputMdpReset" for="password" class="form-label" style="display: none">Nouveau Mot de passe: </label>
+                <input type="password" class="form-control" style="display: none" id="password" name="password" placeholder="Ex: ChevalRizBatterie">
+            </div>
+
             <div class="row my-3">
                 <div class="col-6">
                     <label for="nom" class="form-label">Nom</label>

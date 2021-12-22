@@ -75,6 +75,32 @@ public class UtilisateurDao {
         }
     }
 
+    public void modifierSansModifMotDePasse(Utilisateur utilisateur) {
+        Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            connexion = daoFactory.getConnection();
+            preparedStatement = connexion.prepareStatement("UPDATE Utilisateur " +
+                    " SET login = ?, nom = ?, prenom = ?, date_naissance = ?, administrateur = ? " +
+                    " WHERE id = ?;", Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setString(1, utilisateur.getLogin());
+            preparedStatement.setString(2, utilisateur.getNom());
+            preparedStatement.setString(3, utilisateur.getPrenom());
+            preparedStatement.setString(4, utilisateur.getDate_naissance().toString());
+            preparedStatement.setBoolean(5, utilisateur.isAdministrateur());
+            preparedStatement.setInt(6, utilisateur.getId());
+
+            int affectedRows = preparedStatement.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("Echec modification d'utilisateur, pas de ligne modifié");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void supprimer(Utilisateur utilisateur) {
         Connection connexion = null;
         PreparedStatement preparedStatement = null;
@@ -207,4 +233,5 @@ public class UtilisateurDao {
         }
         return utilisateur;
     }
+
 }
