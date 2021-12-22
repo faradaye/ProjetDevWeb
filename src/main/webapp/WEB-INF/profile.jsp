@@ -51,6 +51,10 @@
             <div class="col-2"><u>Date de naissance :</u></div>
             <div class="col"><fmt:formatDate value="${utilisateur.date_naissance}" type="date" pattern="dd/M/yyyy"/></div>
         </div>
+        <div class="row my-3">
+            <div class="col-2"><u>Email :</u></div>
+            <div class="col">${utilisateur.email}</div>
+        </div>
 
     </div>
 

@@ -63,6 +63,10 @@
                     <label for="date_naissance" class="form-label">Date de naissance:</label>
                     <input type="date" class="form-control" id="date_naissance" name="date_naissance" value="${utilisateur.date_naissance}" required>
                 </div>
+                <div class="form-group">
+                    <label for="email" class="form-label">Email (optionnel: utile pour recuperer votre mot de passe ou être notifié en plus sur votre mail)</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Ex: exemple@gmail.com" value="${utilisateur.email}">
+                </div>
                 <div class="form-group" style="text-align: center">
                     <button type="submit" class="btn btn-primary btn-block">Envoyer</button>
                     <button class="btn btn-primary" onClick="window.history.back()">Retour</button>

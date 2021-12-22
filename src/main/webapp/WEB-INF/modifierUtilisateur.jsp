@@ -82,6 +82,12 @@
                     <input type="date" class="form-control" id="date_naissance" name="date_naissance" value="${utilisateur.date_naissance}" required>
                 </div>
             </div>
+            <div class="row my-3">
+                <div class="col-12">
+                    <label for="email" class="form-label">Email (optionnel: utile pour recuperer votre mot de passe ou être notifié en plus sur votre mail)</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Ex: exemple@gmail.com" value="${utilisateur.email}">
+                </div>
+            </div>
             <c:if test="${sessionScope.utilisateur.administrateur}">
                 <div class="row my-3">
                     <div class="col-12">
