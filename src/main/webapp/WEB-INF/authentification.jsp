@@ -50,10 +50,10 @@
                 <input type="hidden" name="redirectId" value="${param.redirectId}" />
                 <h2 class="text-center">Connection</h2>
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Identifiant" name="login" required>
+                    <input type="text" class="form-control" placeholder="Identifiant" name="login" value= "${utilisateur.login}" required>
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" placeholder="Mot de Passe" name="password" required>
+                    <input type="password" class="form-control" placeholder="Mot de Passe" name="password" value= "${utilisateur.password}" required>
                 </div>
                 <div class="form-group" style="text-align: center">
                     <button type="submit" class="btn btn-primary btn-block">Envoyer</button>
