@@ -1,17 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200&display=swap');
 
 * {
     padding: 0px;
     margin: 0px
-}
-
-nav {
-    display: flex;
-    align-items: center;
-    background: #AB47BC;
-    height: 60px;
-    position: relative;
-    border-bottom: 1px solid #495057
 }
 
 .icon {
@@ -100,4 +90,52 @@ nav {
 .notifications-item .text p {
     color: #aaa;
     font-size: 12px
+}
+
+#homepage section {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+#homepage section h1 {
+    text-transform: uppercase;
+    font-weight: 900;
+    color: #683aa4;
+    text-align: left;
+    margin-bottom: 20px;
+}
+#homepage section p {
+    font-size: 16px;
+    font-weight: 300;
+}
+#homepage button {
+    max-width: 50%;
+    border-radius: 50px !important;
+}
+#homepage .col {
+    justify-content: center;
+    flex-direction: column;
+    display: flex;
+}
+#homepage .img-col {
+    justify-content: flex-end;
+}
+#homepage img {
+    max-width: 100% !important;
+    width: 100%;
+}
+
+#homepage .img-col img{
+    max-width: 60% !important;
+    width: 60%;
+}
+#homepage .card {
+    box-shadow: 2px 11px 7px 16px #f9f9f9;
+    border: 0;
+    text-align: center;
+}
+#homepage .icon {
+    width: 50%;
+    height: 50%;
+    margin-bottom: 20px;
+    margin-right: 0;
 }

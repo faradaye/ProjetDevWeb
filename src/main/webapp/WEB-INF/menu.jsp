@@ -7,11 +7,11 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0 flex-fill">
-                <c:if test="${not empty sessionScope.utilisateur}">
+                <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="<c:url value="/" />">Accueil</a>
                     </li>
+                <c:if test="${not empty sessionScope.utilisateur}">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="utilisateurs">Utilisateurs</a>
                     </li>
@@ -34,42 +34,53 @@
                         </ul>
                     </li>
                 </c:if>
-                <div class="d-flex ms-auto">
+                </ul>
+                    <ul class="navbar-nav ms-auto">
                     <c:if test="${empty sessionScope.utilisateur}">
-                        <li class="d-flex nav-item">
+                        <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="authentification">Se connecter</a>
                         </li>
-                        <li class="d-flex nav-item">
+                        <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="inscription">S'inscrire</a>
                         </li>
                     </c:if>
                     <c:if test="${not empty sessionScope.utilisateur}">
-                        <span class="navbar-brand mb-0 h2" href="#">${sessionScope.utilisateur.login}</span>
-                        <div class="icon" id="bell"> <img src="https://i.imgur.com/AC7dgLA.png" alt=""> </div>
-                        <div class="notifications" id="box">
-                            <h2>Notifications - <span>2</span></h2>
-                            <div class="notifications-item"> <img src="https://i.imgur.com/uIgDDDd.jpg" alt="img">
-                                <div class="text">
-                                    <h4>Samso aliao</h4>
-                                    <p>Samso Nagaro a été testé positif</p>
+                        <li class="nav-item">
+                            <span class="navbar-brand mb-0 h2" href="#">${sessionScope.utilisateur.login}</span>
+                        </li>
+
+                        <li class="nav-item">
+                            <button  type="button" class=" btn btn-primary icon position-relative" id="bell">
+                                <img src="https://i.imgur.com/AC7dgLA.png" alt="">
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                2
+                                <span class="visually-hidden">notifications non lu</span>
+                            </span>
+                            </button>
+                            <div class="notifications" id="box">
+                                <h2>Notifications - <span>2</span></h2>
+                                <div class="notifications-item"> <img src="https://i.imgur.com/uIgDDDd.jpg" alt="img">
+                                    <div class="text">
+                                        <h4>Samso aliao</h4>
+                                        <p>Samso Nagaro a été testé positif</p>
+                                    </div>
+                                </div>
+                                <div class="notifications-item"> <img src="https://img.icons8.com/flat_round/64/000000/vote-badge.png" alt="img">
+                                    <div class="text">
+                                        <h4>John Silvester</h4>
+                                        <p>John Silvester lance une nouvelle activitée</p>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="notifications-item"> <img src="https://img.icons8.com/flat_round/64/000000/vote-badge.png" alt="img">
-                                <div class="text">
-                                    <h4>John Silvester</h4>
-                                    <p>John Silvester lance une nouvelle activitée</p>
-                                </div>
-                            </div>
-                        </div>
-                        <li class="d-flex nav-item">
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="profile">Mon compte</a>
                         </li>
-                        <li class="d-flex nav-item">
+                        <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="#" onclick="Deconnexion()">Se deconnecter</a>
                         </li>
                     </c:if>
-                </div>
-            </ul>
+                    </ul>
         </div>
     </div>
 </nav>
