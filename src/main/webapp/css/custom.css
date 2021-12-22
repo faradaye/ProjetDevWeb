@@ -5,11 +5,6 @@
     margin: 0px
 }
 
-body {
-    color: #fff;
-    font-family: 'Manrope', sans-serif
-}
-
 nav {
     display: flex;
     align-items: center;
