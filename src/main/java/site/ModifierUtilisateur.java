@@ -58,7 +58,12 @@ public class ModifierUtilisateur extends HttpServlet {
         HttpSession session = request.getSession();
 
         //verification remplissage formulaire
-        if (id != "" && id != null && login != "" && login != null && password != "" && password != null && nom != "" && nom != null && prenom != "" && prenom != null && date_naissance != "" && date_naissance != "0000-00-00" && date_naissance != null) {
+        if (id != "" && id != null && login != "" && login != null && (password == "" || password == null) && nom != "" && nom != null && prenom != "" && prenom != null && date_naissance != "" && date_naissance != "0000-00-00" && date_naissance != null) {
+            utilisateurDao.modifierSansModifMotDePasse(new Utilisateur(Integer.parseInt(id), login, nom, prenom, Date.valueOf(date_naissance), administrateur));
+            request.setAttribute("id", Integer.parseInt(id));
+            response.sendRedirect(request.getContextPath() + "/profile?id=" + id);
+        }
+        else if (id != "" && id != null && login != "" && login != null && password != "" && password != null && nom != "" && nom != null && prenom != "" && prenom != null && date_naissance != "" && date_naissance != "0000-00-00" && date_naissance != null) {
             utilisateurDao.modifier(new Utilisateur(Integer.parseInt(id), login, password, nom, prenom, Date.valueOf(date_naissance), administrateur));
             request.setAttribute("id", Integer.parseInt(id));
             response.sendRedirect(request.getContextPath() + "/profile?id=" + id);
