@@ -19,14 +19,14 @@
                     <img src="<c:url value="images/cover.jpg"/>" class="img-fluid" alt="Covid19">
                 </div>
             </div>
-            <div class="row cards">
+            <div class="row cards my-2">
 
                 <div class="col-md-4 d-flex justify-content-center">
                     <div class="card" style="width: 18rem;">
                         <div class="card-body text-center">
-                            <img src="<c:url value="images/friends.png"/>" class="icon" alt="amis image"/>
+                            <a href="amis"><img src="<c:url value="images/friends.png"/>" class="icon" alt="amis image"/></a>
                             <h5 class="card-title">Amis</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <p class="card-text">Enregistrer vous entre amis pour vous protéger</p>
                         </div>
                     </div>
                 </div>
@@ -34,9 +34,9 @@
                 <div class="col-md-4 d-flex justify-content-center">
                     <div class="card" style="width: 18rem;">
                         <div class="card-body text-center">
-                            <img src="<c:url value="images/home.png"/>" class="icon" alt="lieux image"/>
+                            <a href="lieux"> <img src="<c:url value="images/home.png"/>" class="icon" alt="lieux image"/></a>
                             <h5 class="card-title">Lieux</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <p class="card-text">Ajouter des lieux pour vos activitées</p>
                         </div>
                     </div>
                 </div>
@@ -44,9 +44,9 @@
                 <div class="col-md-4 d-flex justify-content-center">
                     <div class="card" style="width: 18rem;">
                         <div class="card-body text-center">
-                            <img src="<c:url value="images/party.png"/>" class="icon" alt="Activitées image"/>
+                            <a href="activitees"> <img src="<c:url value="images/party.png"/>" class="icon" alt="Activitées image"/></a>
                             <h5 class="card-title">Activitées</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <p class="card-text">Organiser des activitées en toute sécurité</p>
                         </div>
                     </div>
                 </div>
