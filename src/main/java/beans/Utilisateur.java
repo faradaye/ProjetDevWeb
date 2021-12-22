@@ -1,6 +1,8 @@
 package beans;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Utilisateur {
     private int id;
@@ -10,6 +12,7 @@ public class Utilisateur {
     private String prenom;
     private Date date_naissance;
     private boolean administrateur;
+    private List<Integer> amis;
 
     public Utilisateur(int id, String login, String password, String nom, String prenom, Date date_naissance, boolean administrateur) {
         this.id = id;
@@ -19,6 +22,7 @@ public class Utilisateur {
         this.prenom = prenom;
         this.date_naissance = date_naissance;
         this.administrateur = administrateur;
+        this.amis = new ArrayList<>();
     }
 
     public Utilisateur(int id, String login, String nom, String prenom, Date date_naissance, boolean administrateur) {
@@ -85,5 +89,13 @@ public class Utilisateur {
 
     public void setAdministrateur(boolean administrateur) {
         this.administrateur = administrateur;
+    }
+
+    public List<Integer> getAmis() {
+        return amis;
+    }
+
+    public void setAmis(List<Integer> amis) {
+        this.amis = amis;
     }
 }

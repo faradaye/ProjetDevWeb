@@ -19,7 +19,7 @@
         <table class="table table-striped">
 
             <br>
-            <button type="button" class="btn btn-primary" id="refreshListeUtilisateurs">Raffraichir la liste</button>
+            <button type="button" class="btn btn-primary" id="refreshListeUtilisateurs">Rafraichir la liste</button>
             <thead>
                 <th scope="col">Nom</th>
                 <th scope="col">Prenom</th>
@@ -35,7 +35,7 @@
                     <td>${ utilisateur.date_naissance }</td>
                     <td>
                         <a type="button" class="btn btn-primary btn-sm" role="button" href="profile?id=${utilisateur.id}">Profile</a>
-                        <c:if test="${ sessionScope.utilisateur.administrateur}">
+                        <c:if test="${ sessionScope.utilisateur.administrateur }">
                             <a type="button" class="btn btn-success btn-sm" role="button" href="modifierUtilisateur?id=${utilisateur.id}">Modifier</a>
                             <a type="button" class="btn btn-danger btn-sm" role="button" href="supprimerUtilisateur?id=${utilisateur.id}">Supprimer</a>
                         </c:if>

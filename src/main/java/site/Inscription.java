@@ -2,6 +2,7 @@ package site;
 
 import beans.Utilisateur;
 import dao.DaoFactory;
+import dao.NotificationDao;
 import dao.UtilisateurDao;
 import utils.VerifDate;
 
@@ -18,11 +19,13 @@ import java.time.LocalDate;
 @WebServlet(name = "inscription", value = "/inscription")
 public class Inscription extends HttpServlet {
     private UtilisateurDao utilisateurDao;
+    private NotificationDao notificationDao;
 
     @Override
     public void init() {
         DaoFactory daoFactory = DaoFactory.getInstance();
         this.utilisateurDao = daoFactory.getUtilisateurDao();
+        this.notificationDao = daoFactory.getNotificationDao();
     }
 
     @Override
@@ -49,6 +52,8 @@ public class Inscription extends HttpServlet {
                 if(utilisateur!=null){
                     session.setAttribute("utilisateur", utilisateur);
                     request.setAttribute("utilisateur", utilisateur);
+                    session.setAttribute("notifications", notificationDao.getAllForUser(utilisateur));
+                    request.setAttribute("notifications", notificationDao.getAllForUser(utilisateur));
                     this.getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
                 }
                 else{
@@ -57,6 +62,8 @@ public class Inscription extends HttpServlet {
                     request.setAttribute("erreur", erreur);
                     session.setAttribute("utilisateur", null);
                     request.setAttribute("utilisateur", utilisateur);
+                    session.setAttribute("notifications", null);
+                    request.setAttribute("notifications", null);
                     this.getServletContext().getRequestDispatcher("/WEB-INF/authentification.jsp").forward(request, response);
                 }
             }
@@ -66,6 +73,8 @@ public class Inscription extends HttpServlet {
                 request.setAttribute("erreur", erreur);
                 session.setAttribute("utilisateur", null);
                 request.setAttribute("utilisateur", utilisateur);
+                session.setAttribute("notifications", null);
+                request.setAttribute("notifications", null);
                 this.getServletContext().getRequestDispatcher("/WEB-INF/inscription.jsp").forward(request, response);
             }
         }
@@ -75,6 +84,8 @@ public class Inscription extends HttpServlet {
             request.setAttribute("erreur", erreur);
             session.setAttribute("utilisateur", null);
             request.setAttribute("utilisateur", utilisateur);
+            session.setAttribute("notifications", null);
+            request.setAttribute("notifications", null);
             this.getServletContext().getRequestDispatcher("/WEB-INF/inscription.jsp").forward(request, response);
         }
     }

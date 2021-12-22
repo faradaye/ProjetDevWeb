@@ -9,9 +9,11 @@ import java.util.List;
 
 public class NotificationDao {
     private final DaoFactory daoFactory;
+    private UtilisateurDao utilisateurDao;
 
     public NotificationDao(DaoFactory daoFactory) {
         this.daoFactory = daoFactory;
+        this.utilisateurDao = daoFactory.getUtilisateurDao();
     }
 
     public void ajouter(Notification notification){
@@ -20,10 +22,11 @@ public class NotificationDao {
 
         try {
             connexion = daoFactory.getConnection();
-            preparedStatement = connexion.prepareStatement("INSERT INTO Notifications(id_utilisateur, type_notif, contenu) VALUES(?, ?, ?);", Statement.RETURN_GENERATED_KEYS);
+            preparedStatement = connexion.prepareStatement("INSERT INTO Notifications(id_utilisateur, id_source, type_notif, contenu) VALUES(?, ?, ?, ?);", Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, String.valueOf(notification.getId_utilisateur()));
-            preparedStatement.setString(2, String.valueOf(notification.getType_notif()));
-            preparedStatement.setString(3, notification.getContenu());
+            preparedStatement.setString(2, String.valueOf(notification.getId_source()));
+            preparedStatement.setString(3, String.valueOf(notification.getType_notif()));
+            preparedStatement.setString(4, notification.getContenu());
 
             int affectedRows = preparedStatement.executeUpdate();
 
@@ -58,11 +61,36 @@ public class NotificationDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
 
+    public Notification getNotif(int idNotif) {
+        Connection connexion = null;
+        Statement statement = null;
+        ResultSet resultat = null;
+        Notification notification = null;
+
+        try {
+            connexion = daoFactory.getConnection();
+            statement = connexion.createStatement();
+            resultat = statement.executeQuery("SELECT * FROM Notifications WHERE id="+idNotif+";");
+
+            while (resultat.next()) {
+                int id = resultat.getInt("id");
+                int id_utilisateur = resultat.getInt("id_utilisateur");
+                int id_source = resultat.getInt("id_source");
+                int type_notif = resultat.getInt("type_notif");
+                String contenu = resultat.getString("contenu");
+
+                notification = new Notification(id, id_utilisateur, id_source, type_notif, contenu, null);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return notification;
     }
 
     public List<Notification> getAll() {
-        List<Notification> notifications = new ArrayList<Notification>();
+        List<Notification> notifications = new ArrayList<>();
         Connection connexion = null;
         Statement statement = null;
         ResultSet resultat = null;
@@ -75,10 +103,18 @@ public class NotificationDao {
             while (resultat.next()) {
                 int id = resultat.getInt("id");
                 int id_utilisateur = resultat.getInt("id_utilisateur");
+                int id_source = resultat.getInt("id_source");
                 int type_notif = resultat.getInt("type_notif");
                 String contenu = resultat.getString("contenu");
 
-                Notification notification = new Notification(id, id_utilisateur, type_notif, contenu);
+                Utilisateur source = utilisateurDao.getUtilisateur(id_source);
+
+                String prenom_nom_source = "";
+                if(source != null){
+                    prenom_nom_source = source.getPrenom() + " " + source.getNom();
+                }
+
+                Notification notification = new Notification(id, id_utilisateur, id_source, type_notif, contenu, prenom_nom_source);
 
                 notifications.add(notification);
             }
@@ -102,10 +138,17 @@ public class NotificationDao {
             while (resultat.next()) {
                 int id = resultat.getInt("id");
                 int id_utilisateur = resultat.getInt("id_utilisateur");
+                int id_source = resultat.getInt("id_source");
                 int type_notif = resultat.getInt("type_notif");
                 String contenu = resultat.getString("contenu");
+                Utilisateur source = utilisateurDao.getUtilisateur(id_source);
 
-                Notification notification = new Notification(id, id_utilisateur, type_notif, contenu);
+                String prenom_nom_source = "";
+                if(source != null){
+                    prenom_nom_source = source.getPrenom() + " " + source.getNom();
+                }
+
+                Notification notification = new Notification(id, id_utilisateur, id_source, type_notif, contenu, prenom_nom_source);
 
                 notifications.add(notification);
             }

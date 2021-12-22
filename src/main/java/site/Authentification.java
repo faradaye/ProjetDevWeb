@@ -2,6 +2,7 @@ package site;
 
 import beans.Utilisateur;
 import dao.DaoFactory;
+import dao.NotificationDao;
 import dao.UtilisateurDao;
 import utils.AppUtils;
 
@@ -16,11 +17,13 @@ import java.io.IOException;
 @WebServlet(name = "authentification", value = "/authentification")
 public class Authentification extends HttpServlet {
     private UtilisateurDao utilisateurDao;
+    private NotificationDao notificationDao;
 
     @Override
     public void init() {
         DaoFactory daoFactory = DaoFactory.getInstance();
         this.utilisateurDao = daoFactory.getUtilisateurDao();
+        this.notificationDao = daoFactory.getNotificationDao();
     }
 
     @Override
@@ -40,7 +43,9 @@ public class Authentification extends HttpServlet {
 
             if(utilisateur!=null){
                 session.setAttribute("utilisateur", utilisateur);
+                session.setAttribute("notifications", notificationDao.getAllForUser(utilisateur));
                 request.setAttribute("utilisateur", utilisateur);
+                request.setAttribute("notifications", notificationDao.getAllForUser(utilisateur));
                 int redirectId = -1;
                 try {
                     redirectId = Integer.parseInt(request.getParameter("redirectId"));
@@ -60,6 +65,8 @@ public class Authentification extends HttpServlet {
                 request.setAttribute("erreur", erreur);
                 session.setAttribute("utilisateur", null);
                 request.setAttribute("utilisateur", utilisateur);
+                session.setAttribute("notifications", null);
+                request.setAttribute("notifications", null);
                 this.getServletContext().getRequestDispatcher("/WEB-INF/authentification.jsp").forward(request, response);
             }
         }
@@ -69,6 +76,8 @@ public class Authentification extends HttpServlet {
             request.setAttribute("erreur", erreur);
             session.setAttribute("utilisateur", null);
             request.setAttribute("utilisateur", utilisateur);
+            session.setAttribute("notifications", null);
+            request.setAttribute("notifications", null);
             this.getServletContext().getRequestDispatcher("/WEB-INF/authentification.jsp").forward(request, response);
         }
     }

@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary bg-gradient">
     <div class="container-fluid">
         <span class="navbar-brand mb-0 h1" href="#">Covid19</span>
@@ -53,24 +54,24 @@
                             <button  type="button" class=" btn btn-primary icon position-relative" id="bell">
                                 <img src="https://i.imgur.com/AC7dgLA.png" alt="">
                                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                2
+                                <c:out value = "${ fn:length(sessionScope.notifications) }"/>
                                 <span class="visually-hidden">notifications non lu</span>
                             </span>
                             </button>
                             <div class="notifications" id="box">
-                                <h2>Notifications - <span>2</span></h2>
+                                <h2>Notifications - <span> <c:out value = "${ fn:length(sessionScope.notifications) }"/> </span></h2>
+                                <c:forEach var="notif" items="${ sessionScope.notifications }">
                                 <div class="notifications-item"> <img src="https://i.imgur.com/uIgDDDd.jpg" alt="img">
                                     <div class="text">
-                                        <h4>Samso aliao</h4>
-                                        <p>Samso Nagaro a été testé positif</p>
+                                        <h4>${ notif.prenom_nom_source }</h4>
+                                        <p>${ notif.contenu }</p>
+                                        <c:if test="${notif.type_notif == 1}">
+                                            <a type="button" onclick="window.location.reload()" href="accepterDemande?id=${notif.id}">Accepter</a>
+                                            <a type="button" onclick="window.location.reload()" href="refuserDemande?id=${notif.id}">Refuser</a>
+                                        </c:if>
                                     </div>
                                 </div>
-                                <div class="notifications-item"> <img src="https://img.icons8.com/flat_round/64/000000/vote-badge.png" alt="img">
-                                    <div class="text">
-                                        <h4>John Silvester</h4>
-                                        <p>John Silvester lance une nouvelle activitée</p>
-                                    </div>
-                                </div>
+                                </c:forEach>
                             </div>
                         </li>
                         <li class="nav-item">
