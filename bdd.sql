@@ -44,10 +44,12 @@ create table IF NOT EXISTS Type_Notification(
 create table IF NOT EXISTS Notifications(
 	id int auto_increment, 
     id_utilisateur int,
+    id_source int,
     type_notif int NOT NULL, 
     contenu varchar(255),
     primary key(id,id_utilisateur),
     foreign key (id_utilisateur) references Utilisateur(id),
+    foreign key (id_source) references Utilisateur(id),
     foreign key (type_notif) references Type_Notification(id)
 ) ENGINE=INNODB;
 

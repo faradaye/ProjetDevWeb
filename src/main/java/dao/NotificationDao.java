@@ -20,10 +20,11 @@ public class NotificationDao {
 
         try {
             connexion = daoFactory.getConnection();
-            preparedStatement = connexion.prepareStatement("INSERT INTO Notifications(id_utilisateur, type_notif, contenu) VALUES(?, ?, ?);", Statement.RETURN_GENERATED_KEYS);
+            preparedStatement = connexion.prepareStatement("INSERT INTO Notifications(id_utilisateur, id_source, type_notif, contenu) VALUES(?, ?, ?, ?);", Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, String.valueOf(notification.getId_utilisateur()));
-            preparedStatement.setString(2, String.valueOf(notification.getType_notif()));
-            preparedStatement.setString(3, notification.getContenu());
+            preparedStatement.setString(2, String.valueOf(notification.getId_source()));
+            preparedStatement.setString(3, String.valueOf(notification.getType_notif()));
+            preparedStatement.setString(4, notification.getContenu());
 
             int affectedRows = preparedStatement.executeUpdate();
 
@@ -62,7 +63,7 @@ public class NotificationDao {
     }
 
     public List<Notification> getAll() {
-        List<Notification> notifications = new ArrayList<Notification>();
+        List<Notification> notifications = new ArrayList<>();
         Connection connexion = null;
         Statement statement = null;
         ResultSet resultat = null;
@@ -75,10 +76,11 @@ public class NotificationDao {
             while (resultat.next()) {
                 int id = resultat.getInt("id");
                 int id_utilisateur = resultat.getInt("id_utilisateur");
+                int id_source = resultat.getInt("id_source");
                 int type_notif = resultat.getInt("type_notif");
                 String contenu = resultat.getString("contenu");
 
-                Notification notification = new Notification(id, id_utilisateur, type_notif, contenu);
+                Notification notification = new Notification(id, id_utilisateur, id_source, type_notif, contenu);
 
                 notifications.add(notification);
             }
@@ -102,10 +104,11 @@ public class NotificationDao {
             while (resultat.next()) {
                 int id = resultat.getInt("id");
                 int id_utilisateur = resultat.getInt("id_utilisateur");
+                int id_source = resultat.getInt("id_source");
                 int type_notif = resultat.getInt("type_notif");
                 String contenu = resultat.getString("contenu");
 
-                Notification notification = new Notification(id, id_utilisateur, type_notif, contenu);
+                Notification notification = new Notification(id, id_utilisateur, id_source, type_notif, contenu);
 
                 notifications.add(notification);
             }

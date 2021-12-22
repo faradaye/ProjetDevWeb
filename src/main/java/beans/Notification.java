@@ -3,12 +3,14 @@ package beans;
 public class Notification {
     private int id;
     private int id_utilisateur;
+    private int id_source;
     private int type_notif;
     private String contenu;
 
-    public Notification(int id, int id_utilisateur, int type_notif, String contenu) {
+    public Notification(int id, int id_utilisateur, int id_source, int type_notif, String contenu) {
         this.id = id;
         this.id_utilisateur = id_utilisateur;
+        this.id_source = id_source;
         this.type_notif = type_notif;
         this.contenu = contenu;
     }
@@ -43,5 +45,13 @@ public class Notification {
 
     public void setContenu(String contenu) {
         this.contenu = contenu;
+    }
+
+    public int getId_source() {
+        return id_source;
+    }
+
+    public void setId_source(int id_source) {
+        this.id_source = id_source;
     }
 }

@@ -148,4 +148,29 @@ public class UtilisateurDao {
         }
         return true;
     }
+
+    public List<Integer> getAmis(Utilisateur utilisateur){
+        Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+        List<Integer> amis = new ArrayList<>();
+
+        try {
+            connexion = daoFactory.getConnection();
+            preparedStatement = connexion.prepareStatement("SELECT * FROM Amis WHERE id_utilisateur1=?;",
+                    ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
+            preparedStatement.setInt(1, utilisateur.getId());
+
+            ResultSet resultat = preparedStatement.executeQuery();
+
+            while(resultat.next()){
+                int id = resultat.getInt(2);
+                amis.add(id);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return amis;
+    }
 }
