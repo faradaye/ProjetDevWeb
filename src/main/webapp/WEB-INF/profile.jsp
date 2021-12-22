@@ -23,14 +23,13 @@
         <div class="row my-3">
             <div class="col">
                 <button class="btn btn-primary" onClick="window.history.back()">Retour</button>
-                <a type="button" class="btn btn-primary" role="button" href="utilisateurs">Liste de utilisateurs</a>
+                <a type="button" class="btn btn-primary" role="button" href="utilisateurs">Liste des utilisateurs</a>
                 <c:if test="${utilisateur.id == sessionScope.utilisateur.id}">
                     <a class="btn btn-success" role="button" href="modifierUtilisateur">Modifier son compte</a>
                 </c:if>
                 <c:if test="${utilisateur.id != sessionScope.utilisateur.id && sessionScope.utilisateur.administrateur eq true}">
                     <a class="btn btn-success" role="button" href="modifierUtilisateur?id=${utilisateur.id}">Modifier le compte</a><br>
                     <a class="btn btn-danger" id="btn-supUtilisateur" value="${utilisateur.id}" role="button" href="supprimerUtilisateur?id=${utilisateur.id}">Supprimer le compte</a>
-                    <a href="supprimerUtilisateur?id=${utilisateur.id}">supprimer le compte</a>
                 </c:if>
             </div>
 
@@ -50,7 +49,7 @@
         </div>
         <div class="row my-3">
             <div class="col-2"><u>Date de naissance :</u></div>
-            <div class="col"><fmt:formatDate value="${date}" type="date" pattern="dd/M/yyyy"/></div>
+            <div class="col"><fmt:formatDate value="${utilisateur.date_naissance}" type="date" pattern="dd/M/yyyy"/></div>
         </div>
 
     </div>
