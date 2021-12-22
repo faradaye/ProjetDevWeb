@@ -9,36 +9,80 @@
         <title>Modifier un compte</title>
     </c:if>
     <%@ include file="header.jsp"%>
+    <script>
+        $(document).ready(function() {
+            $("#displayErreurModificationUtilisateur").hide();
+
+            if($("#displayErreurModificationUtilisateur").html()!='')
+                $("#displayErreurModificationUtilisateur").show();
+
+        });
+    </script>
 </head>
 <body>
     <%@ include file="menu.jsp"%>
-    <c:if test="${ sessionScope.utilisateur.id == idUtilisateur}">
-        <h1>Modifier son compte</h1>
-    </c:if>
-    <c:if test="${ sessionScope.utilisateur.id != idUtilisateur}">
-        <h1>Modifier un compte</h1>
-    </c:if>
 
-    <p style="color: red;">${erreur}</p>
+    <div class="container-fluid">
+        <div class="row my-3">
+            <div class="col-2">
+                <img src="" class="img-fluid" alt="image profile">
+            </div>
+            <div class="col-9">
+                <c:if test="${ sessionScope.utilisateur.id == idUtilisateur}">
+                    <h1>Modification de son compte (${utilisateur.login}) <c:if test="${utilisateur.administrateur eq true}"><span style="color: #ff0000">(ADMIN)</span></c:if></h1>
+                </c:if>
+                <c:if test="${ sessionScope.utilisateur.id != idUtilisateur}">
+                    <h1>Modification de ${utilisateur.login} <c:if test="${utilisateur.administrateur eq true}"><span style="color: #ff0000">(ADMIN)</span></c:if></h1>
+                </c:if>
+            </div>
+        </div>
 
-    <form method="post" action="${pageContext.request.contextPath}/modifierUtilisateur">
-        <input type="hidden" name="idUtilisateur" value="${idUtilisateur}" />
-        <p>Login:</p>
-            <input type="text" name="login" value= "${utilisateur.login}"/><br>
-        <p>Password:</p>
-            <input type="password" name="password" value= "${utilisateur.password}"/><br>
-        <p>Nom:</p>
-            <input type="text" name="nom" value= "${utilisateur.nom}"/><br>
-        <p>Prénom:</p>
-            <input type="text" name="prenom" value= "${utilisateur.prenom}"/><br>
-        <p>Date de naissance:</p>
-            <input type="date" name="date_naissance" value= "${utilisateur.date_naissance}"/><br>
-        <c:if test="${sessionScope.utilisateur.administrateur}">
-            <input type="checkbox" value="1" id="administrateur" name="administrateur"
-                   <c:if test="${utilisateur.administrateur eq true}">checked</c:if>>
-            <label for="administrateur">Administrateur</label><br>
-        </c:if>
-        <input type="submit"/>
-    </form>
+        <button type="button" class="btn btn-primary" onClick="window.history.back()">Retour</button>
+        <a type="button" class="btn btn-primary" role="button" href="utilisateurs">Liste des utilisateurs</a>
+        <!--Nouveau formulaire-->
+        <form method="post" class="my-3" action="${pageContext.request.contextPath}/modifierUtilisateur">
+            <div class="alert alert-danger" role="alert" id="displayErreurModificationUtilisateur">${erreur}</div>
+            <input type="hidden" name="idUtilisateur" value="${idUtilisateur}" />
+            <div class="row my-3">
+                <div class="col-12">
+                    <label for="login" class="form-label">Identifiant</label>
+                    <input type="text" class="form-control" id="login" name="login" placeholder="Ex: L.DuPont" value="${utilisateur.login}" required>
+                </div>
+            </div>
+            <div class="col-12">
+                <label for="password" class="form-label">Mot de passe</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Ex: ChevalRizBatterie" value="${utilisateur.password}" required>
+            </div>
+            <div class="row my-3">
+                <div class="col-6">
+                    <label for="nom" class="form-label">Nom</label>
+                    <input type="text" class="form-control" id="nom" name="nom" placeholder="Ex: DuPont" value="${utilisateur.nom}" required>
+                </div>
+                <div class="col-6">
+                    <label for="prenom" class="form-label">Prenom</label>
+                    <input type="text" class="form-control" id="prenom" name="prenom" placeholder="Ex: Louis" value="${utilisateur.prenom}" required>
+                </div>
+            </div>
+            <div class="row my-3">
+                <div class="col-6">
+                    <label for="date_naissance" class="form-label">Date de naissance</label>
+                    <input type="date" class="form-control" id="date_naissance" name="date_naissance" value="${utilisateur.date_naissance}" required>
+                </div>
+            </div>
+            <c:if test="${sessionScope.utilisateur.administrateur}">
+                <div class="row my-3">
+                    <div class="col-12">
+                        <input type="checkbox" value="1" class="form-check-input" id="administrateur" name="administrateur" <c:if test="${utilisateur.administrateur eq true}">checked</c:if>>
+                        <label for="administrateur" class="form-check-label">Administrateur</label>
+                    </div>
+                </div>
+            </c:if>
+            <div class="row my-3">
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary" name="submit">Mettre à jour</button>
+                </div>
+            </div>
+        </form>
+    </div>
 </body>
 </html>

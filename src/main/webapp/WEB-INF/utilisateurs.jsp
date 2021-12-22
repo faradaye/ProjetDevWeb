@@ -7,27 +7,43 @@
 </head>
 <body>
     <%@ include file="menu.jsp"%>
-    <h1>Liste des utilisateurs</h1>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Nom</th>
-                <th>Prenom</th>
-                <th>Date de naissance</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
+    <div class="container-fluid">
+
+        <div class="row my-3 justify-content-center">
+            <div class="col text-center">
+                <h1>Liste des utilisateurs</h1>
+            </div>
+        </div>
+
+        <table class="table table-striped">
+
+            <br>
+            <button type="button" class="btn btn-primary" id="refreshListeUtilisateurs">Raffraichir la liste</button>
+            <thead>
+                <th scope="col">Nom</th>
+                <th scope="col">Prenom</th>
+                <th scope="col">Date de naissance</th>
+                <th scope="col">Actions</th>
+            </thead>
+            <!--Generation contenu de la table-->
+            <tbody id="displayListeUtilisateurs">
             <c:forEach var="utilisateur" items="${ utilisateurs }">
                 <tr>
                     <td>${ utilisateur.nom }</td>
                     <td>${ utilisateur.prenom }</td>
                     <td>${ utilisateur.date_naissance }</td>
-                    <td><a href="profile?id=${utilisateur.id}">Profile utilisateur</a> <c:if test="${ sessionScope.utilisateur.administrateur}"><a href="modifierUtilisateur?id=${utilisateur.id}">Modifier utilisateur</a> <a href="supprimerUtilisateur?id=${utilisateur.id}">Supprimer utilisateur</a></c:if></td>
+                    <td>
+                        <a type="button" class="btn btn-primary btn-sm" role="button" href="profile?id=${utilisateur.id}">Profile</a>
+                        <c:if test="${ sessionScope.utilisateur.administrateur}">
+                            <a type="button" class="btn btn-success btn-sm" role="button" href="modifierUtilisateur?id=${utilisateur.id}">Modifier</a>
+                            <a type="button" class="btn btn-danger btn-sm" role="button" href="supprimerUtilisateur?id=${utilisateur.id}">Supprimer</a>
+                        </c:if>
+                    </td>
                 </tr>
             </c:forEach>
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
