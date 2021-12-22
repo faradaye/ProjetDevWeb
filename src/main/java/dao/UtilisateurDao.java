@@ -1,6 +1,7 @@
 package dao;
 
 import beans.Utilisateur;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -21,11 +22,11 @@ public class UtilisateurDao {
             connexion = daoFactory.getConnection();
             preparedStatement = connexion.prepareStatement("INSERT INTO Utilisateur(login, `password`, nom, prenom, date_naissance, administrateur) VALUES(?, ?, ?, ?, ?, ?);", Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, utilisateur.getLogin());
-            preparedStatement.setString(2, utilisateur.getPassword()); //A hasher plus tard
+            preparedStatement.setString(2, BCrypt.hashpw(utilisateur.getPassword(), BCrypt.gensalt(12)));
             preparedStatement.setString(3, utilisateur.getNom());
             preparedStatement.setString(4, utilisateur.getPrenom());
             preparedStatement.setString(5, utilisateur.getDate_naissance().toString());
-            preparedStatement.setString(6, String.valueOf(utilisateur.isAdministrateur() ? 1 : 0));
+            preparedStatement.setBoolean(6, utilisateur.isAdministrateur());
 
             int affectedRows = preparedStatement.executeUpdate();
 
@@ -47,13 +48,40 @@ public class UtilisateurDao {
 
     }
 
+    public void modifier(Utilisateur utilisateur) {
+        Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            connexion = daoFactory.getConnection();
+            preparedStatement = connexion.prepareStatement("UPDATE Utilisateur " +
+                    " SET login = ?, `password` = ?, nom = ?, prenom = ?, date_naissance = ?, administrateur = ? " +
+                    " WHERE id = ?;", Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setString(1, utilisateur.getLogin());
+            preparedStatement.setString(2, BCrypt.hashpw(utilisateur.getPassword(), BCrypt.gensalt(12)));
+            preparedStatement.setString(3, utilisateur.getNom());
+            preparedStatement.setString(4, utilisateur.getPrenom());
+            preparedStatement.setString(5, utilisateur.getDate_naissance().toString());
+            preparedStatement.setBoolean(6, utilisateur.isAdministrateur());
+            preparedStatement.setInt(7, utilisateur.getId());
+
+            int affectedRows = preparedStatement.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("Echec modification d'utilisateur, pas de ligne modifié");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void supprimer(Utilisateur utilisateur) {
         Connection connexion = null;
         PreparedStatement preparedStatement = null;
 
         try {
             connexion = daoFactory.getConnection();
-            preparedStatement = connexion.prepareStatement("DELETE FROM UTILISATEUR WHERE id=?;");
+            preparedStatement = connexion.prepareStatement("DELETE FROM Utilisateur WHERE id=?;");
             preparedStatement.setString(1, String.valueOf(utilisateur.getId()));
 
             preparedStatement.executeUpdate();
@@ -77,7 +105,7 @@ public class UtilisateurDao {
             while (resultat.next()) {
                 int id = resultat.getInt("id");
                 String login = resultat.getString("login");
-                String password = resultat.getString("password");
+                String password = "";
                 String nom = resultat.getString("nom");
                 String prenom = resultat.getString("prenom");
                 Date date_naissance = resultat.getDate("date_naissance");
@@ -100,26 +128,27 @@ public class UtilisateurDao {
 
         try {
             connexion = daoFactory.getConnection();
-            preparedStatement = connexion.prepareStatement("SELECT * FROM Utilisateur WHERE login=? AND password=?;",
+            preparedStatement = connexion.prepareStatement("SELECT * FROM Utilisateur WHERE login=?;",
                     ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_UPDATABLE);
             preparedStatement.setString(1, login);
-            preparedStatement.setString(2, password); //A hasher plus tard
 
             ResultSet resultat = preparedStatement.executeQuery();
             if (!resultat.isBeforeFirst()){
                 return  null;
             }
             else if (resultat.first()) {
-                int id = resultat.getInt("id");
-                String loginUtilisateur = resultat.getString("login");
-                String passwordUtilisateur = resultat.getString("password");
-                String nom = resultat.getString("nom");
-                String prenom = resultat.getString("prenom");
-                Date date_naissance = resultat.getDate("date_naissance");
-                Boolean administrateur = resultat.getBoolean("administrateur");
+                if(BCrypt.checkpw(password, resultat.getString("password"))){
+                    int id = resultat.getInt("id");
+                    String loginUtilisateur = resultat.getString("login");
+                    String passwordUtilisateur = resultat.getString("password");
+                    String nom = resultat.getString("nom");
+                    String prenom = resultat.getString("prenom");
+                    Date date_naissance = resultat.getDate("date_naissance");
+                    Boolean administrateur = resultat.getBoolean("administrateur");
 
-                utilisateur = new Utilisateur(id, loginUtilisateur, passwordUtilisateur, nom, prenom, date_naissance, administrateur);
+                    utilisateur = new Utilisateur(id, loginUtilisateur, passwordUtilisateur, nom, prenom, date_naissance, administrateur);
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -149,28 +178,33 @@ public class UtilisateurDao {
         return true;
     }
 
-    public List<Integer> getAmis(Utilisateur utilisateur){
+    public Utilisateur getUtilisateur(int idUtilisateur) {
+        Utilisateur utilisateur = null;
         Connection connexion = null;
         PreparedStatement preparedStatement = null;
-        List<Integer> amis = new ArrayList<>();
 
         try {
             connexion = daoFactory.getConnection();
-            preparedStatement = connexion.prepareStatement("SELECT * FROM Amis WHERE id_utilisateur1=?;",
-                    ResultSet.TYPE_SCROLL_SENSITIVE,
-                    ResultSet.CONCUR_UPDATABLE);
-            preparedStatement.setInt(1, utilisateur.getId());
+            preparedStatement = connexion.prepareStatement("SELECT * FROM Utilisateur WHERE id=?;");
+            preparedStatement.setInt(1, idUtilisateur);
 
             ResultSet resultat = preparedStatement.executeQuery();
 
-            while(resultat.next()){
-                int id = resultat.getInt(2);
-                amis.add(id);
+            if(resultat.next()){
+                int id = resultat.getInt("id");
+                String login = resultat.getString("login");
+                String password = "";
+                String nom = resultat.getString("nom");
+                String prenom = resultat.getString("prenom");
+                Date date_naissance = resultat.getDate("date_naissance");
+                boolean administrateur = resultat.getBoolean("administrateur");
+
+                utilisateur = new Utilisateur(id, login, password, nom, prenom, date_naissance, administrateur);
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return amis;
+        return utilisateur;
     }
 }

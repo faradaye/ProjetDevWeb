@@ -16,7 +16,6 @@
     <p>Bonjour ${sessionScope.utilisateur.login}</p><br>
     <a href="utilisateurs">Utilisateurs</a>
     <a href="notifications">Notifications</a>
-    <a href="demandeamis">Envoyer une demande d'amis</a>
 </c:if>
 
 </body>

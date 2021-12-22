@@ -3,6 +3,7 @@ package site;
 import beans.Utilisateur;
 import dao.DaoFactory;
 import dao.UtilisateurDao;
+import utils.AppUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,7 +41,18 @@ public class Authentification extends HttpServlet {
             if(utilisateur!=null){
                 session.setAttribute("utilisateur", utilisateur);
                 request.setAttribute("utilisateur", utilisateur);
-                this.getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+                int redirectId = -1;
+                try {
+                    redirectId = Integer.parseInt(request.getParameter("redirectId"));
+                } catch (Exception e) {
+                }
+                String requestUri = AppUtils.recupereUriRedirectDepuisIdRedirect(redirectId);
+                if (requestUri != null) {
+                    response.sendRedirect(requestUri);
+                } else {
+                    // Redirection par defaut
+                    this.getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+                }
             }
             else{
                 utilisateur = new Utilisateur(0, login, password, null, null, null, false);
