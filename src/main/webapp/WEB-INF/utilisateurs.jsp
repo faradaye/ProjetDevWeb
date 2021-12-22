@@ -3,8 +3,10 @@
 <html>
 <head>
     <title>Utilisateurs</title>
+    <%@ include file="header.jsp"%>
 </head>
 <body>
+    <%@ include file="menu.jsp"%>
     <h1>Liste des utilisateurs</h1>
 
     <table>

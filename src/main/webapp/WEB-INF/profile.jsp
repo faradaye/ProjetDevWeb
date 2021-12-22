@@ -3,8 +3,10 @@
 <html>
 <head>
     <title>Profile</title>
+    <%@ include file="header.jsp"%>
 </head>
 <body>
+    <%@ include file="menu.jsp"%>
     <h1>Profile</h1>
     <c:if test="${utilisateur.id == sessionScope.utilisateur.id}">
         <a href="modifierUtilisateur">modifier son compte</a>

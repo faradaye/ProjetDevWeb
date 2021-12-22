@@ -3,22 +3,26 @@
 <html>
 <head>
     <title>Accueil</title>
+    <%@ include file="WEB-INF/header.jsp"%>
 </head>
 <body>
+    <%@ include file="WEB-INF/menu.jsp"%>
 
-<c:if test="${empty sessionScope.utilisateur}">
-    <a href="authentification">Authentification</a>
-    <a href="inscription">Inscription</a>
-</c:if>
-<c:if test="${not empty sessionScope.utilisateur}">
-    <a href="profile">Mon compte</a><br>
-    <a href="deconnexion">Deconnexion</a><br><br>
+    <div class="container-fluid">
+        <c:if test="${empty sessionScope.utilisateur}">
+            <a href="authentification">Authentification</a>
+            <a href="inscription">Inscription</a>
+        </c:if>
+        <c:if test="${not empty sessionScope.utilisateur}">
+            <a href="profile">Mon compte</a><br>
+            <a href="deconnexion">Deconnexion</a><br><br>
 
-    <p>Bonjour ${sessionScope.utilisateur.login}</p><br>
-    <a href="utilisateurs">Utilisateurs</a><br>
-    <a href="notifications">Notifications</a><br>
-    <a href="lieux">Lieux</a><br>
-</c:if>
+            <p>Bonjour ${sessionScope.utilisateur.login}</p><br>
+            <a href="utilisateurs">Utilisateurs</a><br>
+            <a href="notifications">Notifications</a><br>
+            <a href="lieux">Lieux</a><br>
+        </c:if>
+    </div>
 
 </body>
 </html>

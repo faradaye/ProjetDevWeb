@@ -3,43 +3,45 @@
 <html>
 <head>
     <title>Notifications</title>
+    <%@ include file="header.jsp"%>
 </head>
 <body>
-<h1>Liste des notifications de l'utilisateur connecté:</h1>
+    <%@ include file="menu.jsp"%>
+    <h1>Liste des notifications de l'utilisateur connecté:</h1>
 
-<table>
-    <thead>
-    <tr>
-        <th>Type de notif</th>
-        <th>Contenu</th>
-    </tr>
-    </thead>
-    <tbody>
-    <c:forEach var="notification" items="${ notificationsUtilisateur }">
+    <table>
+        <thead>
         <tr>
-            <td>${ notification.type_notif }</td>
-            <td>${ notification.contenu }</td>
+            <th>Type de notif</th>
+            <th>Contenu</th>
         </tr>
-    </c:forEach>
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+        <c:forEach var="notification" items="${ notificationsUtilisateur }">
+            <tr>
+                <td>${ notification.type_notif }</td>
+                <td>${ notification.contenu }</td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
 
-<h1>Liste des notifications de tous les utilisateurs:</h1>
-<table>
-    <thead>
-    <tr>
-        <th>Type de notif</th>
-        <th>Contenu</th>
-    </tr>
-    </thead>
-    <tbody>
-    <c:forEach var="notification" items="${ notifications }">
+    <h1>Liste des notifications de tous les utilisateurs:</h1>
+    <table>
+        <thead>
         <tr>
-            <td>${ notification.type_notif }</td>
-            <td>${ notification.contenu }</td>
+            <th>Type de notif</th>
+            <th>Contenu</th>
         </tr>
-    </c:forEach>
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+        <c:forEach var="notification" items="${ notifications }">
+            <tr>
+                <td>${ notification.type_notif }</td>
+                <td>${ notification.contenu }</td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
 </body>
 </html>

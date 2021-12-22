@@ -3,8 +3,10 @@
 <html>
 <head>
     <title>Authentification</title>
+    <%@ include file="header.jsp"%>
 </head>
 <body>
+    <%@ include file="menu.jsp"%>
     <h1>Authentification</h1>
 
     <p style="color: red;">${erreur}</p>

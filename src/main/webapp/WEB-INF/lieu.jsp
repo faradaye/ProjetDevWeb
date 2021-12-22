@@ -3,8 +3,10 @@
 <html>
 <head>
     <title>Lieu</title>
+    <%@ include file="header.jsp"%>
 </head>
 <body>
+    <%@ include file="menu.jsp"%>
     <h1>Lieu</h1>
     <c:if test="${sessionScope.utilisateur.administrateur eq true}">
         <a href="modifierLieu?id=${lieu.id}">modifier le lieu</a><br>

@@ -3,8 +3,10 @@
 <html>
 <head>
     <title>Lieux</title>
+    <%@ include file="header.jsp"%>
 </head>
 <body>
+    <%@ include file="menu.jsp"%>
     <h1>Liste des lieux</h1>
 
     <a href="creerLieu">Ajouter un lieu</a>

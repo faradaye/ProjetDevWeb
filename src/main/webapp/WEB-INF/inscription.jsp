@@ -3,8 +3,10 @@
 <html>
 <head>
     <title>Inscription</title>
+    <%@ include file="header.jsp"%>
 </head>
 <body>
+    <%@ include file="menu.jsp"%>
     <h1>Inscription</h1>
 
     <p style="color: red;">${erreur}</p>

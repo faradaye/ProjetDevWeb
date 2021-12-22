@@ -3,8 +3,10 @@
 <html>
 <head>
     <title>Modifier un lieu</title>
+    <%@ include file="header.jsp"%>
 </head>
 <body>
+    <%@ include file="menu.jsp"%>
     <h1>Modifier un lieu</h1>
 
     <p style="color: red;">${erreur}</p>

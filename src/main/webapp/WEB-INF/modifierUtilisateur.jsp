@@ -8,8 +8,10 @@
     <c:if test="${ sessionScope.utilisateur.id != idUtilisateur}">
         <title>Modifier un compte</title>
     </c:if>
+    <%@ include file="header.jsp"%>
 </head>
 <body>
+    <%@ include file="menu.jsp"%>
     <c:if test="${ sessionScope.utilisateur.id == idUtilisateur}">
         <h1>Modifier son compte</h1>
     </c:if>
