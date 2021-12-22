@@ -30,10 +30,10 @@
     </style>
     <script>
         $(document).ready(function() {
-            $("#displayErreurConnection").hide();
+            $("#displayErreurInscription").hide();
 
-            if($("#displayErreurConnection").html()!='')
-                $("#displayErreurConnection").show();
+            if($("#displayErreurInscription").html()!='')
+                $("#displayErreurInscription").show();
 
         });
     </script>
@@ -67,7 +67,7 @@
                     <button type="submit" class="btn btn-primary btn-block">Envoyer</button>
                     <button class="btn btn-primary" onClick="window.history.back()">Retour</button>
                 </div>
-                <div class="alert alert-danger" role="alert" id="displayErreurConnection">${erreur}</div>
+                <div class="alert alert-danger" role="alert" id="displayErreurInscription">${erreur}</div>
             </form>
         </div>
     </div>
