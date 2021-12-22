@@ -6,13 +6,15 @@ public class Notification {
     private int id_source;
     private int type_notif;
     private String contenu;
+    private String prenom_nom_source;
 
-    public Notification(int id, int id_utilisateur, int id_source, int type_notif, String contenu) {
+    public Notification(int id, int id_utilisateur, int id_source, int type_notif, String contenu, String prenom_nom_source) {
         this.id = id;
         this.id_utilisateur = id_utilisateur;
         this.id_source = id_source;
         this.type_notif = type_notif;
         this.contenu = contenu;
+        this.prenom_nom_source = prenom_nom_source;
     }
 
     public int getId() {
@@ -53,5 +55,13 @@ public class Notification {
 
     public void setId_source(int id_source) {
         this.id_source = id_source;
+    }
+
+    public String getPrenom_nom_source() {
+        return prenom_nom_source;
+    }
+
+    public void setPrenom_nom_source(String prenom_nom_source) {
+        this.prenom_nom_source = prenom_nom_source;
     }
 }

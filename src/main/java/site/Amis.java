@@ -12,10 +12,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(name = "demandeamis", value = "/demandeamis")
-public class DemandeAmis extends HttpServlet {
+@WebServlet(name = "amis", value = "/amis")
+public class Amis extends HttpServlet {
     private UtilisateurDao utilisateurDao;
     private NotificationDao notificationDao;
 
@@ -28,13 +29,19 @@ public class DemandeAmis extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        this.getServletContext().getRequestDispatcher("/WEB-INF/demandeamis.jsp").forward(request, response);
+        Utilisateur utilisateur = (Utilisateur) request.getSession().getAttribute("utilisateur");
+        List<Utilisateur> amis = new ArrayList<>();
+        for(int id_ami : utilisateurDao.getAmis(utilisateur)){
+            Utilisateur ami = utilisateurDao.getUtilisateur(id_ami);
+            amis.add(ami);
+        }
+        request.setAttribute("amis", amis);
+        this.getServletContext().getRequestDispatcher("/WEB-INF/amis.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String loginAmi = request.getParameter("loginami");
-
         if(loginAmi != null & !loginAmi.equals("")){
             Utilisateur utilisateur = (Utilisateur) request.getSession().getAttribute("utilisateur");
             List<Integer> amis = utilisateurDao.getAmis(utilisateur);
@@ -50,12 +57,12 @@ public class DemandeAmis extends HttpServlet {
                 }
             }
         }
-
         doGet(request,response);
     }
 
     private Notification createNotificationDemandeAmi(Utilisateur src, Utilisateur dest){
-        String contenu = src.getPrenom() + " " + src.getNom() + " souhaite vous ajouter en ami.";
-        return new Notification(0, dest.getId(), src.getId(), 1, contenu);
+        String prenom_nom_source = src.getPrenom() + " " + src.getNom();
+        String contenu = prenom_nom_source + " souhaite vous ajouter en ami.";
+        return new Notification(0, dest.getId(), src.getId(), 1, contenu, prenom_nom_source);
     }
 }

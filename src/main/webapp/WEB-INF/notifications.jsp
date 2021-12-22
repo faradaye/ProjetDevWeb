@@ -19,7 +19,7 @@
         <table class="table table-striped">
 
             <br>
-            <button type="button" class="btn btn-primary" id="refreshListeNotificationsPerso">Raffraichir la liste</button>
+            <button type="button" class="btn btn-primary" id="refreshListeNotificationsPerso">Rafraichir la liste</button>
             <thead>
                 <th scope="col">Type de notif</th>
                 <th scope="col">Contenu</th>
@@ -46,7 +46,7 @@
         <table class="table table-striped">
 
             <br>
-            <button type="button" class="btn btn-primary" id="refreshListeNotificationsTous">Raffraichir la liste</button>
+            <button type="button" class="btn btn-primary" id="refreshListeNotificationsTous">Rafraichir la liste</button>
             <thead>
             <th scope="col">Type de notif</th>
             <th scope="col">Contenu</th>

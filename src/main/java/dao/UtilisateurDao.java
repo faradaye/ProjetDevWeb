@@ -207,4 +207,60 @@ public class UtilisateurDao {
         }
         return utilisateur;
     }
+
+    public List<Integer> getAmis(Utilisateur utilisateur){
+        List<Integer> amis = new ArrayList<>();
+        Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            connexion = daoFactory.getConnection();
+            preparedStatement = connexion.prepareStatement("SELECT * FROM Amis WHERE id_utilisateur1=?;");
+            preparedStatement.setInt(1, utilisateur.getId());
+
+            ResultSet resultat = preparedStatement.executeQuery();
+
+            if(resultat.next()){
+                int id = resultat.getInt("id_utilisateur2");
+                amis.add(id);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return amis;
+    }
+
+    public void ajouterAmi(int id1, int id2){
+        Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            //ajout d'en un sens
+            connexion = daoFactory.getConnection();
+            preparedStatement = connexion.prepareStatement("INSERT INTO Amis(id_utilisateur1, id_utilisateur2) VALUES(?, ?);");
+            preparedStatement.setInt(1, id1);
+            preparedStatement.setInt(2, id2);
+
+            int affectedRows = preparedStatement.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("Echec insertion de lien d'amitie, pas de ligne ajoutée");
+            }
+
+            //ajout dans l'autre sens
+            connexion = daoFactory.getConnection();
+            preparedStatement = connexion.prepareStatement("INSERT INTO Amis(id_utilisateur1, id_utilisateur2) VALUES(?, ?);");
+            preparedStatement.setInt(1, id2);
+            preparedStatement.setInt(2, id1);
+
+            affectedRows = preparedStatement.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("Echec insertion de lien d'amitie, pas de ligne ajoutée");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
