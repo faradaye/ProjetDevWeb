@@ -44,9 +44,9 @@
             <div class="col-md-4 d-flex justify-content-center">
                 <div class="card" style="width: 18rem;">
                     <div class="card-body text-center">
-                        <a href="activitees"> <img src="<c:url value="images/party.png"/>" class="icon" alt="Activitées image"/></a>
-                        <h5 class="card-title">Activitées</h5>
-                        <p class="card-text">Organiser des activitées en toute sécurité</p>
+                        <a href="activites"> <img src="<c:url value="images/party.png"/>" class="icon" alt="Activitées image"/></a>
+                        <h5 class="card-title">Activités</h5>
+                        <p class="card-text">Organiser des activités en toute sécurité</p>
                     </div>
                 </div>
             </div>

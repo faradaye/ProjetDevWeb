@@ -22,6 +22,7 @@ create table IF NOT EXISTS Lieu(
 
 create table IF NOT EXISTS Activite(
 	id int auto_increment primary key,
+	nom varchar(255) NOT NULL,
 	date_activite date  NOT NULL, 
 	heure_debut time  NOT NULL, 
 	heure_fin time  NOT NULL, 
@@ -38,7 +39,7 @@ create table IF NOT EXISTS Amis(
 ) ENGINE=INNODB;
 
 create table IF NOT EXISTS Type_Notification(
-	id int auto_increment primary key, 
+	id int primary key, 
     nom varchar(255)
 ) ENGINE=INNODB;
 
@@ -54,8 +55,6 @@ create table IF NOT EXISTS Notifications(
     foreign key (type_notif) references Type_Notification(id)
 ) ENGINE=INNODB;
 
-idUtilisateur
-
 create table IF NOT EXISTS RecupMotDePasse(
     id_utilisateur int,
     token varchar(255),
@@ -63,4 +62,5 @@ create table IF NOT EXISTS RecupMotDePasse(
     foreign key (id_utilisateur) references Utilisateur(id)
 ) ENGINE=INNODB;
 
-INSERT INTO UTILISATEUR(login, `password`, nom, prenom, date_naissance, administrateur) VALUES('admin', 'mdpAdmin', 'Alan', 'Turing', '1912-06-23', 1)
+INSERT INTO UTILISATEUR(login, `password`, nom, prenom, date_naissance, administrateur) VALUES('admin', 'mdpAdmin', 'Alan', 'Turing', '1912-06-23', 1);
+INSERT INTO TYPE_NOTIFICATION(id, nom) VALUES(1, 'Demande d\'amis');

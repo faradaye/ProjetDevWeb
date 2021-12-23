@@ -30,13 +30,17 @@ public class Amis extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Utilisateur utilisateur = (Utilisateur) request.getSession().getAttribute("utilisateur");
-        List<Utilisateur> amis = new ArrayList<>();
-        for(int id_ami : utilisateurDao.getAmis(utilisateur)){
-            Utilisateur ami = utilisateurDao.getUtilisateur(id_ami);
-            amis.add(ami);
+        if(utilisateur == null){
+            response.sendRedirect(request.getContextPath()+"/authentification");
+        }else{
+            List<Utilisateur> amis = new ArrayList<>();
+            for(int id_ami : utilisateurDao.getAmis(utilisateur)){
+                Utilisateur ami = utilisateurDao.getUtilisateur(id_ami);
+                amis.add(ami);
+            }
+            request.setAttribute("amis", amis);
+            this.getServletContext().getRequestDispatcher("/WEB-INF/amis.jsp").forward(request, response);
         }
-        request.setAttribute("amis", amis);
-        this.getServletContext().getRequestDispatcher("/WEB-INF/amis.jsp").forward(request, response);
     }
 
     @Override

@@ -1,0 +1,53 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<html>
+<head>
+    <title>Activités</title>
+    <%@ include file="header.jsp"%>
+</head>
+<body>
+<%@ include file="menu.jsp"%>
+
+<div class="container-fluid">
+
+    <div class="row my-3 justify-content-center">
+        <div class="col text-center">
+            <h1>Liste des activités</h1>
+        </div>
+    </div>
+
+    <table class="table table-striped">
+        <br>
+        <a type="button" class="btn btn-primary" role="button" href="creerActivite">Ajouter une activité</a>
+        <button type="button" class="btn btn-primary" id="refreshListeActivite">Rafraichir la liste</button>
+        <thead>
+            <th scope="col">Nom</th>
+            <th scope="col">Lieu</th>
+            <th scope="col">Date</th>
+            <th scope="col">Heure de début</th>
+            <th scope="col">Heure de fin</th>
+            <th scope="col">Actions</th>
+        </thead>
+        <!--Generation contenu de la table-->
+        <tbody id="displayListeActivites">
+        <c:forEach var="activite" items="${ activites }">
+            <tr>
+                <td>${ activite.nom }</td>
+                <td>${ activite.lieu.nom }</td>
+                <td>${ activite.date_activite }</td>
+                <td>${ activite.heure_debut }</td>
+                <td>${ activite.heure_fin }</td>
+                <td>
+                    <a type="button" class="btn btn-primary btn-sm" role="button" href="activite?id=${activite.id}">Details</a>
+                    <c:if test="${ sessionScope.utilisateur.administrateur}">
+                        <a type="button" class="btn btn-success btn-sm" role="button" href="modifierActivite?id=${activite.id}">Modifier</a>
+                        <a type="button" class="btn btn-danger btn-sm" role="button" href="supprimerActivite?id=${activite.id}">Supprimer</a>
+                    </c:if>
+                </td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

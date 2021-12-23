@@ -1,6 +1,5 @@
 package utils;
 
-import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 

@@ -55,4 +55,7 @@ public class DaoFactory {
         return new LieuDao(this);
     }
 
+    public ActiviteDao getActiviteDao(){
+        return new ActiviteDao(this);
+    }
 }

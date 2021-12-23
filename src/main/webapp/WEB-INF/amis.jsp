@@ -47,7 +47,7 @@
     </div>
 
     <form method="post" action="${pageContext.request.contextPath}/amis">
-        <p>Adresse mail de l'ami:</p>
+        <p>Nom d'utilisateur de l'ami:</p>
         <input type="text" name="loginami"/><br>
 
         <input type="submit"/>

@@ -27,11 +27,11 @@
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownActivitees" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Activitées
+                            Activités
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="creerActivitee">Créer une activitée</a></li>
-                            <li><a class="dropdown-item" href="activitees">Liste des activitées</a></li>
+                            <li><a class="dropdown-item" href="creerActivite">Créer une activité</a></li>
+                            <li><a class="dropdown-item" href="activites">Liste des activités</a></li>
                         </ul>
                     </li>
                 </c:if>
