@@ -262,6 +262,37 @@ public class UtilisateurDao {
         return utilisateur;
     }
 
+    public Utilisateur getUtilisateurParEmail(String email) {
+        Utilisateur utilisateur = null;
+        Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            connexion = daoFactory.getConnection();
+            preparedStatement = connexion.prepareStatement("SELECT * FROM Utilisateur WHERE email=?;");
+            preparedStatement.setString(1, email);
+
+            ResultSet resultat = preparedStatement.executeQuery();
+
+            if(resultat.next()){
+                int id = resultat.getInt("id");
+                String login = resultat.getString("login");
+                String password = "";
+                String nom = resultat.getString("nom");
+                String prenom = resultat.getString("prenom");
+                Date date_naissance = resultat.getDate("date_naissance");
+                String emailUtilisateur = resultat.getString("email");
+                boolean administrateur = resultat.getBoolean("administrateur");
+
+                utilisateur = new Utilisateur(id, login, password, nom, prenom, date_naissance, emailUtilisateur, administrateur);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return utilisateur;
+    }
+
     public void enregistrementDemandeRecupMotDePasse(Utilisateur utilisateur, String token) {
         Connection connexion = null;
         PreparedStatement preparedStatement = null;

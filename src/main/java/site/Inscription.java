@@ -59,7 +59,7 @@ public class Inscription extends HttpServlet {
                         this.getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
                     }
                     else{
-                        utilisateur = new Utilisateur(0, login, password, null, null, null, false);
+                        utilisateur = new Utilisateur(0, login, password, null, (String) null, null, false);
                         String erreur = "Login ou mot de passe invalide";
                         request.setAttribute("erreur", erreur);
                         session.setAttribute("utilisateur", null);
