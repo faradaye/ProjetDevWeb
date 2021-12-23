@@ -73,6 +73,7 @@ public class NouveauMotDePasse extends HttpServlet {
             }
             //verification remplissage formulaire
             if (password != "" && password != null && confPassword != "" && confPassword != null) {
+                utilisateur.setPassword(password);
                 if(password.equals(confPassword)){
                     utilisateurDao.recupMotDePasse(utilisateur, token);
                     this.getServletContext().getRequestDispatcher("/WEB-INF/authentification.jsp").forward(request, response);

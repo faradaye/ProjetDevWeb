@@ -300,6 +300,20 @@ public class UtilisateurDao {
 
         try {
             connexion = daoFactory.getConnection();
+            preparedStatement = connexion.prepareStatement("DELETE FROM RecupMotDePasse WHERE id_utilisateur=?;");
+            preparedStatement.setInt(1, utilisateur.getId());
+
+            int affectedRows = preparedStatement.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("Echec suppression ancienne demandes dans la table de recuperation de mot de passe, pas de ligne supprimées");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            connexion = daoFactory.getConnection();
             preparedStatement = connexion.prepareStatement("INSERT INTO RecupMotDePasse(id_utilisateur, token) VALUES(?, ?);");
             preparedStatement.setInt(1, utilisateur.getId());
             preparedStatement.setString(2, token);
@@ -354,7 +368,7 @@ public class UtilisateurDao {
 
         try {
             connexion = daoFactory.getConnection();
-            preparedStatement = connexion.prepareStatement("DELETE FROM RecupMotDePasse WHERE id_utilisateur=?, token=?;");
+            preparedStatement = connexion.prepareStatement("DELETE FROM RecupMotDePasse WHERE id_utilisateur=? AND token=?;");
             preparedStatement.setInt(1, utilisateur.getId());
             preparedStatement.setString(2, token);
 

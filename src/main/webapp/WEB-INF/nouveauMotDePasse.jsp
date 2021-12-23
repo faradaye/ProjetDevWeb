@@ -46,7 +46,7 @@
             <div class="login-form">
                 <form action="${pageContext.request.contextPath}/nouveauMotDePasse" method="post" class="row g-2">
                     <h2 class="text-center">Nouveau mot de passe</h2>
-                    <input type="hidden" value="${token}"/>
+                    <input type="hidden" name="token" value="${token}"/>
                     <div class="form-group">
                         <input type="password" class="form-control" placeholder="Mot de Passe" name="password" value= "${utilisateur.password}" required>
                     </div>
