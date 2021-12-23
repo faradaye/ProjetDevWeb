@@ -7,7 +7,8 @@ create table IF NOT EXISTS Utilisateur(
     `password` varchar(255) NOT NULL,
     nom varchar(255) NOT NULL, 
     prenom varchar(255) NOT NULL, 
-    date_naissance date  NOT NULL, 
+    date_naissance date  NOT NULL,
+    email varchar(255) DEFAULT NULL,
     administrateur BOOLEAN DEFAULT 0
 ) ENGINE=INNODB;
 
@@ -51,6 +52,15 @@ create table IF NOT EXISTS Notifications(
     foreign key (id_utilisateur) references Utilisateur(id),
     foreign key (id_source) references Utilisateur(id),
     foreign key (type_notif) references Type_Notification(id)
+) ENGINE=INNODB;
+
+idUtilisateur
+
+create table IF NOT EXISTS RecupMotDePasse(
+    id_utilisateur int,
+    token varchar(255),
+    primary key(id_utilisateur,token),
+    foreign key (id_utilisateur) references Utilisateur(id)
 ) ENGINE=INNODB;
 
 INSERT INTO UTILISATEUR(login, `password`, nom, prenom, date_naissance, administrateur) VALUES('admin', 'mdpAdmin', 'Alan', 'Turing', '1912-06-23', 1)
