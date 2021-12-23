@@ -42,14 +42,15 @@ public class Amis extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String loginAmi = request.getParameter("loginami");
-        if(loginAmi != null & !loginAmi.equals("")){
-            Utilisateur utilisateur = (Utilisateur) request.getSession().getAttribute("utilisateur");
+        Utilisateur utilisateur = (Utilisateur) request.getSession().getAttribute("utilisateur");
+        if(loginAmi != null && !loginAmi.equals("") && !loginAmi.equals(utilisateur.getLogin())){
             List<Integer> amis = utilisateurDao.getAmis(utilisateur);
             utilisateur.setAmis(amis);
 
+            utilisateur.setAmis(utilisateurDao.getAmis(utilisateur));
             if(utilisateurDao.loginUtilisateurExiste(loginAmi)){
                 for(Utilisateur u : utilisateurDao.getAll()){
-                    if(u.getLogin().equals(loginAmi)){
+                    if(u.getLogin().equals(loginAmi) && !utilisateur.getAmis().contains(u)){
                         Notification n = createNotificationDemandeAmi(utilisateur, u);
                         notificationDao.ajouter(n);
                         break;
