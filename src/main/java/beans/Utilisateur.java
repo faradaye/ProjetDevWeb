@@ -11,6 +11,7 @@ public class Utilisateur {
     private String nom;
     private String prenom;
     private Date date_naissance;
+    private String email;
     private boolean administrateur;
     private List<Integer> amis;
 
@@ -21,6 +22,7 @@ public class Utilisateur {
         this.nom = nom;
         this.prenom = prenom;
         this.date_naissance = date_naissance;
+        this.email = null;
         this.administrateur = administrateur;
         this.amis = new ArrayList<>();
     }
@@ -32,6 +34,29 @@ public class Utilisateur {
         this.nom = nom;
         this.prenom = prenom;
         this.date_naissance = date_naissance;
+        this.email = null;
+        this.administrateur = administrateur;
+    }
+
+    public Utilisateur(int id, String login, String password, String nom, String prenom, Date date_naissance, String email, boolean administrateur) {
+        this.id = id;
+        this.login = login;
+        this.password = password;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.date_naissance = date_naissance;
+        this.email = email;
+        this.administrateur = administrateur;
+    }
+
+    public Utilisateur(int id, String login, String nom, String prenom, Date date_naissance, String email, boolean administrateur) {
+        this.id = id;
+        this.login = login;
+        this.password = "";
+        this.nom = nom;
+        this.prenom = prenom;
+        this.date_naissance = date_naissance;
+        this.email = email;
         this.administrateur = administrateur;
     }
 
@@ -81,6 +106,14 @@ public class Utilisateur {
 
     public void setDate_naissance(Date date_naissance) {
         this.date_naissance = date_naissance;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public boolean isAdministrateur() {

@@ -20,13 +20,14 @@ public class UtilisateurDao {
 
         try {
             connexion = daoFactory.getConnection();
-            preparedStatement = connexion.prepareStatement("INSERT INTO Utilisateur(login, `password`, nom, prenom, date_naissance, administrateur) VALUES(?, ?, ?, ?, ?, ?);", Statement.RETURN_GENERATED_KEYS);
+            preparedStatement = connexion.prepareStatement("INSERT INTO Utilisateur(login, `password`, nom, prenom, date_naissance, email, administrateur) VALUES(?, ?, ?, ?, ?, ?, ?);", Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, utilisateur.getLogin());
             preparedStatement.setString(2, BCrypt.hashpw(utilisateur.getPassword(), BCrypt.gensalt(12)));
             preparedStatement.setString(3, utilisateur.getNom());
             preparedStatement.setString(4, utilisateur.getPrenom());
-            preparedStatement.setString(5, utilisateur.getDate_naissance().toString());
-            preparedStatement.setBoolean(6, utilisateur.isAdministrateur());
+            preparedStatement.setDate(5, utilisateur.getDate_naissance());
+            preparedStatement.setString(6, utilisateur.getEmail());
+            preparedStatement.setBoolean(7, utilisateur.isAdministrateur());
 
             int affectedRows = preparedStatement.executeUpdate();
 
@@ -55,15 +56,16 @@ public class UtilisateurDao {
         try {
             connexion = daoFactory.getConnection();
             preparedStatement = connexion.prepareStatement("UPDATE Utilisateur " +
-                    " SET login = ?, `password` = ?, nom = ?, prenom = ?, date_naissance = ?, administrateur = ? " +
+                    " SET login = ?, `password` = ?, nom = ?, prenom = ?, date_naissance = ?, email = ?, administrateur = ? " +
                     " WHERE id = ?;", Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, utilisateur.getLogin());
             preparedStatement.setString(2, BCrypt.hashpw(utilisateur.getPassword(), BCrypt.gensalt(12)));
             preparedStatement.setString(3, utilisateur.getNom());
             preparedStatement.setString(4, utilisateur.getPrenom());
-            preparedStatement.setString(5, utilisateur.getDate_naissance().toString());
-            preparedStatement.setBoolean(6, utilisateur.isAdministrateur());
-            preparedStatement.setInt(7, utilisateur.getId());
+            preparedStatement.setDate(5, utilisateur.getDate_naissance());
+            preparedStatement.setString(6, utilisateur.getEmail());
+            preparedStatement.setBoolean(7, utilisateur.isAdministrateur());
+            preparedStatement.setInt(8, utilisateur.getId());
 
             int affectedRows = preparedStatement.executeUpdate();
 
@@ -82,14 +84,15 @@ public class UtilisateurDao {
         try {
             connexion = daoFactory.getConnection();
             preparedStatement = connexion.prepareStatement("UPDATE Utilisateur " +
-                    " SET login = ?, nom = ?, prenom = ?, date_naissance = ?, administrateur = ? " +
+                    " SET login = ?, nom = ?, prenom = ?, date_naissance = ?, email = ?, administrateur = ? " +
                     " WHERE id = ?;", Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, utilisateur.getLogin());
             preparedStatement.setString(2, utilisateur.getNom());
             preparedStatement.setString(3, utilisateur.getPrenom());
-            preparedStatement.setString(4, utilisateur.getDate_naissance().toString());
-            preparedStatement.setBoolean(5, utilisateur.isAdministrateur());
-            preparedStatement.setInt(6, utilisateur.getId());
+            preparedStatement.setDate(4, utilisateur.getDate_naissance());
+            preparedStatement.setString(5, utilisateur.getEmail());
+            preparedStatement.setBoolean(6, utilisateur.isAdministrateur());
+            preparedStatement.setInt(7, utilisateur.getId());
 
             int affectedRows = preparedStatement.executeUpdate();
 
@@ -135,9 +138,10 @@ public class UtilisateurDao {
                 String nom = resultat.getString("nom");
                 String prenom = resultat.getString("prenom");
                 Date date_naissance = resultat.getDate("date_naissance");
+                String email = resultat.getString("email");
                 Boolean administrateur = resultat.getBoolean("administrateur");
 
-                Utilisateur utilisateur = new Utilisateur(id, login, password, nom, prenom, date_naissance, administrateur);
+                Utilisateur utilisateur = new Utilisateur(id, login, password, nom, prenom, date_naissance, email, administrateur);
 
                 utilisateurs.add(utilisateur);
             }
@@ -171,9 +175,10 @@ public class UtilisateurDao {
                     String nom = resultat.getString("nom");
                     String prenom = resultat.getString("prenom");
                     Date date_naissance = resultat.getDate("date_naissance");
+                    String email = resultat.getString("email");
                     Boolean administrateur = resultat.getBoolean("administrateur");
 
-                    utilisateur = new Utilisateur(id, loginUtilisateur, passwordUtilisateur, nom, prenom, date_naissance, administrateur);
+                    utilisateur = new Utilisateur(id, loginUtilisateur, passwordUtilisateur, nom, prenom, date_naissance, email, administrateur);
                 }
             }
         } catch (SQLException e) {
@@ -192,6 +197,28 @@ public class UtilisateurDao {
                     ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_UPDATABLE);
             preparedStatement.setString(1, login);
+
+            ResultSet resultat = preparedStatement.executeQuery();
+
+            if (!resultat.isBeforeFirst()){
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+    public boolean emailUtilisateurExiste(String email) {
+        Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            connexion = daoFactory.getConnection();
+            preparedStatement = connexion.prepareStatement("SELECT * FROM Utilisateur WHERE email=?;",
+                    ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
+            preparedStatement.setString(1, email);
 
             ResultSet resultat = preparedStatement.executeQuery();
 
@@ -223,15 +250,100 @@ public class UtilisateurDao {
                 String nom = resultat.getString("nom");
                 String prenom = resultat.getString("prenom");
                 Date date_naissance = resultat.getDate("date_naissance");
+                String email = resultat.getString("email");
                 boolean administrateur = resultat.getBoolean("administrateur");
 
-                utilisateur = new Utilisateur(id, login, password, nom, prenom, date_naissance, administrateur);
+                utilisateur = new Utilisateur(id, login, password, nom, prenom, date_naissance, email, administrateur);
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return utilisateur;
+    }
+
+    public void enregistrementDemandeRecupMotDePasse(Utilisateur utilisateur, String token) {
+        Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            connexion = daoFactory.getConnection();
+            preparedStatement = connexion.prepareStatement("DELETE FROM RecupMotDePasse WHERE id_utilisateur=?;");
+            preparedStatement.setInt(1, utilisateur.getId());
+
+            int affectedRows = preparedStatement.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("Echec suppression ancienne demandes dans la table de recuperation de mot de passe, pas de ligne supprimées");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            connexion = daoFactory.getConnection();
+            preparedStatement = connexion.prepareStatement("INSERT INTO RecupMotDePasse(id_utilisateur, token) VALUES(?, ?);");
+            preparedStatement.setInt(1, utilisateur.getId());
+            preparedStatement.setString(2, token);
+
+            int affectedRows = preparedStatement.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("Echec insertion dans la table de recuperation de mot de passe, pas de ligne ajoutée");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Utilisateur getUtilisateurDemandeRecupMotDePasse(String token) {
+        Utilisateur utilisateur = null;
+        Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            connexion = daoFactory.getConnection();
+            preparedStatement = connexion.prepareStatement("SELECT * FROM Utilisateur u, RecupMotDePasse r " +
+                    " WHERE r.token=? " +
+                    " AND u.id = r.id_utilisateur;");
+            preparedStatement.setString(1, token);
+
+            ResultSet resultat = preparedStatement.executeQuery();
+
+            if(resultat.next()){
+                int id = resultat.getInt("id");
+                String login = resultat.getString("login");
+                String password = "";
+                String nom = resultat.getString("nom");
+                String prenom = resultat.getString("prenom");
+                Date date_naissance = resultat.getDate("date_naissance");
+                String emailUtilisateur = resultat.getString("email");
+                boolean administrateur = resultat.getBoolean("administrateur");
+
+                utilisateur = new Utilisateur(id, login, password, nom, prenom, date_naissance, emailUtilisateur, administrateur);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return utilisateur;
+    }
+
+    public void recupMotDePasse(Utilisateur utilisateur, String token) {
+        this.modifier(utilisateur);
+        Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            connexion = daoFactory.getConnection();
+            preparedStatement = connexion.prepareStatement("DELETE FROM RecupMotDePasse WHERE id_utilisateur=? AND token=?;");
+            preparedStatement.setInt(1, utilisateur.getId());
+            preparedStatement.setString(2, token);
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public List<Integer> getAmis(Utilisateur utilisateur){
@@ -289,4 +401,6 @@ public class UtilisateurDao {
             e.printStackTrace();
         }
     }
+
+
 }

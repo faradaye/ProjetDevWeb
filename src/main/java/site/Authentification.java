@@ -60,7 +60,7 @@ public class Authentification extends HttpServlet {
                 }
             }
             else{
-                utilisateur = new Utilisateur(0, login, password, null, null, null, false);
+                utilisateur = new Utilisateur(0, login, password, null, (String) null, null, false);
                 String erreur = "Login ou mot de passe invalide";
                 request.setAttribute("erreur", erreur);
                 session.setAttribute("utilisateur", null);
@@ -71,7 +71,7 @@ public class Authentification extends HttpServlet {
             }
         }
         else {
-            Utilisateur utilisateur = new Utilisateur(0, login, password, null, null, null, false);
+            Utilisateur utilisateur = new Utilisateur(0, login, password, null, (String) null, null, false);
             String erreur = "Informations rentrées incorrectes";
             request.setAttribute("erreur", erreur);
             session.setAttribute("utilisateur", null);
