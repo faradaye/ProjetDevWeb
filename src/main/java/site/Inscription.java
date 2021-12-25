@@ -1,5 +1,6 @@
 package site;
 
+import beans.Notification;
 import beans.Utilisateur;
 import dao.DaoFactory;
 import dao.NotificationDao;
@@ -15,6 +16,8 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet(name = "inscription", value = "/inscription")
 public class Inscription extends HttpServlet {
@@ -56,6 +59,7 @@ public class Inscription extends HttpServlet {
                         request.setAttribute("utilisateur", utilisateur);
                         session.setAttribute("notifications", notificationDao.getAllForUser(utilisateur));
                         request.setAttribute("notifications", notificationDao.getAllForUser(utilisateur));
+                        setNotificationsNonLues(request,utilisateur);
                         this.getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
                     }
                     else{
@@ -103,4 +107,13 @@ public class Inscription extends HttpServlet {
         }
     }
 
+    private void setNotificationsNonLues(HttpServletRequest request, Utilisateur utilisateur){
+        List<Notification> nonLues = new ArrayList<>();
+        for(Notification n : notificationDao.getAllForUser(utilisateur)){
+            if(!n.isLue()){
+                nonLues.add(n);
+            }
+        }
+        request.getSession().setAttribute("notificationsNonLues", nonLues);
+    }
 }

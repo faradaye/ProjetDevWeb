@@ -49,6 +49,7 @@ create table IF NOT EXISTS Notifications(
     id_source int,
     type_notif int NOT NULL, 
     contenu varchar(255),
+    lue BOOLEAN DEFAULT 0,
     primary key(id,id_utilisateur),
     foreign key (id_utilisateur) references Utilisateur(id),
     foreign key (id_source) references Utilisateur(id),

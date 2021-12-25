@@ -54,23 +54,28 @@
                             <button  type="button" class=" btn btn-primary icon position-relative" id="bell">
                                 <img src="https://i.imgur.com/AC7dgLA.png" alt="">
                                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                <c:out value = "${ fn:length(sessionScope.notifications) }"/>
+                                <c:out value = "${ fn:length(sessionScope.notificationsNonLues) }"/>
                                 <span class="visually-hidden">notifications non lu</span>
                             </span>
                             </button>
                             <div class="notifications" id="box">
-                                <h2>Notifications - <span> <c:out value = "${ fn:length(sessionScope.notifications) }"/> </span></h2>
+                                <h2>Notifications - <span> <c:out value = "${ fn:length(sessionScope.notificationsNonLues) }"/> </span> <a type="button" href="notifications">Tout voir</a> </h2>
                                 <c:forEach var="notif" items="${ sessionScope.notifications }">
-                                <div class="notifications-item"> <img src="https://i.imgur.com/uIgDDDd.jpg" alt="img">
-                                    <div class="text">
-                                        <h4>${ notif.prenom_nom_source }</h4>
-                                        <p>${ notif.contenu }</p>
-                                        <c:if test="${notif.type_notif == 1}">
-                                            <a type="button" onclick="window.location.reload()" href="accepterDemande?id=${notif.id}">Accepter</a>
-                                            <a type="button" onclick="window.location.reload()" href="refuserDemande?id=${notif.id}">Refuser</a>
-                                        </c:if>
-                                    </div>
-                                </div>
+                                    <c:if test="${not notif.lue}">
+                                        <div class="notifications-item"> <img src="https://i.imgur.com/uIgDDDd.jpg" alt="img">
+                                            <div class="text">
+                                                <h4>${ notif.prenom_nom_source }</h4>
+                                                <p>${ notif.contenu }</p>
+                                                <c:if test="${notif.type_notif == 1}">
+                                                    <a type="button" onclick="window.location.reload()" href="accepterDemande?id=${notif.id}">Accepter</a>
+                                                    <a type="button" onclick="window.location.reload()" href="refuserDemande?id=${notif.id}">Refuser</a>
+                                                </c:if>
+                                                <c:if test="${notif.type_notif != 1}">
+                                                    <a type="button" onclick="window.location.reload()" href="notificationLue?id=${notif.id}">Marquer comme lue</a>
+                                                </c:if>
+                                            </div>
+                                        </div>
+                                    </c:if>
                                 </c:forEach>
                             </div>
                         </li>

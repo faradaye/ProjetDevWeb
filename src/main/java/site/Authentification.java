@@ -1,5 +1,6 @@
 package site;
 
+import beans.Notification;
 import beans.Utilisateur;
 import dao.DaoFactory;
 import dao.NotificationDao;
@@ -13,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet(name = "authentification", value = "/authentification")
 public class Authentification extends HttpServlet {
@@ -46,6 +49,7 @@ public class Authentification extends HttpServlet {
                 session.setAttribute("notifications", notificationDao.getAllForUser(utilisateur));
                 request.setAttribute("utilisateur", utilisateur);
                 request.setAttribute("notifications", notificationDao.getAllForUser(utilisateur));
+                setNotificationsNonLues(request,utilisateur);
                 int redirectId = -1;
                 try {
                     redirectId = Integer.parseInt(request.getParameter("redirectId"));
@@ -82,4 +86,13 @@ public class Authentification extends HttpServlet {
         }
     }
 
+    private void setNotificationsNonLues(HttpServletRequest request, Utilisateur utilisateur){
+        List<Notification> nonLues = new ArrayList<>();
+        for(Notification n : notificationDao.getAllForUser(utilisateur)){
+            if(!n.isLue()){
+                nonLues.add(n);
+            }
+        }
+        request.getSession().setAttribute("notificationsNonLues", nonLues);
+    }
 }

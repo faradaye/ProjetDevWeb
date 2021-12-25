@@ -54,6 +54,6 @@ public class SupprimerAmi extends HttpServlet {
     private Notification createNotificationSuppressionAmi(Utilisateur src, Utilisateur dest){
         String prenom_nom_source = src.getPrenom() + " " + src.getNom();
         String contenu = prenom_nom_source + " n'est plus votre ami.";
-        return new Notification(0, dest.getId(), src.getId(), 2, contenu, prenom_nom_source);
+        return new Notification(0, dest.getId(), src.getId(), 2, contenu, prenom_nom_source, false);
     }
 }

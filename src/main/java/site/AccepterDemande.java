@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "accepterDemande", value = "/accepterDemande")
@@ -36,10 +37,13 @@ public class AccepterDemande extends HttpServlet {
             int id = Integer.parseInt(request.getParameter("id"));
             Notification notification = notificationDao.getNotif(id);
             utilisateurDao.ajouterAmi(notification.getId_utilisateur(),notification.getId_source());
-            notificationDao.supprimer(notification);
+
+            notification.setLue(true);
+            notificationDao.modifier(notification);
 
             Utilisateur utilisateur = (Utilisateur) request.getSession().getAttribute("utilisateur");
             request.getSession().setAttribute("notifications", notificationDao.getAllForUser(utilisateur));
+            setNotificationsNonLues(request,utilisateur);
         }
         response.sendRedirect(request.getContextPath());
     }
@@ -49,4 +53,13 @@ public class AccepterDemande extends HttpServlet {
 
     }
 
+    private void setNotificationsNonLues(HttpServletRequest request, Utilisateur utilisateur){
+        List<Notification> nonLues = new ArrayList<>();
+        for(Notification n : notificationDao.getAllForUser(utilisateur)){
+            if(!n.isLue()){
+                nonLues.add(n);
+            }
+        }
+        request.getSession().setAttribute("notificationsNonLues", nonLues);
+    }
 }

@@ -7,14 +7,16 @@ public class Notification {
     private int type_notif;
     private String contenu;
     private String prenom_nom_source;
+    private boolean lue;
 
-    public Notification(int id, int id_utilisateur, int id_source, int type_notif, String contenu, String prenom_nom_source) {
+    public Notification(int id, int id_utilisateur, int id_source, int type_notif, String contenu, String prenom_nom_source, boolean lue) {
         this.id = id;
         this.id_utilisateur = id_utilisateur;
         this.id_source = id_source;
         this.type_notif = type_notif;
         this.contenu = contenu;
         this.prenom_nom_source = prenom_nom_source;
+        this.lue = lue;
     }
 
     public int getId() {
@@ -63,5 +65,13 @@ public class Notification {
 
     public void setPrenom_nom_source(String prenom_nom_source) {
         this.prenom_nom_source = prenom_nom_source;
+    }
+
+    public boolean isLue() {
+        return lue;
+    }
+
+    public void setLue(boolean lue) {
+        this.lue = lue;
     }
 }

@@ -5,22 +5,18 @@ import beans.Utilisateur;
 import dao.DaoFactory;
 import dao.NotificationDao;
 import dao.UtilisateurDao;
-import utils.VerifDate;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(name = "refuserDemande", value = "/refuserDemande")
-public class RefuserDemande extends HttpServlet {
+@WebServlet(name = "notificationLue", value = "/notificationLue")
+public class NotificationLue extends HttpServlet {
     private UtilisateurDao utilisateurDao;
     private NotificationDao notificationDao;
 
@@ -35,21 +31,19 @@ public class RefuserDemande extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if((request.getParameter("id")!=null && !request.getParameter("id").equals(""))){
             int id = Integer.parseInt(request.getParameter("id"));
+            Utilisateur utilisateur = (Utilisateur) request.getSession().getAttribute("utilisateur");
             Notification notification = notificationDao.getNotif(id);
-
             notification.setLue(true);
             notificationDao.modifier(notification);
 
-            Utilisateur utilisateur = (Utilisateur) request.getSession().getAttribute("utilisateur");
-            request.getSession().setAttribute("notifications", notificationDao.getAllForUser(utilisateur));
             setNotificationsNonLues(request,utilisateur);
+            request.getSession().setAttribute("notifications", notificationDao.getAllForUser(utilisateur));
         }
         response.sendRedirect(request.getContextPath());
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 
     private void setNotificationsNonLues(HttpServletRequest request, Utilisateur utilisateur){
