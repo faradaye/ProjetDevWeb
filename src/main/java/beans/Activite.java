@@ -4,6 +4,8 @@ import dao.DaoFactory;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Activite {
     private int id;
@@ -14,6 +16,7 @@ public class Activite {
     private int id_lieu;
 
     private Lieu lieu;
+    private List<Integer> participants;
 
     public Activite(int id, String nom, Date date_activite, Time heure_debut, Time heure_fin, int id_lieu) {
         this.id = id;
@@ -23,6 +26,7 @@ public class Activite {
         this.heure_fin = heure_fin;
         this.id_lieu = id_lieu;
         this.lieu = DaoFactory.getInstance().getLieuDao().getLieu(id_lieu);
+        this.participants = new ArrayList<>();
     }
 
     public int getId() {
@@ -76,5 +80,13 @@ public class Activite {
 
     public Lieu getLieu() {
         return lieu;
+    }
+
+    public List<Integer> getParticipants() {
+        return participants;
+    }
+
+    public void setParticipants(List<Integer> participants) {
+        this.participants = participants;
     }
 }

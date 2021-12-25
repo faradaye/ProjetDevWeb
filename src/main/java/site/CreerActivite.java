@@ -47,6 +47,7 @@ public class CreerActivite extends HttpServlet {
         if(request.getSession().getAttribute("utilisateur")==null){
             response.sendRedirect(request.getContextPath()+"/authentification");
         }else {
+            Utilisateur utilisateur = (Utilisateur) request.getSession().getAttribute("utilisateur");
             String nom = request.getParameter("nom");
             String date_activite = request.getParameter("date");
             String heure_debut = request.getParameter("heuredebut");
@@ -57,6 +58,7 @@ public class CreerActivite extends HttpServlet {
             if (nom != null && !nom.equals("") && date_activite != null && lieuDao.getLieu(id_lieu) != null) {
                 Activite activite = new Activite(0, nom, Date.valueOf(date_activite), Time.valueOf(heure_debut + ":00"), Time.valueOf(heure_fin + ":00"), id_lieu);
                 activiteDao.ajouter(activite);
+                activiteDao.addParticipant(activite, utilisateur);
                 request.setAttribute("id", activite.getId());
                 response.sendRedirect(request.getContextPath() + "/activite?id=" + activite.getId());
             } else {

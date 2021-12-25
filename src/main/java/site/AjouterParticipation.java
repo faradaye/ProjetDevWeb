@@ -1,8 +1,10 @@
 package site;
 
 import beans.Activite;
+import beans.Utilisateur;
 import dao.ActiviteDao;
 import dao.DaoFactory;
+import dao.UtilisateurDao;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,13 +13,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "activites", value = "/activites")
-public class Activites extends HttpServlet {
+@WebServlet(name = "ajouterParticipation", value = "/ajouterParticipation")
+public class AjouterParticipation extends HttpServlet {
+    private UtilisateurDao utilisateurDao;
     private ActiviteDao activiteDao;
 
     @Override
     public void init() {
         DaoFactory daoFactory = DaoFactory.getInstance();
+        this.utilisateurDao = daoFactory.getUtilisateurDao();
         this.activiteDao = daoFactory.getActiviteDao();
     }
 
@@ -26,8 +30,15 @@ public class Activites extends HttpServlet {
         if(request.getSession().getAttribute("utilisateur")==null){
             response.sendRedirect(request.getContextPath()+"/authentification");
         }else{
-            request.setAttribute("activites", activiteDao.getAll());
-            this.getServletContext().getRequestDispatcher("/WEB-INF/activites.jsp").forward(request, response);
+            if((request.getParameter("id")!=null && !request.getParameter("id").equals(""))){
+                int id = Integer.parseInt(request.getParameter("id"));
+                Activite activite = activiteDao.getActivite(id);
+                Utilisateur utilisateur = (Utilisateur) request.getSession().getAttribute("utilisateur");
+                activiteDao.addParticipant(activite,utilisateur);
+
+                request.setAttribute("activite", activite);
+            }
+            response.sendRedirect(request.getContextPath());
         }
     }
 

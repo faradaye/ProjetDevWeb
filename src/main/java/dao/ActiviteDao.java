@@ -1,6 +1,7 @@
 package dao;
 
 import beans.Activite;
+import beans.Utilisateur;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -108,7 +109,7 @@ public class ActiviteDao {
                 int id_lieu = resultat.getInt("id_lieu");
 
                 Activite activite = new Activite(id, nom, date_activite, heure_debut, heure_fin, id_lieu);
-
+                setParticipants(activite);
                 activites.add(activite);
             }
         } catch (SQLException e) {
@@ -138,11 +139,59 @@ public class ActiviteDao {
                 int id_lieu = resultat.getInt("id_lieu");
 
                 activite = new Activite(id, nom, date_activite, heure_debut, heure_fin, id_lieu);
+                setParticipants(activite);
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return activite;
+    }
+
+    private void setParticipants(Activite activite){
+        Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+        List<Integer> participants = new ArrayList<>();
+
+        try {
+            connexion = daoFactory.getConnection();
+            preparedStatement = connexion.prepareStatement("SELECT * FROM ParticipationActivite WHERE id_activite=?;");
+            preparedStatement.setInt(1, activite.getId());
+
+            ResultSet resultat = preparedStatement.executeQuery();
+
+            while(resultat.next()){
+                int id = resultat.getInt("id_utilisateur");
+                participants.add(id);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        activite.setParticipants(participants);
+    }
+
+    public void addParticipant(Activite activite, Utilisateur utilisateur){
+        Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+        List<Integer> participants = new ArrayList<>();
+
+        try {
+            connexion = daoFactory.getConnection();
+            preparedStatement = connexion.prepareStatement("INSERT INTO participationactivite(id_utilisateur, id_activite) VALUES(?, ?);");
+            preparedStatement.setInt(1, utilisateur.getId());
+            preparedStatement.setInt(2, activite.getId());
+
+            int affectedRows = preparedStatement.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("Echec insertion de participation, pas de ligne ajoutée");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
