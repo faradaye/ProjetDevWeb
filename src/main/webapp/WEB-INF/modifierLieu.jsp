@@ -29,7 +29,7 @@
         <button type="button" class="btn btn-primary" onClick="window.history.back()">Retour</button>
         <a type="button" class="btn btn-primary" role="button" href="lieux">Liste des lieux</a>
         <!--Nouveau formulaire-->
-        <form method="post" class="my-3" action="${pageContext.request.contextPath}/creerLieu">
+        <form method="post" class="my-3" action="${pageContext.request.contextPath}/modifierLieu">
             <div class="alert alert-danger" role="alert" id="displayErreurModifierLieu">${erreur}</div>
             <input type="hidden" name="idLieu" value="${idLieu}" />
             <div class="row my-3">

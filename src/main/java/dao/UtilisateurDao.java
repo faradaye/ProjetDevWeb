@@ -1,5 +1,6 @@
 package dao;
 
+import beans.Notification;
 import beans.Utilisateur;
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -389,7 +390,7 @@ public class UtilisateurDao {
 
             ResultSet resultat = preparedStatement.executeQuery();
 
-            if(resultat.next()){
+            while(resultat.next()){
                 int id = resultat.getInt("id_utilisateur2");
                 amis.add(id);
             }
@@ -405,7 +406,7 @@ public class UtilisateurDao {
         PreparedStatement preparedStatement = null;
 
         try {
-            //ajout d'en un sens
+            //ajout dans un sens
             connexion = daoFactory.getConnection();
             preparedStatement = connexion.prepareStatement("INSERT INTO Amis(id_utilisateur1, id_utilisateur2) VALUES(?, ?);");
             preparedStatement.setInt(1, id1);
@@ -433,5 +434,34 @@ public class UtilisateurDao {
         }
     }
 
+    public void supprimerAmi(int id1, int id2){
+        Connection connexion = null;
+        PreparedStatement preparedStatement = null;
 
+        try {
+            connexion = daoFactory.getConnection();
+            preparedStatement = connexion.prepareStatement("DELETE FROM Amis WHERE id_utilisateur1=? AND id_utilisateur2=?;");
+            preparedStatement.setInt(1, id1);
+            preparedStatement.setInt(2, id2);
+
+            //suppression dans un sens
+            int affectedRows = preparedStatement.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("Echec suppression de lien d'amitie, pas de ligne supprimée");
+            }
+
+            //suppression dans l'autre sens
+            preparedStatement = connexion.prepareStatement("DELETE FROM Amis WHERE id_utilisateur1=? AND id_utilisateur2=?;");
+            preparedStatement.setInt(1, id2);
+            preparedStatement.setInt(2, id1);
+            affectedRows = preparedStatement.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("Echec suppression de lien d'amitie, pas de ligne supprimée");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

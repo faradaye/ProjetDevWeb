@@ -33,7 +33,7 @@
                 <td>${ ami.prenom }</td>
                 <td>
                     <a type="button" class="btn btn-primary btn-sm" role="button" href="profile?id=${ami.id}">Profile</a>
-                    <a type="button" class="btn btn-danger btn-sm" role="button" href="supprimerUtilisateurAmi?id=${ami.id}">Supprimer</a>
+                    <a type="button" class="btn btn-danger btn-sm" role="button" href="supprimerAmi?id=${ami.id}">Supprimer</a>
                 </td>
             </tr>
         </c:forEach>
