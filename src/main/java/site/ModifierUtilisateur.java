@@ -6,16 +6,16 @@ import dao.UtilisateurDao;
 import utils.VerifDate;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Date;
 import java.time.LocalDate;
 
 @WebServlet(name = "modifierUtilisateur", value = "/modifierUtilisateur")
+@MultipartConfig(maxFileSize = 16177215) // upload file up to 16MB
 public class ModifierUtilisateur extends HttpServlet {
     private UtilisateurDao utilisateurDao;
 
@@ -60,12 +60,20 @@ public class ModifierUtilisateur extends HttpServlet {
         HttpSession session = request.getSession();
         Utilisateur utilisateurSessions = (Utilisateur) session.getAttribute("utilisateur");
 
+
+        InputStream inputStreamImage = null;
+        Part filePart = request.getPart("imageProfile");
+        if (filePart != null) {
+            inputStreamImage = filePart.getInputStream();
+        }
+
+
         //verification remplissage formulaire
         //Sans modif mot de pass
         if (id != "" && id != null && login != "" && login != null && (password == "" || password == null) && nom != "" && nom != null && prenom != "" && prenom != null && email!=null && date_naissance != "" && date_naissance != "0000-00-00" && date_naissance != null) {
             if(login.equals(utilisateurSessions.getLogin()) || !utilisateurDao.loginUtilisateurExiste(login)){
                 if(email.equals(utilisateurSessions.getEmail()) || email=="" || !utilisateurDao.emailUtilisateurExiste(email)){
-                    utilisateurDao.modifierSansModifMotDePasse(new Utilisateur(Integer.parseInt(id), login, nom, prenom, Date.valueOf(date_naissance), email, administrateur));
+                    utilisateurDao.modifierSansModifMotDePasse(new Utilisateur(Integer.parseInt(id), login, nom, prenom, Date.valueOf(date_naissance), email, inputStreamImage, administrateur));
                     request.setAttribute("id", Integer.parseInt(id));
                     response.sendRedirect(request.getContextPath() + "/profile?id=" + id);
                 }
@@ -91,7 +99,7 @@ public class ModifierUtilisateur extends HttpServlet {
         else if (id != "" && id != null && login != "" && login != null && password != "" && password != null && nom != "" && nom != null && prenom != "" && prenom != null && email!=null && date_naissance != "" && date_naissance != "0000-00-00" && date_naissance != null) {
             if(login.equals(utilisateurSessions.getLogin()) || !utilisateurDao.loginUtilisateurExiste(login)){
                 if(email.equals(utilisateurSessions.getEmail()) || email=="" || !utilisateurDao.emailUtilisateurExiste(email)){
-                    utilisateurDao.modifier(new Utilisateur(Integer.parseInt(id), login, password, nom, prenom, Date.valueOf(date_naissance), email, administrateur));
+                    utilisateurDao.modifier(new Utilisateur(Integer.parseInt(id), login, password, nom, prenom, Date.valueOf(date_naissance), email, inputStreamImage, administrateur));
                     request.setAttribute("id", Integer.parseInt(id));
                     response.sendRedirect(request.getContextPath() + "/profile?id=" + id);
                 }

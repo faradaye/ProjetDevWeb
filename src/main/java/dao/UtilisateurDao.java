@@ -4,6 +4,7 @@ import beans.Notification;
 import beans.Utilisateur;
 import org.mindrot.jbcrypt.BCrypt;
 
+import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,7 @@ public class UtilisateurDao {
 
         try {
             connexion = daoFactory.getConnection();
-            preparedStatement = connexion.prepareStatement("INSERT INTO Utilisateur(login, `password`, nom, prenom, date_naissance, email, administrateur) VALUES(?, ?, ?, ?, ?, ?, ?);", Statement.RETURN_GENERATED_KEYS);
+            preparedStatement = connexion.prepareStatement("INSERT INTO Utilisateur(login, `password`, nom, prenom, date_naissance, email, " + (utilisateur.getImageProfile()!=null ? " imageProfile, ": "") + "administrateur) VALUES(?, ?, ?, ?, ?, ?, " + (utilisateur.getImageProfile()!=null ? " ?, ": "") + "?);", Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, utilisateur.getLogin());
             preparedStatement.setString(2, BCrypt.hashpw(utilisateur.getPassword(), BCrypt.gensalt(12)));
             preparedStatement.setString(3, utilisateur.getNom());
@@ -29,6 +30,8 @@ public class UtilisateurDao {
             preparedStatement.setDate(5, utilisateur.getDate_naissance());
             preparedStatement.setString(6, utilisateur.getEmail());
             preparedStatement.setBoolean(7, utilisateur.isAdministrateur());
+            if(utilisateur.getImageProfile()!=null)
+                preparedStatement.setBlob(8, utilisateur.getImageProfile());
 
             int affectedRows = preparedStatement.executeUpdate();
 
@@ -58,6 +61,7 @@ public class UtilisateurDao {
             connexion = daoFactory.getConnection();
             preparedStatement = connexion.prepareStatement("UPDATE Utilisateur " +
                     " SET login = ?, `password` = ?, nom = ?, prenom = ?, date_naissance = ?, email = ?, administrateur = ? " +
+                    (utilisateur.getImageProfile()!=null ? ", imageProfile = ? ": "") +
                     " WHERE id = ?;", Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, utilisateur.getLogin());
             preparedStatement.setString(2, BCrypt.hashpw(utilisateur.getPassword(), BCrypt.gensalt(12)));
@@ -66,7 +70,11 @@ public class UtilisateurDao {
             preparedStatement.setDate(5, utilisateur.getDate_naissance());
             preparedStatement.setString(6, utilisateur.getEmail());
             preparedStatement.setBoolean(7, utilisateur.isAdministrateur());
-            preparedStatement.setInt(8, utilisateur.getId());
+            if(utilisateur.getImageProfile()!=null){
+                preparedStatement.setBlob(8, utilisateur.getImageProfile());
+                preparedStatement.setInt(9, utilisateur.getId());
+            }
+            else preparedStatement.setInt(8, utilisateur.getId());
 
             int affectedRows = preparedStatement.executeUpdate();
 
@@ -86,6 +94,7 @@ public class UtilisateurDao {
             connexion = daoFactory.getConnection();
             preparedStatement = connexion.prepareStatement("UPDATE Utilisateur " +
                     " SET login = ?, nom = ?, prenom = ?, date_naissance = ?, email = ?, administrateur = ? " +
+                    (utilisateur.getImageProfile()!=null ? ", imageProfile = ? ": "") +
                     " WHERE id = ?;", Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, utilisateur.getLogin());
             preparedStatement.setString(2, utilisateur.getNom());
@@ -93,7 +102,11 @@ public class UtilisateurDao {
             preparedStatement.setDate(4, utilisateur.getDate_naissance());
             preparedStatement.setString(5, utilisateur.getEmail());
             preparedStatement.setBoolean(6, utilisateur.isAdministrateur());
-            preparedStatement.setInt(7, utilisateur.getId());
+            if(utilisateur.getImageProfile()!=null){
+                preparedStatement.setBlob(7, utilisateur.getImageProfile());
+                preparedStatement.setInt(8, utilisateur.getId());
+            }
+            else preparedStatement.setInt(7, utilisateur.getId());
 
             int affectedRows = preparedStatement.executeUpdate();
 
@@ -140,9 +153,10 @@ public class UtilisateurDao {
                 String prenom = resultat.getString("prenom");
                 Date date_naissance = resultat.getDate("date_naissance");
                 String email = resultat.getString("email");
+                InputStream imageProfile = (InputStream) resultat.getBlob("imageProfile");
                 Boolean administrateur = resultat.getBoolean("administrateur");
 
-                Utilisateur utilisateur = new Utilisateur(id, login, password, nom, prenom, date_naissance, email, administrateur);
+                Utilisateur utilisateur = new Utilisateur(id, login, password, nom, prenom, date_naissance, email, imageProfile, administrateur);
 
                 utilisateurs.add(utilisateur);
             }
@@ -177,9 +191,10 @@ public class UtilisateurDao {
                     String prenom = resultat.getString("prenom");
                     Date date_naissance = resultat.getDate("date_naissance");
                     String email = resultat.getString("email");
+                    InputStream imageProfile = (InputStream) resultat.getBlob("imageProfile");
                     Boolean administrateur = resultat.getBoolean("administrateur");
 
-                    utilisateur = new Utilisateur(id, loginUtilisateur, passwordUtilisateur, nom, prenom, date_naissance, email, administrateur);
+                    utilisateur = new Utilisateur(id, loginUtilisateur, passwordUtilisateur, nom, prenom, date_naissance, email, imageProfile, administrateur);
                 }
             }
         } catch (SQLException e) {
@@ -252,9 +267,10 @@ public class UtilisateurDao {
                 String prenom = resultat.getString("prenom");
                 Date date_naissance = resultat.getDate("date_naissance");
                 String email = resultat.getString("email");
+                InputStream imageProfile = (InputStream) resultat.getBlob("imageProfile");
                 boolean administrateur = resultat.getBoolean("administrateur");
 
-                utilisateur = new Utilisateur(id, login, password, nom, prenom, date_naissance, email, administrateur);
+                utilisateur = new Utilisateur(id, login, password, nom, prenom, date_naissance, email, imageProfile, administrateur);
             }
 
         } catch (SQLException e) {
@@ -283,9 +299,10 @@ public class UtilisateurDao {
                 String prenom = resultat.getString("prenom");
                 Date date_naissance = resultat.getDate("date_naissance");
                 String emailUtilisateur = resultat.getString("email");
+                InputStream imageProfile = (InputStream) resultat.getBlob("imageProfile");
                 boolean administrateur = resultat.getBoolean("administrateur");
 
-                utilisateur = new Utilisateur(id, login, password, nom, prenom, date_naissance, emailUtilisateur, administrateur);
+                utilisateur = new Utilisateur(id, login, password, nom, prenom, date_naissance, emailUtilisateur, imageProfile, administrateur);
             }
 
         } catch (SQLException e) {
@@ -350,9 +367,10 @@ public class UtilisateurDao {
                 String prenom = resultat.getString("prenom");
                 Date date_naissance = resultat.getDate("date_naissance");
                 String emailUtilisateur = resultat.getString("email");
+                InputStream imageProfile = (InputStream) resultat.getBlob("imageProfile");
                 boolean administrateur = resultat.getBoolean("administrateur");
 
-                utilisateur = new Utilisateur(id, login, password, nom, prenom, date_naissance, emailUtilisateur, administrateur);
+                utilisateur = new Utilisateur(id, login, password, nom, prenom, date_naissance, emailUtilisateur, imageProfile, administrateur);
             }
 
         } catch (SQLException e) {

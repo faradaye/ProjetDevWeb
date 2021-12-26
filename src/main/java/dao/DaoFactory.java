@@ -4,6 +4,7 @@ import beans.Utilisateur;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.*;
 import java.util.Properties;
 
@@ -11,6 +12,8 @@ public class DaoFactory {
     private final String url;
     private final String username;
     private final String password;
+
+    private static Connection connection = null;
 
     DaoFactory(String url, String username, String password) {
         this.url = url;
@@ -23,8 +26,8 @@ public class DaoFactory {
         private static DaoFactory createConnection() {
             try {
                 Properties p = new Properties();
-                p.load(Thread.currentThread().getContextClassLoader().
-                        getResourceAsStream("dao/confBDD.properties"));
+                InputStream inputStream = DaoFactory.class.getClassLoader().getResourceAsStream("/confBDD.properties");
+                p.load(inputStream);
                 // chargement du driver
                 Class.forName(p.getProperty("driver"));
                 checkAdminExistance(p.getProperty("url"), p.getProperty("user"), p.getProperty("pwd"));
@@ -106,13 +109,17 @@ public class DaoFactory {
         }
     }
 
-    public static DaoFactory getInstance()
-    {
+    public static DaoFactory getInstance() {
         return DaoFactorySingletonHolder.instance;
     }
 
     public Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(url, username, password);
+        if (connection != null)
+            return connection;
+        else{
+            connection = DriverManager.getConnection(url, username, password);
+            return connection;
+        }
     }
 
     // Récupération des DAO

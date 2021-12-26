@@ -36,6 +36,10 @@
                 $("#displayErreurInscription").show();
 
         });
+
+        function preview() {
+            frame.src = URL.createObjectURL(event.target.files[0]);
+        }
     </script>
 </head>
 <body>
@@ -45,8 +49,18 @@
         <h1 style="text-align: center;">Inscription</h1>
 
         <div class="login-form">
-            <form action="${pageContext.request.contextPath}/inscription" method="post" class="row g-2">
+            <form action="${pageContext.request.contextPath}/inscription" method="post" class="row g-2" enctype="multipart/form-data">
                 <h2 class="text-center">Inscription</h2>
+                <div class="form-group">
+                    <label for="imageProfile" class="form-label">Photo de profile (Photo par defaut si laissé vide)</label>
+                    <input class="form-control" type="file" id="imageProfile" name="imageProfile" accept="image/*" size="16777216" onchange="preview()"><br>
+                    <c:if test="${empty utilisateur.imageProfile}">
+                        <div class="text-center"><img id="frame" src="" class="img-fluid col-6" /></div>
+                    </c:if>
+                    <c:if test="${not empty utilisateur.imageProfile}">
+                        <div class="text-center"><img id="frame" src="${utilisateur.imageProfile}" class="img-fluid col-6" /></div>
+                    </c:if>
+                </div>
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="Identifiant" name="login" value= "${utilisateur.login}" required>
                 </div>
