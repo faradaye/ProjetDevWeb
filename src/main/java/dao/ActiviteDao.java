@@ -194,4 +194,66 @@ public class ActiviteDao {
             e.printStackTrace();
         }
     }
+
+    public List<Activite> getActivitesUtilisateurDerniersJours(Utilisateur utilisateur){
+        Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+        List<Activite> activites = new ArrayList<>();
+
+        try {
+            connexion = daoFactory.getConnection();
+            preparedStatement = connexion.prepareStatement("SELECT * FROM ParticipationActivite WHERE id_utilisateur=? AND " +
+                    "id_activite IN (SELECT id FROM Activite WHERE activite.date_activite >= DATE_ADD(CURDATE(), INTERVAL -7 DAY));");
+
+            preparedStatement.setInt(1, utilisateur.getId());
+
+            ResultSet resultat = preparedStatement.executeQuery();
+
+            while(resultat.next()){
+                int id = resultat.getInt("id_activite");
+                activites.add(getActivite(id));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return activites;
+    }
+
+    public List<Activite> getActivitesMemeLieuMemeMoment(Activite activite){
+        Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+        List<Activite> activites = new ArrayList<>();
+
+        try {
+            connexion = daoFactory.getConnection();
+            preparedStatement = connexion.prepareStatement("SELECT * FROM Activite WHERE id_lieu = ? AND " +
+                    "date_activite = ? AND " +
+                    "((heure_debut <= ? AND ? <= heure_fin) OR " +
+                    "(heure_debut <= ? AND ? <= heure_fin) OR " +
+                    "(? <= heure_debut AND heure_fin <= ?));");
+
+            preparedStatement.setInt(1, activite.getId_lieu());
+            preparedStatement.setDate(2, activite.getDate_activite());
+            preparedStatement.setTime(3, activite.getHeure_debut());
+            preparedStatement.setTime(4, activite.getHeure_debut());
+            preparedStatement.setTime(5, activite.getHeure_fin());
+            preparedStatement.setTime(6, activite.getHeure_fin());
+            preparedStatement.setTime(7, activite.getHeure_debut());
+            preparedStatement.setTime(8, activite.getHeure_fin());
+
+            ResultSet resultat = preparedStatement.executeQuery();
+
+            while(resultat.next()){
+                int id = resultat.getInt("id");
+                activites.add(getActivite(id));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return activites;
+    }
 }

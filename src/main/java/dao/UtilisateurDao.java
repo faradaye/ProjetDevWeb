@@ -1,5 +1,6 @@
 package dao;
 
+import beans.Activite;
 import beans.Notification;
 import beans.Utilisateur;
 import org.mindrot.jbcrypt.BCrypt;
@@ -463,5 +464,42 @@ public class UtilisateurDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public List<Utilisateur> getCasContacts(Utilisateur utilisateur){
+        List<Utilisateur> casContacts = new ArrayList<>();
+        List<Activite> activitesUtilisateurDerniersJours =
+                daoFactory.getActiviteDao().getActivitesUtilisateurDerniersJours(utilisateur);
+
+        List<Activite> activitesMemeLieuMemeMoment = new ArrayList<>();
+        for(Activite a : activitesUtilisateurDerniersJours){
+            activitesMemeLieuMemeMoment.addAll(daoFactory.getActiviteDao().getActivitesMemeLieuMemeMoment(a));
+        }
+
+        Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            connexion = daoFactory.getConnection();
+
+            for(Activite a : activitesMemeLieuMemeMoment){
+                preparedStatement = connexion.prepareStatement("SELECT id_utilisateur FROM participationactivite WHERE " +
+                        "id_activite = ?");
+
+                preparedStatement.setInt(1, a.getId());
+
+                ResultSet resultat = preparedStatement.executeQuery();
+
+                while(resultat.next()){
+                    int id = resultat.getInt("id_utilisateur");
+                    casContacts.add(getUtilisateur(id));
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return casContacts;
     }
 }

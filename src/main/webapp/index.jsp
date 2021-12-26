@@ -14,6 +14,9 @@
             <div class="col">
                 <h1>Covid19</h1>
                 <p>Covid19 est un site aidant à identifié les personnes atteint du virus SARS-CoV-2, en permettant d'organiser des événements en toute securité</p>
+                <c:if test="${ sessionScope.utilisateur != null }">
+                    <a type="button" class="btn btn-danger" role="button" href="positif">Je suis positif au covid</a>
+                </c:if>
             </div>
             <div class="col img-col">
                 <img src="<c:url value="images/cover.jpg"/>" class="img-fluid" alt="Covid19">
