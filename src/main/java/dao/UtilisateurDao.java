@@ -22,7 +22,7 @@ public class UtilisateurDao {
 
         try {
             connexion = daoFactory.getConnection();
-            preparedStatement = connexion.prepareStatement("INSERT INTO Utilisateur(login, `password`, nom, prenom, date_naissance, email, " + (utilisateur.getImageProfile()!=null ? " imageProfile, ": "") + "administrateur) VALUES(?, ?, ?, ?, ?, ?, " + (utilisateur.getImageProfile()!=null ? " ?, ": "") + "?);", Statement.RETURN_GENERATED_KEYS);
+            preparedStatement = connexion.prepareStatement("INSERT INTO Utilisateur(login, `password`, nom, prenom, date_naissance, email, administrateur " + (utilisateur.getImageProfile()!=null ? " ,imageProfile ": "") + ") VALUES(?, ?, ?, ?, ?, ?, ? " + (utilisateur.getImageProfile()!=null ? " ,? ": "") + ");", Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, utilisateur.getLogin());
             preparedStatement.setString(2, BCrypt.hashpw(utilisateur.getPassword(), BCrypt.gensalt(12)));
             preparedStatement.setString(3, utilisateur.getNom());
@@ -153,7 +153,7 @@ public class UtilisateurDao {
                 String prenom = resultat.getString("prenom");
                 Date date_naissance = resultat.getDate("date_naissance");
                 String email = resultat.getString("email");
-                InputStream imageProfile = (InputStream) resultat.getBlob("imageProfile");
+                InputStream imageProfile = resultat.getBlob("imageProfile").getBinaryStream();
                 Boolean administrateur = resultat.getBoolean("administrateur");
 
                 Utilisateur utilisateur = new Utilisateur(id, login, password, nom, prenom, date_naissance, email, imageProfile, administrateur);
@@ -191,7 +191,7 @@ public class UtilisateurDao {
                     String prenom = resultat.getString("prenom");
                     Date date_naissance = resultat.getDate("date_naissance");
                     String email = resultat.getString("email");
-                    InputStream imageProfile = (InputStream) resultat.getBlob("imageProfile");
+                    InputStream imageProfile = resultat.getBlob("imageProfile").getBinaryStream();
                     Boolean administrateur = resultat.getBoolean("administrateur");
 
                     utilisateur = new Utilisateur(id, loginUtilisateur, passwordUtilisateur, nom, prenom, date_naissance, email, imageProfile, administrateur);
@@ -267,7 +267,7 @@ public class UtilisateurDao {
                 String prenom = resultat.getString("prenom");
                 Date date_naissance = resultat.getDate("date_naissance");
                 String email = resultat.getString("email");
-                InputStream imageProfile = (InputStream) resultat.getBlob("imageProfile");
+                InputStream imageProfile = resultat.getBlob("imageProfile").getBinaryStream();
                 boolean administrateur = resultat.getBoolean("administrateur");
 
                 utilisateur = new Utilisateur(id, login, password, nom, prenom, date_naissance, email, imageProfile, administrateur);
@@ -299,7 +299,7 @@ public class UtilisateurDao {
                 String prenom = resultat.getString("prenom");
                 Date date_naissance = resultat.getDate("date_naissance");
                 String emailUtilisateur = resultat.getString("email");
-                InputStream imageProfile = (InputStream) resultat.getBlob("imageProfile");
+                InputStream imageProfile = resultat.getBlob("imageProfile").getBinaryStream();
                 boolean administrateur = resultat.getBoolean("administrateur");
 
                 utilisateur = new Utilisateur(id, login, password, nom, prenom, date_naissance, emailUtilisateur, imageProfile, administrateur);
@@ -367,7 +367,7 @@ public class UtilisateurDao {
                 String prenom = resultat.getString("prenom");
                 Date date_naissance = resultat.getDate("date_naissance");
                 String emailUtilisateur = resultat.getString("email");
-                InputStream imageProfile = (InputStream) resultat.getBlob("imageProfile");
+                InputStream imageProfile = resultat.getBlob("imageProfile").getBinaryStream();
                 boolean administrateur = resultat.getBoolean("administrateur");
 
                 utilisateur = new Utilisateur(id, login, password, nom, prenom, date_naissance, emailUtilisateur, imageProfile, administrateur);

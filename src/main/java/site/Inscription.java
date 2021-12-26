@@ -55,7 +55,7 @@ public class Inscription extends HttpServlet {
         //verification remplissage formulaire
         if (login != "" && login != null && password != "" && password != null && nom != "" && nom != null && prenom != "" && prenom != null && email!=null && date_naissance != "" && date_naissance != "0000-00-00" && date_naissance != null) {
             if(!utilisateurDao.loginUtilisateurExiste(login)){
-                if(email=="" || !utilisateurDao.emailUtilisateurExiste(email)){
+                if(email.equals("") || !utilisateurDao.emailUtilisateurExiste(email)){
                     utilisateurDao.ajouter(new Utilisateur(0, login, password, nom, prenom, Date.valueOf(date_naissance), email, inputStreamImage, false));
 
                     Utilisateur utilisateur = utilisateurDao.authUtilisateur(login, password);
@@ -87,7 +87,7 @@ public class Inscription extends HttpServlet {
                     request.setAttribute("utilisateur", utilisateur);
                     session.setAttribute("notifications", null);
                     request.setAttribute("notifications", null);
-                    this.getServletContext().getRequestDispatcher("/WEB-INF/authentification.jsp").forward(request, response);
+                    this.getServletContext().getRequestDispatcher("/WEB-INF/inscription.jsp").forward(request, response);
                 }
             }
             else{

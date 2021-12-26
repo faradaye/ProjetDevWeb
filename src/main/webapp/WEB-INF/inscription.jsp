@@ -55,10 +55,10 @@
                     <label for="imageProfile" class="form-label">Photo de profile (Photo par defaut si laissé vide)</label>
                     <input class="form-control" type="file" id="imageProfile" name="imageProfile" accept="image/*" size="16777216" onchange="preview()"><br>
                     <c:if test="${empty utilisateur.imageProfile}">
-                        <div class="text-center"><img id="frame" src="" class="img-fluid col-6" /></div>
+                        <div class="text-center"><img src="" class="img-fluid col-6" /></div>
                     </c:if>
                     <c:if test="${not empty utilisateur.imageProfile}">
-                        <div class="text-center"><img id="frame" src="${utilisateur.imageProfile}" class="img-fluid col-6" /></div>
+                        <div class="text-center"><img src="${utilisateur.imageProfile}" class="img-fluid col-6" /></div>
                     </c:if>
                 </div>
                 <div class="form-group">
