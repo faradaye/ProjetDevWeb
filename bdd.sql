@@ -71,6 +71,5 @@ create table IF NOT EXISTS ParticipationActivite(
     foreign key (id_activite) references Activite(id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=INNODB;
 
-INSERT INTO UTILISATEUR(login, `password`, nom, prenom, date_naissance, administrateur) VALUES('admin', 'mdpAdmin', 'Alan', 'Turing', '1912-06-23', 1);
 INSERT INTO TYPE_NOTIFICATION(id, nom) VALUES(1, 'Demande d\'amis');
 INSERT INTO TYPE_NOTIFICATION(id, nom) VALUES(2, 'Suppression amis');
