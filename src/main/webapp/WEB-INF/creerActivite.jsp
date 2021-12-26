@@ -12,6 +12,21 @@
                 $("#displayErreurCreerActivite").show();
 
         });
+
+        function verifyTimes(){
+            var debut = document.forms["form"].elements["heuredebut"].value;
+            var fin = document.forms["form"].elements["heurefin"].value;
+            var date = document.forms["form"].elements["date"].value;
+            var dateDebut = new Date(date + " " + debut);
+            var dateFin = new Date(date + " " + fin);
+
+            if(dateDebut < dateFin){
+                return true;
+            }else{
+                alert("Les horaires ne sont pas bons.");
+                return false;
+            }
+        }
     </script>
 </head>
 <body>
@@ -29,7 +44,7 @@
     <button type="button" class="btn btn-primary" onClick="window.history.back()">Retour</button>
     <a type="button" class="btn btn-primary" role="button" href="activites">Liste des activités</a>
     <!--Nouveau formulaire-->
-    <form method="post" class="my-3" action="${pageContext.request.contextPath}/creerActivite">
+    <form method="post" class="my-3" id="form" onsubmit="return verifyTimes()" action="${pageContext.request.contextPath}/creerActivite">
         <div class="alert alert-danger" role="alert" id="displayErreurCreerActivite">${erreur}</div>
         <div class="row my-3">
             <div class="col-12">

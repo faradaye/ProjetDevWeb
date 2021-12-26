@@ -12,6 +12,21 @@
                 $("#displayErreurModifierLieu").show();
 
         });
+
+        function verifyTimes(){
+            var debut = document.forms["form"].elements["heure_debut"].value;
+            var fin = document.forms["form"].elements["heure_fin"].value;
+            var date = document.forms["form"].elements["date"].value;
+            var dateDebut = new Date(date + " " + debut);
+            var dateFin = new Date(date + " " + fin);
+
+            if(dateDebut < dateFin){
+                return true;
+            }else{
+                alert("Les horaires ne sont pas bons.");
+                return false;
+            }
+        }
     </script>
 </head>
 <body>
@@ -29,7 +44,7 @@
     <button type="button" class="btn btn-primary" onClick="window.history.back()">Retour</button>
     <a type="button" class="btn btn-primary" role="button" href="lieux">Liste des lieux</a>
     <!--Nouveau formulaire-->
-    <form method="post" class="my-3" action="${pageContext.request.contextPath}/modifierActivite">
+    <form method="post" class="my-3" id="form" onsubmit="return verifyTimes()" action="${pageContext.request.contextPath}/modifierActivite">
         <div class="alert alert-danger" role="alert" id="displayErreurModifierLieu">${erreur}</div>
         <input type="hidden" name="idActivite" value="${idActivite}" />
         <div class="row my-3">

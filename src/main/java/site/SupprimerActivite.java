@@ -34,9 +34,7 @@ public class SupprimerActivite extends HttpServlet {
             Activite activite = activiteDao.getActivite(id);
             activiteDao.supprimer(activite);
         }
-        if(request.getHeader("referer")==null || request.getHeader("referer").contains("/profile?id="))
-            response.sendRedirect(request.getContextPath() + "/activites");
-        else response.sendRedirect(request.getHeader("referer"));
+        response.sendRedirect(request.getContextPath() + "/activites");
     }
 
     @Override
