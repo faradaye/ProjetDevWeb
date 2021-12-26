@@ -3,7 +3,6 @@
  "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
-
 <web-app
         xmlns="http://xmlns.jcp.org/xml/ns/javaee"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -14,12 +13,4 @@
     <error-code>404</error-code>
     <location>/erreur404.jsp</location>
   </error-page>
-
-  <resource-ref>
-    <description>Votre description </description>
-    <res-ref-name>mail/NomDeLaRessource</res-ref-name>
-    <res-type>javax.mail.Session</res-type>
-    <res-auth>Container</res-auth>
-    <res-sharing-scope>Shareable</res-sharing-scope>
-  </resource-ref>
 </web-app>
