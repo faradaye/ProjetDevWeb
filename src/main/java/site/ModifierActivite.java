@@ -65,7 +65,7 @@ public class ModifierActivite extends HttpServlet {
         if(utilisateur == null){
             response.sendRedirect(request.getContextPath()+"/authentification");
         }else if(!utilisateur.isAdministrateur()) {
-            response.sendRedirect(request.getHeader("referer"));
+            response.sendRedirect(request.getContextPath()+"/activites");
         }else{
             //verification remplissage formulaire
             if (!Objects.equals(id, "") && id != null && !Objects.equals(nom, "") && nom != null && !Objects.equals(date, "") && date != null && heure_debut != null && heure_fin!=null && id_lieu != null && !id_lieu.equals("0")) {

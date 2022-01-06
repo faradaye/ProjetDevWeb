@@ -74,3 +74,4 @@ create table IF NOT EXISTS ParticipationActivite(
 
 INSERT INTO TYPE_NOTIFICATION(id, nom) VALUES(1, 'Demande d\'amis');
 INSERT INTO TYPE_NOTIFICATION(id, nom) VALUES(2, 'Suppression amis');
+INSERT INTO TYPE_NOTIFICATION(id, nom) VALUES(3, 'Cas contact');
