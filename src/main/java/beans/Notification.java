@@ -1,5 +1,9 @@
 package beans;
 
+import dao.DaoFactory;
+
+import java.sql.Blob;
+
 public class Notification {
     private int id;
     private int id_utilisateur;
@@ -7,6 +11,7 @@ public class Notification {
     private int type_notif;
     private String contenu;
     private String prenom_nom_source;
+    private Blob image_source;
     private boolean lue;
 
     public Notification(int id, int id_utilisateur, int id_source, int type_notif, String contenu, String prenom_nom_source, boolean lue) {
@@ -57,6 +62,14 @@ public class Notification {
 
     public void setId_source(int id_source) {
         this.id_source = id_source;
+    }
+
+    public Blob getImage_source() {
+        return DaoFactory.getInstance().getUtilisateurDao().getUtilisateur(this.getId_source()).getImageProfile();
+    }
+
+    public void setImage_source(Blob image_source) {
+        this.image_source = image_source;
     }
 
     public String getPrenom_nom_source() {
