@@ -39,6 +39,7 @@ public class ModifierUtilisateur extends HttpServlet {
         }
 
         request.setAttribute("utilisateur", utilisateur);
+        request.getSession().setAttribute("imageProfile" + utilisateur.getId(), utilisateur.getImageProfile());
 
         this.getServletContext().getRequestDispatcher("/WEB-INF/modifierUtilisateur.jsp").forward(request, response);
     }
@@ -78,19 +79,21 @@ public class ModifierUtilisateur extends HttpServlet {
                     response.sendRedirect(request.getContextPath() + "/profile?id=" + id);
                 }
                 else{
-                    Utilisateur utilisateur = new Utilisateur(0, login, password, nom, prenom, Date.valueOf(date_naissance), email, false);
+                    Utilisateur utilisateur = new Utilisateur(Integer.parseInt(id), login, password, nom, prenom, Date.valueOf(date_naissance), email, inputStreamImage, false);
                     String erreur = "L'email est déjà pris";
                     request.setAttribute("erreur", erreur);
                     request.setAttribute("utilisateur", utilisateur);
+                    request.setAttribute("imageProfile" + utilisateur.getId(), utilisateur.getImageProfile());
                     request.setAttribute("id", id);
                     this.getServletContext().getRequestDispatcher("/WEB-INF/modifierUtilisateur.jsp").forward(request, response);
                 }
             }
             else{
-                Utilisateur utilisateur = new Utilisateur(0, login, password, nom, prenom, Date.valueOf(date_naissance), email, false);
+                Utilisateur utilisateur = new Utilisateur(Integer.parseInt(id), login, password, nom, prenom, Date.valueOf(date_naissance), email, inputStreamImage, false);
                 String erreur = "Le login est déjà pris";
                 request.setAttribute("erreur", erreur);
                 request.setAttribute("utilisateur", utilisateur);
+                request.setAttribute("imageProfile" + utilisateur.getId(), utilisateur.getImageProfile());
                 request.setAttribute("id", id);
                 this.getServletContext().getRequestDispatcher("/WEB-INF/modifierUtilisateur.jsp").forward(request, response);
             }
@@ -104,29 +107,32 @@ public class ModifierUtilisateur extends HttpServlet {
                     response.sendRedirect(request.getContextPath() + "/profile?id=" + id);
                 }
                 else{
-                    Utilisateur utilisateur = new Utilisateur(0, login, password, nom, prenom, Date.valueOf(date_naissance), email, false);
+                    Utilisateur utilisateur = new Utilisateur(Integer.parseInt(id), login, password, nom, prenom, Date.valueOf(date_naissance), email, inputStreamImage, false);
                     String erreur = "L'email est déjà pris";
                     request.setAttribute("erreur", erreur);
                     request.setAttribute("utilisateur", utilisateur);
+                    request.setAttribute("imageProfile" + utilisateur.getId(), utilisateur.getImageProfile());
                     request.setAttribute("id", id);
                     this.getServletContext().getRequestDispatcher("/WEB-INF/modifierUtilisateur.jsp").forward(request, response);
                 }
             }
             else{
-                Utilisateur utilisateur = new Utilisateur(0, login, password, nom, prenom, Date.valueOf(date_naissance), email, false);
+                Utilisateur utilisateur = new Utilisateur(Integer.parseInt(id), login, password, nom, prenom, Date.valueOf(date_naissance), email, inputStreamImage, false);
                 String erreur = "Le login est déjà pris";
                 request.setAttribute("erreur", erreur);
                 request.setAttribute("utilisateur", utilisateur);
+                request.setAttribute("imageProfile" + utilisateur.getId(), utilisateur.getImageProfile());
                 request.setAttribute("id", id);
                 this.getServletContext().getRequestDispatcher("/WEB-INF/modifierUtilisateur.jsp").forward(request, response);
             }
         }
         else {
-            Utilisateur utilisateur = new Utilisateur(0, login, password, nom, prenom, VerifDate.estValide(date_naissance) ? Date.valueOf(date_naissance) : Date.valueOf(LocalDate.now()), email, administrateur);
+            Utilisateur utilisateur = new Utilisateur(Integer.parseInt(id), login, password, nom, prenom, VerifDate.estValide(date_naissance) ? Date.valueOf(date_naissance) : Date.valueOf(LocalDate.now()), email, inputStreamImage, administrateur);
             String erreur = "Informations rentrées incorrectes";
             request.setAttribute("erreur", erreur);
             session.setAttribute("utilisateur", null);
             request.setAttribute("utilisateur", utilisateur);
+            request.setAttribute("imageProfile" + utilisateur.getId(), utilisateur.getImageProfile());
             request.setAttribute("id", id);
             this.getServletContext().getRequestDispatcher("/WEB-INF/modifierUtilisateur.jsp").forward(request, response);
         }

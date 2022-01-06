@@ -1,3 +1,4 @@
+<%@ page import="beans.Utilisateur" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
@@ -36,7 +37,7 @@
     <div class="container-fluid">
         <div class="row my-3">
             <div class="col-2">
-                <img src="" class="img-fluid" alt="image profile">
+                <img src="voirImageProfile?id=${utilisateur.id}" class="img-fluid" alt="image profile">
             </div>
             <div class="col-9">
                 <c:if test="${ sessionScope.utilisateur.id == idUtilisateur}">
@@ -57,13 +58,13 @@
 
             <div class="row my-3">
                 <div class="col-4">
-                    <label for="imageProfile" class="form-label">Photo de profile (Photo par defaut si laissé vide)</label>
+                    <label for="imageProfile" class="form-label">Photo de profile</label>
                     <input class="form-control" type="file" id="imageProfile" name="imageProfile" accept="image/*" size="16777216" onchange="preview()"><br>
                     <c:if test="${empty utilisateur.imageProfile}">
                         <img id="frame" src="<c:url value="images/profileDefaut.png"/>" class="img-fluid col-6" />
                     </c:if>
                     <c:if test="${not empty utilisateur.imageProfile}">
-                        <img id="frame" src="data:image/png;base64,${utilisateur.imageProfile}" class="img-fluid col-6" />
+                        <img id="frame" src="voirImageProfile?id=${utilisateur.id}" class="img-fluid col-6" />
                     </c:if>
                 </div>
             </div>

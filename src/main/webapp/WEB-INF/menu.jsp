@@ -47,7 +47,23 @@
                     </c:if>
                     <c:if test="${not empty sessionScope.utilisateur}">
                         <li class="nav-item">
-                            <span class="navbar-brand mb-0 h2" href="#">${sessionScope.utilisateur.login}</span>
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="profile-header-container">
+                                        <div class="profile-header-img">
+                                            <c:if test="${empty sessionScope.utilisateur.imageProfile}">
+                                                <img class="rounded-circle" style="height: 50px; width: 50px" alt="image profile" src="<c:url value="images/profileDefaut.png"/>" />
+                                            </c:if>
+                                            <c:if test="${not empty sessionScope.utilisateur.imageProfile}">
+                                                <img class="rounded-circle" style="height: 50px; width: 50px" alt="image profile" src="voirImageProfile?id=${sessionScope.utilisateur.id}" />
+                                            </c:if>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-8">
+                                    <span class="navbar-brand mb-0 h2" href="#">${sessionScope.utilisateur.login}</span>
+                                </div>
+                            </div>
                         </li>
 
                         <li class="nav-item">

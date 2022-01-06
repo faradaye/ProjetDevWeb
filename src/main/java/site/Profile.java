@@ -42,6 +42,7 @@ public class Profile extends HttpServlet {
         }
 
         request.setAttribute("utilisateur", utilisateur);
+        request.getSession().setAttribute("imageProfile" + utilisateur.getId(), utilisateur.getImageProfile());
 
         this.getServletContext().getRequestDispatcher("/WEB-INF/profile.jsp").forward(request, response);
     }

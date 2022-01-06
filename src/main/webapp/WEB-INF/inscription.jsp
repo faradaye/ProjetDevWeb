@@ -35,11 +35,28 @@
             if($("#displayErreurInscription").html()!='')
                 $("#displayErreurInscription").show();
 
+
+            <c:if test="${empty utilisateur.imageProfile}">
+                $("#frame").hide();
+            </c:if>
+            <c:if test="${not empty utilisateur.imageProfile}">
+                $("#frame2").hide();
+            </c:if>
+
         });
 
         function preview() {
-            frame.src = URL.createObjectURL(event.target.files[0]);
+
+            <c:if test="${empty utilisateur.imageProfile}">
+                $("#frame").show();
+                frame.src = URL.createObjectURL(event.target.files[0]);
+            </c:if>
+            <c:if test="${not empty utilisateur.imageProfile}">
+                $("#frame2").show();
+                frame2.src = URL.createObjectURL(event.target.files[0]);
+            </c:if>
         }
+
     </script>
 </head>
 <body>
@@ -55,10 +72,10 @@
                     <label for="imageProfile" class="form-label">Photo de profile (Photo par defaut si laissé vide)</label>
                     <input class="form-control" type="file" id="imageProfile" name="imageProfile" accept="image/*" size="16777216" onchange="preview()"><br>
                     <c:if test="${empty utilisateur.imageProfile}">
-                        <div id="frame" class="text-center"><img src="" class="img-fluid col-6" /></div>
+                        <div class="text-center"><img id="frame" src="" class="img-fluid col-6"  alt=""/></div>
                     </c:if>
                     <c:if test="${not empty utilisateur.imageProfile}">
-                        <div id="frame" class="text-center"><img src="${utilisateur.imageProfile}" class="img-fluid col-6" /></div>
+                        <div class="text-center"><img id="frame2" src="${utilisateur.imageProfile}" class="img-fluid col-6"  alt=""/></div>
                     </c:if>
                 </div>
                 <div class="form-group">
