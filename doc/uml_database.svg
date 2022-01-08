@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="643px" preserveAspectRatio="none" style="width:645px;height:643px;background:#FFFFFF;" version="1.1" viewBox="0 0 645 643" width="645px" zoomAndPan="magnify"><defs><filter height="300%" id="f16fqtmu20jqcb" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[354e8650cefe639d77b0834953981666]
+class Utilisateur--><rect codeLine="6" fill="#FEFECE" filter="url(#f16fqtmu20jqcb)" height="155.2422" id="Utilisateur" style="stroke:#A80036;stroke-width:1.5;" width="151" x="138.5" y="310"/><ellipse cx="180.05" cy="326" fill="#FFAAAA" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M180.4875,323.5313 L182.3313,323.5313 L182.3313,325.125 C182.3313,325.5156 182.3625,325.6875 182.4563,325.8281 C182.6125,326.0781 182.8938,326.2344 183.1906,326.2344 C183.4563,326.2344 183.7063,326.1094 183.8781,325.8906 C184.0188,325.7188 184.0344,325.5938 184.0344,325.125 L184.0344,321.8438 L175.2688,321.8438 L175.2688,325.125 C175.2688,325.5156 175.3,325.6875 175.3781,325.8281 C175.5344,326.0938 175.8313,326.2344 176.1125,326.2344 C176.3938,326.2344 176.6438,326.1094 176.8156,325.8906 C176.925,325.7188 176.9563,325.5781 176.9563,325.125 L176.9563,323.5313 L178.7844,323.5313 L178.7844,330.0469 L177.675,330.0469 C177.2375,330.0469 177.1125,330.0625 176.9563,330.1719 C176.7063,330.3281 176.55,330.6094 176.55,330.9063 C176.55,331.1563 176.6906,331.4219 176.9094,331.5781 C177.0656,331.7031 177.2844,331.75 177.675,331.75 L181.6125,331.75 C181.9406,331.75 182.2063,331.7031 182.3156,331.625 C182.5813,331.4844 182.7219,331.1875 182.7219,330.9063 C182.7219,330.625 182.5969,330.375 182.3625,330.2031 C182.2063,330.0781 182.0656,330.0469 181.6125,330.0469 L180.4875,330.0469 L180.4875,323.5313 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="60" x="199.95" y="330.1543">Utilisateur</text><line style="stroke:#A80036;stroke-width:1.5;" x1="139.5" x2="288.5" y1="342" y2="342"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" text-decoration="underline" textLength="35" x="144.5" y="356.2104">id : int</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="80" x="144.5" y="369.0151">login : varchar</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="106" x="144.5" y="381.8198">password : varchar</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="78" x="144.5" y="394.6245">nom : varchar</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="97" x="144.5" y="407.4292">prenom : varchar</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="126" x="144.5" y="420.2339">date_naissance : date</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="85" x="144.5" y="433.0386">email : varchar</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="106" x="144.5" y="445.8433">imageProfile : blob</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="139" x="144.5" y="458.6479">administrateur : boolean</text><!--MD5=[127e3b8364e167fa42b348a854ee4d09]
+class Lieu--><rect codeLine="19" fill="#FEFECE" filter="url(#f16fqtmu20jqcb)" height="104.0234" id="Lieu" style="stroke:#A80036;stroke-width:1.5;" width="121" x="496.5" y="525"/><ellipse cx="540.75" cy="541" fill="#FFAAAA" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M541.1875,538.5313 L543.0313,538.5313 L543.0313,540.125 C543.0313,540.5156 543.0625,540.6875 543.1563,540.8281 C543.3125,541.0781 543.5938,541.2344 543.8906,541.2344 C544.1563,541.2344 544.4063,541.1094 544.5781,540.8906 C544.7188,540.7188 544.7344,540.5938 544.7344,540.125 L544.7344,536.8438 L535.9688,536.8438 L535.9688,540.125 C535.9688,540.5156 536,540.6875 536.0781,540.8281 C536.2344,541.0938 536.5313,541.2344 536.8125,541.2344 C537.0938,541.2344 537.3438,541.1094 537.5156,540.8906 C537.625,540.7188 537.6563,540.5781 537.6563,540.125 L537.6563,538.5313 L539.4844,538.5313 L539.4844,545.0469 L538.375,545.0469 C537.9375,545.0469 537.8125,545.0625 537.6563,545.1719 C537.4063,545.3281 537.25,545.6094 537.25,545.9063 C537.25,546.1563 537.3906,546.4219 537.6094,546.5781 C537.7656,546.7031 537.9844,546.75 538.375,546.75 L542.3125,546.75 C542.6406,546.75 542.9063,546.7031 543.0156,546.625 C543.2813,546.4844 543.4219,546.1875 543.4219,545.9063 C543.4219,545.625 543.2969,545.375 543.0625,545.2031 C542.9063,545.0781 542.7656,545.0469 542.3125,545.0469 L541.1875,545.0469 L541.1875,538.5313 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="24" x="561.25" y="545.1543">Lieu</text><line style="stroke:#A80036;stroke-width:1.5;" x1="497.5" x2="616.5" y1="557" y2="557"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" text-decoration="underline" textLength="10" x="502.5" y="571.2104">id</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="21" x="516.5" y="571.2104">: int</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="78" x="502.5" y="584.0151">nom : varchar</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="99" x="502.5" y="596.8198">adresse : varchar</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="99" x="502.5" y="609.6245">latitude : decimal</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="109" x="502.5" y="622.4292">longitude : decimal</text><!--MD5=[ec80e38a8c68884e42f32734d2d2fc2d]
+class Activite--><rect codeLine="27" fill="#FEFECE" filter="url(#f16fqtmu20jqcb)" height="104.0234" id="Activite" style="stroke:#A80036;stroke-width:1.5;" width="123" x="495.5" y="335.5"/><ellipse cx="531.65" cy="351.5" fill="#FFAAAA" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M532.0875,349.0313 L533.9313,349.0313 L533.9313,350.625 C533.9313,351.0156 533.9625,351.1875 534.0563,351.3281 C534.2125,351.5781 534.4938,351.7344 534.7906,351.7344 C535.0563,351.7344 535.3063,351.6094 535.4781,351.3906 C535.6188,351.2188 535.6344,351.0938 535.6344,350.625 L535.6344,347.3438 L526.8688,347.3438 L526.8688,350.625 C526.8688,351.0156 526.9,351.1875 526.9781,351.3281 C527.1344,351.5938 527.4313,351.7344 527.7125,351.7344 C527.9938,351.7344 528.2438,351.6094 528.4156,351.3906 C528.525,351.2188 528.5563,351.0781 528.5563,350.625 L528.5563,349.0313 L530.3844,349.0313 L530.3844,355.5469 L529.275,355.5469 C528.8375,355.5469 528.7125,355.5625 528.5563,355.6719 C528.3063,355.8281 528.15,356.1094 528.15,356.4063 C528.15,356.6563 528.2906,356.9219 528.5094,357.0781 C528.6656,357.2031 528.8844,357.25 529.275,357.25 L533.2125,357.25 C533.5406,357.25 533.8063,357.2031 533.9156,357.125 C534.1813,356.9844 534.3219,356.6875 534.3219,356.4063 C534.3219,356.125 534.1969,355.875 533.9625,355.7031 C533.8063,355.5781 533.6656,355.5469 533.2125,355.5469 L532.0875,355.5469 L532.0875,349.0313 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="44" x="550.35" y="355.6543">Activite</text><line style="stroke:#A80036;stroke-width:1.5;" x1="496.5" x2="617.5" y1="367.5" y2="367.5"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" text-decoration="underline" textLength="10" x="501.5" y="381.7104">id</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="21" x="515.5" y="381.7104">: int</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="78" x="501.5" y="394.5151">nom : varchar</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="111" x="501.5" y="407.3198">date_activite : date</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="110" x="501.5" y="420.1245">heure_debut : time</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="91" x="501.5" y="432.9292">heure_fin : time</text><!--MD5=[86379eee473ae47eddc274543cc7bb44]
+class Amis--><rect codeLine="35" fill="#FEFECE" filter="url(#f16fqtmu20jqcb)" height="65.6094" id="Amis" style="stroke:#A80036;stroke-width:1.5;" width="116" x="7" y="158.5"/><ellipse cx="46.75" cy="174.5" fill="#FFAAAA" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M47.1875,172.0313 L49.0313,172.0313 L49.0313,173.625 C49.0313,174.0156 49.0625,174.1875 49.1563,174.3281 C49.3125,174.5781 49.5938,174.7344 49.8906,174.7344 C50.1563,174.7344 50.4063,174.6094 50.5781,174.3906 C50.7188,174.2188 50.7344,174.0938 50.7344,173.625 L50.7344,170.3438 L41.9688,170.3438 L41.9688,173.625 C41.9688,174.0156 42,174.1875 42.0781,174.3281 C42.2344,174.5938 42.5313,174.7344 42.8125,174.7344 C43.0938,174.7344 43.3438,174.6094 43.5156,174.3906 C43.625,174.2188 43.6563,174.0781 43.6563,173.625 L43.6563,172.0313 L45.4844,172.0313 L45.4844,178.5469 L44.375,178.5469 C43.9375,178.5469 43.8125,178.5625 43.6563,178.6719 C43.4063,178.8281 43.25,179.1094 43.25,179.4063 C43.25,179.6563 43.3906,179.9219 43.6094,180.0781 C43.7656,180.2031 43.9844,180.25 44.375,180.25 L48.3125,180.25 C48.6406,180.25 48.9063,180.2031 49.0156,180.125 C49.2813,179.9844 49.4219,179.6875 49.4219,179.4063 C49.4219,179.125 49.2969,178.875 49.0625,178.7031 C48.9063,178.5781 48.7656,178.5469 48.3125,178.5469 L47.1875,178.5469 L47.1875,172.0313 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="29" x="66.25" y="178.6543">Amis</text><line style="stroke:#A80036;stroke-width:1.5;" x1="8" x2="122" y1="190.5" y2="190.5"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" text-decoration="underline" textLength="104" x="13" y="204.7104">id_utilisateur1 : int</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" text-decoration="underline" textLength="104" x="13" y="217.5151">id_utilisateur2 : int</text><!--MD5=[f926665eac736d7a1a42c2bf8fd6eb74]
+class Type_Notification--><rect codeLine="40" fill="#FEFECE" filter="url(#f16fqtmu20jqcb)" height="65.6094" id="Type_Notification" style="stroke:#A80036;stroke-width:1.5;" width="134" x="147" y="7"/><ellipse cx="162" cy="23" fill="#FFAAAA" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M162.4375,20.5313 L164.2813,20.5313 L164.2813,22.125 C164.2813,22.5156 164.3125,22.6875 164.4063,22.8281 C164.5625,23.0781 164.8438,23.2344 165.1406,23.2344 C165.4063,23.2344 165.6563,23.1094 165.8281,22.8906 C165.9688,22.7188 165.9844,22.5938 165.9844,22.125 L165.9844,18.8438 L157.2188,18.8438 L157.2188,22.125 C157.2188,22.5156 157.25,22.6875 157.3281,22.8281 C157.4844,23.0938 157.7813,23.2344 158.0625,23.2344 C158.3438,23.2344 158.5938,23.1094 158.7656,22.8906 C158.875,22.7188 158.9063,22.5781 158.9063,22.125 L158.9063,20.5313 L160.7344,20.5313 L160.7344,27.0469 L159.625,27.0469 C159.1875,27.0469 159.0625,27.0625 158.9063,27.1719 C158.6563,27.3281 158.5,27.6094 158.5,27.9063 C158.5,28.1563 158.6406,28.4219 158.8594,28.5781 C159.0156,28.7031 159.2344,28.75 159.625,28.75 L163.5625,28.75 C163.8906,28.75 164.1563,28.7031 164.2656,28.625 C164.5313,28.4844 164.6719,28.1875 164.6719,27.9063 C164.6719,27.625 164.5469,27.375 164.3125,27.2031 C164.1563,27.0781 164.0156,27.0469 163.5625,27.0469 L162.4375,27.0469 L162.4375,20.5313 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="102" x="176" y="27.1543">Type_Notification</text><line style="stroke:#A80036;stroke-width:1.5;" x1="148" x2="280" y1="39" y2="39"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" text-decoration="underline" textLength="35" x="153" y="53.2104">id : int</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="78" x="153" y="66.0151">nom : varchar</text><!--MD5=[93ee1ecca66ee5f7dabe44355765ef2c]
+class Notifications--><rect codeLine="45" fill="#FEFECE" filter="url(#f16fqtmu20jqcb)" height="116.8281" id="Notifications" style="stroke:#A80036;stroke-width:1.5;" width="111" x="158.5" y="133"/><ellipse cx="176.2" cy="149" fill="#FFAAAA" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M176.6375,146.5313 L178.4813,146.5313 L178.4813,148.125 C178.4813,148.5156 178.5125,148.6875 178.6063,148.8281 C178.7625,149.0781 179.0438,149.2344 179.3406,149.2344 C179.6063,149.2344 179.8563,149.1094 180.0281,148.8906 C180.1688,148.7188 180.1844,148.5938 180.1844,148.125 L180.1844,144.8438 L171.4188,144.8438 L171.4188,148.125 C171.4188,148.5156 171.45,148.6875 171.5281,148.8281 C171.6844,149.0938 171.9813,149.2344 172.2625,149.2344 C172.5438,149.2344 172.7938,149.1094 172.9656,148.8906 C173.075,148.7188 173.1063,148.5781 173.1063,148.125 L173.1063,146.5313 L174.9344,146.5313 L174.9344,153.0469 L173.825,153.0469 C173.3875,153.0469 173.2625,153.0625 173.1063,153.1719 C172.8563,153.3281 172.7,153.6094 172.7,153.9063 C172.7,154.1563 172.8406,154.4219 173.0594,154.5781 C173.2156,154.7031 173.4344,154.75 173.825,154.75 L177.7625,154.75 C178.0906,154.75 178.3563,154.7031 178.4656,154.625 C178.7313,154.4844 178.8719,154.1875 178.8719,153.9063 C178.8719,153.625 178.7469,153.375 178.5125,153.2031 C178.3563,153.0781 178.2156,153.0469 177.7625,153.0469 L176.6375,153.0469 L176.6375,146.5313 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="73" x="190.8" y="153.1543">Notifications</text><line style="stroke:#A80036;stroke-width:1.5;" x1="159.5" x2="268.5" y1="165" y2="165"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" text-decoration="underline" textLength="35" x="164.5" y="179.2104">id : int</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="97" x="164.5" y="192.0151">id_utilisateur : int</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="79" x="164.5" y="204.8198">id_source : int</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="82" x="164.5" y="217.6245">type_notif : int</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="99" x="164.5" y="230.4292">contenu : varchar</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="75" x="164.5" y="243.2339">lue : boolean</text><!--MD5=[c965cbcd821529ebcb8b1a478f802ad4]
+class RecupMotDePasse--><rect codeLine="54" fill="#FEFECE" filter="url(#f16fqtmu20jqcb)" height="65.6094" id="RecupMotDePasse" style="stroke:#A80036;stroke-width:1.5;" width="143" x="304.5" y="158.5"/><ellipse cx="319.5" cy="174.5" fill="#FFAAAA" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M319.9375,172.0313 L321.7813,172.0313 L321.7813,173.625 C321.7813,174.0156 321.8125,174.1875 321.9063,174.3281 C322.0625,174.5781 322.3438,174.7344 322.6406,174.7344 C322.9063,174.7344 323.1563,174.6094 323.3281,174.3906 C323.4688,174.2188 323.4844,174.0938 323.4844,173.625 L323.4844,170.3438 L314.7188,170.3438 L314.7188,173.625 C314.7188,174.0156 314.75,174.1875 314.8281,174.3281 C314.9844,174.5938 315.2813,174.7344 315.5625,174.7344 C315.8438,174.7344 316.0938,174.6094 316.2656,174.3906 C316.375,174.2188 316.4063,174.0781 316.4063,173.625 L316.4063,172.0313 L318.2344,172.0313 L318.2344,178.5469 L317.125,178.5469 C316.6875,178.5469 316.5625,178.5625 316.4063,178.6719 C316.1563,178.8281 316,179.1094 316,179.4063 C316,179.6563 316.1406,179.9219 316.3594,180.0781 C316.5156,180.2031 316.7344,180.25 317.125,180.25 L321.0625,180.25 C321.3906,180.25 321.6563,180.2031 321.7656,180.125 C322.0313,179.9844 322.1719,179.6875 322.1719,179.4063 C322.1719,179.125 322.0469,178.875 321.8125,178.7031 C321.6563,178.5781 321.5156,178.5469 321.0625,178.5469 L319.9375,178.5469 L319.9375,172.0313 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="111" x="333.5" y="178.6543">RecupMotDePasse</text><line style="stroke:#A80036;stroke-width:1.5;" x1="305.5" x2="446.5" y1="190.5" y2="190.5"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" text-decoration="underline" textLength="85" x="310.5" y="204.7104">token : varchar</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" text-decoration="underline" textLength="97" x="310.5" y="217.5151">id_utilisateur : int</text><!--MD5=[0fd75fcc7fd51d9d835a49229b7fbbb9]
+class ParticipationActivite--><rect codeLine="59" fill="#FEFECE" filter="url(#f16fqtmu20jqcb)" height="65.6094" id="ParticipationActivite" style="stroke:#A80036;stroke-width:1.5;" width="148" x="483" y="158.5"/><ellipse cx="498" cy="174.5" fill="#FFAAAA" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M498.4375,172.0313 L500.2813,172.0313 L500.2813,173.625 C500.2813,174.0156 500.3125,174.1875 500.4063,174.3281 C500.5625,174.5781 500.8438,174.7344 501.1406,174.7344 C501.4063,174.7344 501.6563,174.6094 501.8281,174.3906 C501.9688,174.2188 501.9844,174.0938 501.9844,173.625 L501.9844,170.3438 L493.2188,170.3438 L493.2188,173.625 C493.2188,174.0156 493.25,174.1875 493.3281,174.3281 C493.4844,174.5938 493.7813,174.7344 494.0625,174.7344 C494.3438,174.7344 494.5938,174.6094 494.7656,174.3906 C494.875,174.2188 494.9063,174.0781 494.9063,173.625 L494.9063,172.0313 L496.7344,172.0313 L496.7344,178.5469 L495.625,178.5469 C495.1875,178.5469 495.0625,178.5625 494.9063,178.6719 C494.6563,178.8281 494.5,179.1094 494.5,179.4063 C494.5,179.6563 494.6406,179.9219 494.8594,180.0781 C495.0156,180.2031 495.2344,180.25 495.625,180.25 L499.5625,180.25 C499.8906,180.25 500.1563,180.2031 500.2656,180.125 C500.5313,179.9844 500.6719,179.6875 500.6719,179.4063 C500.6719,179.125 500.5469,178.875 500.3125,178.7031 C500.1563,178.5781 500.0156,178.5469 499.5625,178.5469 L498.4375,178.5469 L498.4375,172.0313 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="116" x="512" y="178.6543">ParticipationActivite</text><line style="stroke:#A80036;stroke-width:1.5;" x1="484" x2="630" y1="190.5" y2="190.5"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" text-decoration="underline" textLength="83" x="489" y="204.7104">id_activite : int</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" text-decoration="underline" textLength="97" x="489" y="217.5151">id_utilisateur : int</text><!--MD5=[d2a2edbfebad24af748c2fbeea33d61b]
+link Activite to Lieu--><path codeLine="64" d="M557,439.735 C557,466.192 557,498.379 557,524.827 " fill="none" id="Activite-Lieu" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="549.5516" y="459.4624">*</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="548.4625" y="513.8827">1</text><!--MD5=[95642d1b5bd8b2452ee6bc9282c4a854]
+link ParticipationActivite to Activite--><path codeLine="65" d="M557,224.535 C557,254.669 557,300.283 557,335.434 " fill="none" id="ParticipationActivite-Activite" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="549.3547" y="244.1238">*</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="548.4625" y="324.5041">1</text><!--MD5=[2a233a4248dd9d47d5338de93bfa8a58]
+link ParticipationActivite to Utilisateur--><path codeLine="66" d="M506.72,224.689 C493.267,233.092 478.664,242.024 465,250 C406.845,283.945 339.788,320.272 289.622,346.91 " fill="none" id="ParticipationActivite-Utilisateur" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="490.1404" y="244.0502">*</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="297.4598" y="339.2377">1</text><!--MD5=[48c42175bc05739ca0d0325d72c13acb]
+link RecupMotDePasse to Utilisateur--><path codeLine="67" d="M349.249,224.535 C329.927,247.673 302.984,279.939 278.227,309.587 " fill="none" id="RecupMotDePasse-Utilisateur" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="336.6715" y="244.1238">*</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="275.591" y="299.0419">1</text><!--MD5=[f80eabedd400abdab16e0804cb54110f]
+link Type_Notification to Notifications--><path codeLine="68" d="M214,73.072 C214,90.488 214,112.554 214,132.844 " fill="none" id="Type_Notification-Notifications" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="205.2625" y="92.6676">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="205.5125" y="121.8667">1</text><!--MD5=[b654042a2d751f75200b697a7e48c7f2]
+link Notifications to Utilisateur--><path codeLine="69" d="M214,250.181 C214,268.945 214,290.072 214,309.991 " fill="none" id="Notifications-Utilisateur" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="206.5953" y="269.9177">*</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="205.6188" y="298.9503">1</text><!--MD5=[c0d0166d131970e7e7462c106f07c138]
+link Amis to Utilisateur--><path codeLine="70" d="M79.8457,224.535 C95.0506,247.673 118.917,279.939 142.424,309.587 " fill="none" id="Amis-Utilisateur" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="74.9376" y="244.1238">*</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="24" x="110.9805" y="299.0419">0..1</text><!--MD5=[c0d0166d131970e7e7462c106f07c138]
+link Amis to Utilisateur--><path codeLine="71" d="M99.937,224.535 C120.425,247.673 146.176,279.939 168.167,309.587 " fill="none" id="Amis-Utilisateur-1" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="98.7332" y="244.1238">*</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="24" x="139.0162" y="299.0419">0..1</text><!--MD5=[ff1f3469fe7a1c8e749dfc1780e8a6e6]
+@startuml
+!define table(x) class x << (T,#FFAAAA) >>
+!define primary_key(x) <u>x</u>
+hide methods
+hide stereotypes
+
+table(Utilisateur) {
+  primary_key(id : int)
+  login : varchar
+  password : varchar
+  nom : varchar
+  prenom : varchar
+  date_naissance : date
+  email : varchar
+  imageProfile : blob
+  administrateur : boolean
+}
+
+
+table(Lieu) {
+  primary_key(id) : int
+  nom : varchar
+  adresse : varchar
+  latitude : decimal
+  longitude : decimal
+}
+
+table(Activite) {
+  primary_key(id) : int
+  nom : varchar
+  date_activite : date
+  heure_debut : time
+  heure_fin : time
+}
+
+table(Amis) {
+  primary_key(id_utilisateur1 : int)
+  primary_key(id_utilisateur2 : int)
+}
+
+table(Type_Notification) {
+  primary_key(id : int)
+  nom : varchar
+}
+
+table(Notifications) {
+  primary_key(id : int)
+  id_utilisateur : int
+  id_source : int
+  type_notif : int
+  contenu : varchar
+  lue : boolean
+}
+
+table(RecupMotDePasse) {
+  primary_key(token : varchar)
+  primary_key(id_utilisateur : int)
+}
+
+table(ParticipationActivite) {
+  primary_key(id_activite : int)
+  primary_key(id_utilisateur : int)
+}
+
+Activite "*" - - "1" Lieu
+ParticipationActivite "*" - - "1" Activite
+ParticipationActivite "*" - - "1" Utilisateur
+RecupMotDePasse "*" - - "1" Utilisateur
+Type_Notification "1" - - "1" Notifications
+Notifications "*" - - "1" Utilisateur
+Amis "*" - - "0..1" Utilisateur
+Amis "*" - - "0..1" Utilisateur
+@enduml
+
+@startuml
+hide methods
+hide stereotypes
+
+class Utilisateur << (T,#FFAAAA) >> {
+  <u>id : int</u>
+  login : varchar
+  password : varchar
+  nom : varchar
+  prenom : varchar
+  date_naissance : date
+  email : varchar
+  imageProfile : blob
+  administrateur : boolean
+}
+
+
+class Lieu << (T,#FFAAAA) >> {
+  <u>id</u> : int
+  nom : varchar
+  adresse : varchar
+  latitude : decimal
+  longitude : decimal
+}
+
+class Activite << (T,#FFAAAA) >> {
+  <u>id</u> : int
+  nom : varchar
+  date_activite : date
+  heure_debut : time
+  heure_fin : time
+}
+
+class Amis << (T,#FFAAAA) >> {
+  <u>id_utilisateur1 : int</u>
+  <u>id_utilisateur2 : int</u>
+}
+
+class Type_Notification << (T,#FFAAAA) >> {
+  <u>id : int</u>
+  nom : varchar
+}
+
+class Notifications << (T,#FFAAAA) >> {
+  <u>id : int</u>
+  id_utilisateur : int
+  id_source : int
+  type_notif : int
+  contenu : varchar
+  lue : boolean
+}
+
+class RecupMotDePasse << (T,#FFAAAA) >> {
+  <u>token : varchar</u>
+  <u>id_utilisateur : int</u>
+}
+
+class ParticipationActivite << (T,#FFAAAA) >> {
+  <u>id_activite : int</u>
+  <u>id_utilisateur : int</u>
+}
+
+Activite "*" - - "1" Lieu
+ParticipationActivite "*" - - "1" Activite
+ParticipationActivite "*" - - "1" Utilisateur
+RecupMotDePasse "*" - - "1" Utilisateur
+Type_Notification "1" - - "1" Notifications
+Notifications "*" - - "1" Utilisateur
+Amis "*" - - "0..1" Utilisateur
+Amis "*" - - "0..1" Utilisateur
+@enduml
+
+PlantUML version 1.2021.17beta10(Unknown compile time)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>
