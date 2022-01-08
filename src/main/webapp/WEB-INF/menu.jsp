@@ -47,7 +47,23 @@
                     </c:if>
                     <c:if test="${not empty sessionScope.utilisateur}">
                         <li class="nav-item">
-                            <span class="navbar-brand mb-0 h2" href="#">${sessionScope.utilisateur.login}</span>
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="profile-header-container">
+                                        <div class="profile-header-img">
+                                            <c:if test="${empty sessionScope.utilisateur.imageProfile}">
+                                                <img class="rounded-circle" style="height: 50px; width: 50px" alt="image profile" src="<c:url value="images/profileDefaut.png"/>" />
+                                            </c:if>
+                                            <c:if test="${not empty sessionScope.utilisateur.imageProfile}">
+                                                <img class="rounded-circle" style="height: 50px; width: 50px" alt="image profile" src="voirImageProfile?id=${sessionScope.utilisateur.id}" />
+                                            </c:if>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-8">
+                                    <span class="navbar-brand mb-0 h2" href="#">${sessionScope.utilisateur.login}</span>
+                                </div>
+                            </div>
                         </li>
 
                         <li class="nav-item">
@@ -62,7 +78,13 @@
                                 <h2>Notifications - <span> <c:out value = "${ fn:length(sessionScope.notificationsNonLues) }"/> </span> <a type="button" href="notifications">Tout voir</a> </h2>
                                 <c:forEach var="notif" items="${ sessionScope.notifications }">
                                     <c:if test="${not notif.lue}">
-                                        <div class="notifications-item"> <img src="https://i.imgur.com/uIgDDDd.jpg" alt="img">
+                                        <div class="notifications-item">
+                                            <c:if test="${empty notif.image_source}">
+                                                <img alt="image utilisateur" src="<c:url value="images/profileDefaut.png"/>" />
+                                            </c:if>
+                                            <c:if test="${not empty notif.image_source}">
+                                                <img alt="image utilisateur" src="voirImageProfile?id=${notif.id_source}" />
+                                            </c:if>
                                             <div class="text">
                                                 <h4>${ notif.prenom_nom_source }</h4>
                                                 <p>${ notif.contenu }</p>

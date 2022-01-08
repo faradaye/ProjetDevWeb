@@ -1,3 +1,4 @@
+<%@ page import="beans.Utilisateur" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
@@ -24,6 +25,9 @@
 
         });
 
+        function preview() {
+            frame.src = URL.createObjectURL(event.target.files[0]);
+        }
     </script>
 
 </head>
@@ -33,7 +37,7 @@
     <div class="container-fluid">
         <div class="row my-3">
             <div class="col-2">
-                <img src="" class="img-fluid" alt="image profile">
+                <img src="voirImageProfile?id=${utilisateur.id}" class="img-fluid" alt="image profile">
             </div>
             <div class="col-9">
                 <c:if test="${ sessionScope.utilisateur.id == idUtilisateur}">
@@ -48,9 +52,23 @@
         <button type="button" class="btn btn-primary" onClick="window.history.back()">Retour</button>
         <a type="button" class="btn btn-primary" role="button" href="utilisateurs">Liste des utilisateurs</a>
         <!--Nouveau formulaire-->
-        <form method="post" class="my-3" action="${pageContext.request.contextPath}/modifierUtilisateur">
+        <form method="post" class="my-3" action="${pageContext.request.contextPath}/modifierUtilisateur" enctype="multipart/form-data">
             <div class="alert alert-danger" role="alert" id="displayErreurModificationUtilisateur">${erreur}</div>
             <input type="hidden" name="idUtilisateur" value="${idUtilisateur}" />
+
+            <div class="row my-3">
+                <div class="col-4">
+                    <label for="imageProfile" class="form-label">Photo de profile</label>
+                    <input class="form-control" type="file" id="imageProfile" name="imageProfile" accept="image/*" size="16777216" onchange="preview()"><br>
+                    <c:if test="${empty utilisateur.imageProfile}">
+                        <img id="frame" src="<c:url value="images/profileDefaut.png"/>" class="img-fluid col-6" />
+                    </c:if>
+                    <c:if test="${not empty utilisateur.imageProfile}">
+                        <img id="frame" src="voirImageProfile?id=${utilisateur.id}" class="img-fluid col-6" />
+                    </c:if>
+                </div>
+            </div>
+
             <div class="row my-3">
                 <div class="col-12">
                     <label for="login" class="form-label">Identifiant</label>

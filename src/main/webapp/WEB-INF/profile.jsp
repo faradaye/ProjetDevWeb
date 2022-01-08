@@ -12,8 +12,18 @@
 
     <div class="container-fluid">
         <div class="row my-3">
-            <div class="col-2">
-                <img src="" class="img-fluid" alt="image profile">
+
+            <div class="col-md-3">
+                <div class="profile-header-container">
+                    <div class="profile-header-img">
+                        <c:if test="${empty utilisateur.imageProfile}">
+                            <img id="frame" src="<c:url value="images/profileDefaut.png"/>" class="img-fluid rounded-circle" />
+                        </c:if>
+                        <c:if test="${not empty utilisateur.imageProfile}">
+                            <img class="img-fluid rounded-circle" alt="image profile" src="voirImageProfile?id=${utilisateur.id}" />
+                        </c:if>
+                    </div>
+                </div>
             </div>
             <div class="col-9">
                 <h1>Profile de ${utilisateur.login} <c:if test="${utilisateur.administrateur eq true}"><span style="color: #ff0000">(ADMIN)</span></c:if></h1>

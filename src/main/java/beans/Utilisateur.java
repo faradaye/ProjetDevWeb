@@ -1,6 +1,13 @@
 package beans;
 
+import dao.DaoFactory;
+import org.apache.commons.io.IOUtils;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Blob;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +19,7 @@ public class Utilisateur {
     private String prenom;
     private Date date_naissance;
     private String email;
+    private Blob imageProfile = null;
     private boolean administrateur;
     private List<Integer> amis;
 
@@ -57,6 +65,46 @@ public class Utilisateur {
         this.prenom = prenom;
         this.date_naissance = date_naissance;
         this.email = email;
+        this.administrateur = administrateur;
+    }
+
+    public Utilisateur(int id, String login, String password, String nom, String prenom, Date date_naissance, String email, InputStream inputStreamImage, boolean administrateur) {
+        this.id = id;
+        this.login = login;
+        this.password = password;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.date_naissance = date_naissance;
+        this.email = email;
+        if(inputStreamImage!=null){
+            try {
+                this.imageProfile = DaoFactory.getInstance().getConnection().createBlob();
+                this.imageProfile.setBytes(1, IOUtils.toByteArray(inputStreamImage));
+            } catch (SQLException | IOException throwables) {
+                this.imageProfile = null;
+            }
+        }
+        else this.imageProfile = null;
+        this.administrateur = administrateur;
+    }
+
+    public Utilisateur(int id, String login, String nom, String prenom, Date date_naissance, String email, InputStream inputStreamImage, boolean administrateur) {
+        this.id = id;
+        this.login = login;
+        this.password = "";
+        this.nom = nom;
+        this.prenom = prenom;
+        this.date_naissance = date_naissance;
+        this.email = email;
+        if(inputStreamImage!=null){
+            try {
+                this.imageProfile = DaoFactory.getInstance().getConnection().createBlob();
+                this.imageProfile.setBytes(1, IOUtils.toByteArray(inputStreamImage));
+            } catch (SQLException | IOException throwables) {
+                this.imageProfile = null;
+            }
+        }
+        else this.imageProfile = null;
         this.administrateur = administrateur;
     }
 
@@ -114,6 +162,19 @@ public class Utilisateur {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Blob getImageProfile() {
+        return imageProfile;
+    }
+
+    public String getImageArrayString()
+    {
+        return String.valueOf(this.imageProfile);
+    }
+
+    public void setImageProfile(Blob imageProfile) {
+        this.imageProfile = imageProfile;
     }
 
     public boolean isAdministrateur() {

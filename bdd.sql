@@ -9,6 +9,7 @@ create table IF NOT EXISTS Utilisateur(
     prenom varchar(255) NOT NULL, 
     date_naissance date  NOT NULL,
     email varchar(255) DEFAULT NULL,
+    imageProfile MEDIUMBLOB DEFAULT NULL,
     administrateur BOOLEAN DEFAULT 0
 ) ENGINE=INNODB;
 

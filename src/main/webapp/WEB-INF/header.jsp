@@ -7,6 +7,18 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <link href="<c:url value="/css/custom.css"/>" rel="stylesheet">
 
+<style>
+    .profile-header-container{
+        text-align: center;
+    }
+
+    .profile-header-img > img.rounded-circle {
+        width: 120px;
+        height: 120px;
+        border: 2px solid #0555b8;
+    }
+</style>
+
 <script language="javascript" type="text/javascript">
     function Deconnexion(){
         var confDeco = confirm("Voulez vous vraiment vous déconnecter?");

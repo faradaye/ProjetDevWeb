@@ -10,7 +10,7 @@ public class VerifDate {
     public static boolean estValide(String date) {
         try {
             VerifDate.dateFormatter.parse(date);
-        } catch (DateTimeParseException e) {
+        } catch (DateTimeParseException | NullPointerException e) {
             return false;
         }
         return true;
