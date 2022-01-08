@@ -47,10 +47,10 @@
     </div>
 
     <form method="post" action="${pageContext.request.contextPath}/amis">
-        <p>Nom d'utilisateur de l'ami:</p>
+        <h3>Nom d'utilisateur de l'ami:</h3>
         <input type="text" name="loginami"/><br>
 
-        <input type="submit"/>
+        <input class="btn btn-primary" type="submit"/>
     </form>
 </div>
 </body>
