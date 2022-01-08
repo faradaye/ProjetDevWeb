@@ -20,3 +20,6 @@ mvn build
 # On lance le projet en utilisant tomcat
 mvn tomcat7:run
 ```
+## Diagramme de classe de la base de données
+
+![diagramme de classe base de données](./doc/uml_database.svg)
