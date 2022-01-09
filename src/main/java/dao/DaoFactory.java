@@ -1,6 +1,9 @@
 package dao;
 
 import beans.Utilisateur;
+import ch.vorburger.exec.ManagedProcessException;
+import ch.vorburger.mariadb4j.DB;
+import ch.vorburger.mariadb4j.DBConfigurationBuilder;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.IOException;
@@ -24,6 +27,20 @@ public class DaoFactory {
     private static class DaoFactorySingletonHolder{
         private final static DaoFactory instance = createConnection();
         private static DaoFactory createConnection() {
+
+
+            //Base de donnees
+            try{
+                DBConfigurationBuilder configBuilder = DBConfigurationBuilder.newBuilder();
+                configBuilder.setPort(3306);
+                configBuilder.setDataDir("db");
+                DB db = DB.newEmbeddedDB(configBuilder.build());
+                db.start();
+                db.source("bdd.sql");
+            }catch (ManagedProcessException e) {
+                e.printStackTrace();
+            }
+
             try {
                 Properties p = new Properties();
                 InputStream inputStream = DaoFactory.class.getClassLoader().getResourceAsStream("/confBDD.properties");

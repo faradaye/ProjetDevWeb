@@ -72,6 +72,12 @@ create table IF NOT EXISTS ParticipationActivite(
     foreign key (id_activite) references Activite(id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=INNODB;
 
-INSERT INTO TYPE_NOTIFICATION(id, nom) VALUES(1, 'Demande d\'amis');
-INSERT INTO TYPE_NOTIFICATION(id, nom) VALUES(2, 'Suppression amis');
-INSERT INTO TYPE_NOTIFICATION(id, nom) VALUES(3, 'Cas contact');
+INSERT INTO Type_Notification (id, nom)
+    VALUES(1, 'Demande d\'amis')
+        ON DUPLICATE KEY UPDATE id = 1;
+INSERT INTO Type_Notification (id, nom)
+    VALUES(2, 'Suppression amis')
+        ON DUPLICATE KEY UPDATE id = 2;
+INSERT INTO Type_Notification (id, nom)
+    VALUES(3, 'Cas contact')
+        ON DUPLICATE KEY UPDATE id = 3;
