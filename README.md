@@ -15,10 +15,12 @@ git clone https://github.com/thomasbigel/ProjetDevWeb.git -b main
 cd ProjetDevWeb
 
 #On compile le projet
-mvn build
+mvn package
 
 # On lance le projet en utilisant tomcat
 mvn tomcat7:run
+
+L'url est http://localhost:8080/ProjetDevWeb/
 ```
 ## Diagramme de la base de données
 
