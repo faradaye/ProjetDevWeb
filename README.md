@@ -4,6 +4,7 @@
 
 - Java 11+
 - Maven 3
+- libncurses5
 
 ## Lancement
 
