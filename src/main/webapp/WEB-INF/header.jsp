@@ -52,4 +52,5 @@
 
     });
 </script>
+<link href="<c:url value="/js/dark-mode-switch-1.0.0/dark-mode.css"/>" rel="stylesheet">
 
