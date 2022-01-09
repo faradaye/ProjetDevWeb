@@ -4,6 +4,7 @@
 
 - Java 11+
 - Maven 3
+- libncurses5
 
 ## Lancement
 
@@ -15,10 +16,12 @@ git clone https://github.com/thomasbigel/ProjetDevWeb.git -b main
 cd ProjetDevWeb
 
 #On compile le projet
-mvn build
+mvn package
 
 # On lance le projet en utilisant tomcat
 mvn tomcat7:run
+
+url: http://localhost:8080/ProjetDevWeb/
 ```
 ## Diagramme de la base de données
 
