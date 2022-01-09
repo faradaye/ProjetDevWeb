@@ -1,6 +1,7 @@
 package dao;
 
 import beans.Utilisateur;
+import ch.vorburger.mariadb4j.DB;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.IOException;

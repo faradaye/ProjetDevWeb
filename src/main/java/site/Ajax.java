@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,6 +63,30 @@ public class Ajax extends HttpServlet {
             else if(categorie.equals("getListeLieux")){
                 request.setAttribute("lieux", lieuDao.getAll());
                 this.getServletContext().getRequestDispatcher("/WEB-INF/listeLieux.jsp").forward(request, response);
+            }
+            else if(categorie.equals("loginUtilisateurExiste")){
+                String login = request.getParameter("login");
+                if(login!=null && !login.equals("")){
+                    if(utilisateurDao.loginUtilisateurExiste(login)){
+                        response.setContentType("text/html");
+                        PrintWriter out = response.getWriter();
+                        out.println("Cet Identifiant existe déjà");
+                        out.close();
+                    }
+                }
+
+            }
+            else if(categorie.equals("emailUtilisateurExiste")){
+                String email = request.getParameter("email");
+                if(email!=null && !email.equals("")){
+                    if(utilisateurDao.emailUtilisateurExiste(email)){
+                        response.setContentType("text/html");
+                        PrintWriter out = response.getWriter();
+                        out.println("Cet email existe déjà");
+                        out.close();
+                    }
+                }
+
             }
         }
     }
