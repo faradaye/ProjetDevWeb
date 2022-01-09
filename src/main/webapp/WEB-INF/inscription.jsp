@@ -29,12 +29,59 @@
         }
     </style>
     <script>
+        function loginUtilisateurExiste(login) {
+            $.ajax({
+                type: "POST",
+                url: "ajax",
+                data: {
+                    'categorie': "loginUtilisateurExiste",
+                    'login' : login
+
+                },
+                success: function(html) {
+                    if(html!=="")
+                        $("#alertLogin").html(html).show();
+                    else
+                        $("#alertLogin").hide();
+                }
+            });
+        }
+
+        function emailUtilisateurExiste(email) {
+            $.ajax({
+                type: "POST",
+                url: "ajax",
+                data: {
+                    'categorie': "emailUtilisateurExiste",
+                    'email': email
+
+                },
+                success: function(html) {
+                    if(html!=="")
+                        $("#alertEmail").html(html).show();
+                    else
+                        $("#alertEmail").hide();
+                }
+            });
+        }
+
         $(document).ready(function() {
             $("#displayErreurInscription").hide();
+            $("#alertEmail").hide();
+            $("#alertLogin").hide();
 
             if($("#displayErreurInscription").html()!='')
                 $("#displayErreurInscription").show();
 
+            $("#login").keyup(delay(function() {
+                let login = $("#login").val();
+                loginUtilisateurExiste(login);
+            }, 1000));
+
+            $("#email").keyup(delay(function() {
+                let email = $("#email").val();
+                emailUtilisateurExiste(email);
+            }, 1000));
 
             <c:if test="${empty utilisateur.imageProfile}">
                 $("#frame").hide();
@@ -79,7 +126,8 @@
                     </c:if>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Identifiant" name="login" value= "${utilisateur.login}" required>
+                    <input type="text" class="form-control" placeholder="Identifiant" name="login" id="login" value= "${utilisateur.login}" required>
+                    <div class="alert alert-danger" role="alert" id="alertLogin"></div>
                 </div>
                 <div class="form-group">
                     <input type="password" class="form-control" placeholder="Mot de Passe" name="password" value= "${utilisateur.password}" required>
@@ -97,6 +145,8 @@
                 <div class="form-group">
                     <label for="email" class="form-label">Email (optionnel: utile pour recuperer votre mot de passe ou être notifié en plus sur votre mail)</label>
                     <input type="email" class="form-control" id="email" name="email" placeholder="Ex: exemple@gmail.com" value="${utilisateur.email}">
+                    <div class="alert alert-danger" role="alert" id="alertEmail">
+                    </div>
                 </div>
                 <div class="form-group" style="text-align: center">
                     <button type="submit" class="btn btn-primary btn-block">Envoyer</button>

@@ -11,12 +11,60 @@
     </c:if>
     <%@ include file="header.jsp"%>
     <script>
+            function loginUtilisateurExiste(login) {
+                    $.ajax({
+                        type: "POST",
+                        url: "ajax",
+                        data: {
+                            'categorie': "loginUtilisateurExiste",
+                            'login' : login
+
+                        },
+                        success: function(html) {
+                            if(html!=="")
+                                $("#alertLogin").html(html).show();
+                            else
+                                $("#alertLogin").hide();
+                        }
+                    });
+                }
+
+                function emailUtilisateurExiste(email) {
+                    $.ajax({
+                        type: "POST",
+                        url: "ajax",
+                        data: {
+                            'categorie': "emailUtilisateurExiste",
+                            'email': email
+
+                        },
+                        success: function(html) {
+                            if(html!=="")
+                                $("#alertEmail").html(html).show();
+                            else
+                                $("#alertEmail").hide();
+                        }
+                    });
+                }
+
         $(document).ready(function() {
             $("#displayErreurModificationUtilisateur").hide();
+            $("#alertEmail").hide();
+            $("#alertLogin").hide();
 
             if($("#displayErreurModificationUtilisateur").html()!='')
                 $("#displayErreurModificationUtilisateur").show();
 
+            $("#login").keyup(delay(function() {
+                            let login = $("#login").val();
+                            let loginOriginal = $("#loginOriginal").text();
+                            if(login!==loginOriginal)loginUtilisateurExiste(login);
+                        }, 1000));
+
+                        $("#email").keyup(delay(function() {
+                            let email = $("#email").val();
+                            emailUtilisateurExiste(email);
+                        }, 1000));
 
             $("#btn-MdpReset").click(function (){
                 $("#password").show();
@@ -44,7 +92,7 @@
                     <h1>Modification de son compte (${utilisateur.login}) <c:if test="${utilisateur.administrateur eq true}"><span style="color: #ff0000">(ADMIN)</span></c:if></h1>
                 </c:if>
                 <c:if test="${ sessionScope.utilisateur.id != idUtilisateur}">
-                    <h1>Modification de ${utilisateur.login} <c:if test="${utilisateur.administrateur eq true}"><span style="color: #ff0000">(ADMIN)</span></c:if></h1>
+                    <h1>Modification de <span id="loginOriginal">${utilisateur.login}</span> <c:if test="${utilisateur.administrateur eq true}"><span style="color: #ff0000">(ADMIN)</span></c:if></h1>
                 </c:if>
             </div>
         </div>
@@ -73,6 +121,7 @@
                 <div class="col-12">
                     <label for="login" class="form-label">Identifiant</label>
                     <input type="text" class="form-control" id="login" name="login" placeholder="Ex: L.DuPont" value="${utilisateur.login}" required>
+                    <div class="alert alert-danger" role="alert" id="alertLogin"></div>
                 </div>
             </div>
 
