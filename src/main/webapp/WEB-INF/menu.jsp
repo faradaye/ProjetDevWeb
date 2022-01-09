@@ -13,8 +13,14 @@
                         <a class="nav-link active" aria-current="page" href="<c:url value="/" />">Accueil</a>
                     </li>
                 <c:if test="${not empty sessionScope.utilisateur}">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="utilisateurs">Utilisateurs</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUtilisateurs" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Utilisateurs
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="amis">Amis</a></li>
+                            <li><a class="dropdown-item" href="utilisateurs">Liste des utilisateurs</a></li>
+                        </ul>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownLieux" role="button" data-bs-toggle="dropdown" aria-expanded="false">
