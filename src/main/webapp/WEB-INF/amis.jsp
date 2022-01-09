@@ -30,8 +30,8 @@
             <button type="button" class="btn btn-primary" id="refreshListeAmis">Rafraichir la liste</button>
             <thead>
             <th scope="col"></th>
-            <th scope="col">Nom</th>
-            <th scope="col">Prenom</th>
+            <th data-sortable="true" data-field="nom" scope="col">Nom</th>
+            <th data-sortable="true" data-field="prenom" scope="col">Prenom</th>
             <th scope="col">Actions</th>
             </thead>
             <!--Generation contenu de la table-->

@@ -30,9 +30,9 @@
             <a type="button" class="btn btn-primary" role="button" href="creerActivite">Ajouter une activité</a>
             <button type="button" class="btn btn-primary" id="refreshListeActivite">Rafraichir la liste</button>
             <thead>
-                <th scope="col">Nom</th>
-                <th scope="col">Lieu</th>
-                <th scope="col">Date</th>
+                <th data-sortable="true" data-field="nom" scope="col">Nom</th>
+                <th data-sortable="true" data-field="lieu" scope="col">Lieu</th>
+                <th data-sortable="true" data-field="date_activite" scope="col">Date</th>
                 <th scope="col">Heure de début</th>
                 <th scope="col">Heure de fin</th>
                 <th scope="col">Actions</th>

@@ -30,8 +30,8 @@
                 <a type="button" class="btn btn-primary" role="button" href="creerLieu">Ajouter un lieu</a>
                 <button type="button" class="btn btn-primary" id="refreshListeLieux">Raffraichir la liste</button>
                 <thead>
-                    <th scope="col">Nom</th>
-                    <th scope="col">adresse</th>
+                    <th data-sortable="true" data-field="nom" scope="col">Nom</th>
+                    <th data-sortable="true" data-field="adresse" scope="col">adresse</th>
                     <th scope="col">latitude</th>
                     <th scope="col">longitude</th>
                     <th scope="col">Actions</th>
