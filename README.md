@@ -11,7 +11,7 @@
 Dans un terminal :
 ```bash
 # On clone le dépôt...
-git clone https://github.com/thomasbigel/ProjetDevWeb.git -b main
+git clone https://github.com/thomasbigel/ProjetDevWeb.git -b master
 # ...et on se déplace dans sa racine
 cd ProjetDevWeb
 
